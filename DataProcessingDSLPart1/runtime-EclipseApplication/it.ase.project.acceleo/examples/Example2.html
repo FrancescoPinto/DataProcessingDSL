@@ -1,0 +1,253 @@
+<h1>Pipeline: Example2</h1>
+<h3>Tasks</h3>
+	<ul>
+		<li>	<b>Data Collection</b>, id: <u>AmazonDataCollection</u> with Input Source:
+			<ul>
+				<li> Source URI: www.amazon.co.uk/ </li>
+				<li> Query Endpoint: users </li>
+				<li> Exchange Format: json </li>
+				<li> Source Type: Web </li>
+				<li> Source Schema: <br/><b>Schema</b>, id: <u> UserSchema</u>
+				<ul>
+					<li>Primary Key: ID1:String</li>
+					<li>Attribute: Username:String</li>
+					<li>Attribute: Gender:String</li>
+					<li>Attribute: Age:Int</li>
+					<li>Attribute: AverageMoneySpentInYear:Float</li>
+				</ul></li>
+				
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>1</u>
+					<ul>
+						<li>Start Time: 82673781 (epoch format)</li>
+						<li>End Time: 82673790(epoch format)</li>
+					</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>DataCollection2json2csv</u>, with schema <u>UserSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Change Data Format</b> Task, id: <u>json2csv</u>
+			<ul>
+				<li>From json to csv</li>
+			</ul>
+					<ul>
+						<li><b>Runtime Information</b>, id: <u>2</u>
+						<ul>
+							<li>Start Time: 82673791 (epoch format)</li>
+							<li>End Time: 82673800(epoch format)</li>
+						</ul></li>
+						<li><b>Input Dataflow</b>:	
+							<ul>
+							<li>Dataflow <u>DataCollection2json2csv</u>, with schema <u>UserSchema</u></li>
+							</ul></li>
+						<li><b>Output Dataflow</b>:
+							<ul>
+							<li>DataFlow <u>json2csv2DBSCANClustering</u>, with schema <u>UserSchema</u></li>	
+							<li>DataFlow <u>json2csv2ClusteredDataIntegration</u>, with schema <u>UserSchema</u></li>	
+							</ul></li>
+					</ul>
+		</li>
+		<li>	<b>DBSCAN</b>, id: <u>DBSCANClustering</u> with radius = 33.4 and threshold = 12
+					<ul>
+						<li><b>Runtime Information</b>, id: <u>3</u>
+						<ul>
+							<li>Start Time: 82673801 (epoch format)</li>
+							<li>End Time: 82673814(epoch format)</li>
+						</ul></li>
+						<li><b>Input Dataflow</b>:	
+							<ul>
+							<li>Dataflow <u>json2csv2DBSCANClustering</u>, with schema <u>UserSchema</u></li>
+							</ul></li>
+						<li><b>Output Dataflow</b>:
+							<ul>
+							<li>DataFlow <u>DBSCANClustering2ClusteredDataIntegration</u>, with schema <u>ClusterLabelSchema</u></li>	
+							<li>DataFlow <u>DBSCANClustering2ClusterHistogram</u>, with schema <u>ClusterLabelSchema</u></li>	
+							</ul></li>
+					</ul>
+		</li>
+		<li>	<b>Data Integration</b>, id: <u>ClusteredDataIntegration</u>:<br/>
+			<ul><li><b>Join Attributes list </b>:
+			<ol>
+				UserSchema.ID1:String=ClusterLabelSchema.ID3:String
+			</ol>
+			</li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>6</u>
+					<ul>
+						<li>Start Time: 82673818 (epoch format)</li>
+						<li>End Time: 82673823(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>DBSCANClustering2ClusteredDataIntegration</u>, with schema <u>ClusterLabelSchema</u></li>
+						<li>Dataflow <u>json2csv2ClusteredDataIntegration</u>, with schema <u>UserSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>ClusteredDataIntegration2ClusteredDataExport</u>, with schema <u>ClusterLabelAndUserIntegrationSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Histogram</b> Task, id: <u>ClusterHistogram</u>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>4</u>
+					<ul>
+						<li>Start Time: 82673815 (epoch format)</li>
+						<li>End Time: 82673828(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>DBSCANClustering2ClusterHistogram</u>, with schema <u>ClusterLabelSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>ClusterHistogram2ClusterHistogramExport</u>, with schema <u>ClusterHistogramSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Export</b> Task, id: <u>ClusterHistogramExport</u>
+			<ul>
+				<li><b>Output File</b>, id: <u>ClusterHistogramFile</u>
+				<ul>
+					<li>Name: ClusterHistogramFile</li>
+					<li>Path: C:/Statistics</li>
+					<li>Format: csv</li>
+				</ul></li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>5</u>
+					<ul>
+						<li>Start Time: 82673829 (epoch format)</li>
+						<li>End Time: 82673844(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>ClusterHistogram2ClusterHistogramExport</u>, with schema <u>ClusterHistogramSchema</u></li>
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Export</b> Task, id: <u>ClusteredDataExport</u>
+			<ul>
+				<li><b>Output File</b>, id: <u>ClusteredData</u>
+				<ul>
+					<li>Name: ClusteredData</li>
+					<li>Path: C:/Statistics</li>
+					<li>Format: csv</li>
+				</ul></li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>7</u>
+					<ul>
+						<li>Start Time: 82673825 (epoch format)</li>
+						<li>End Time: 82673843(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>ClusteredDataIntegration2ClusteredDataExport</u>, with schema <u>ClusterLabelAndUserIntegrationSchema</u></li>
+						</ul></li>
+				</ul>
+		</li>
+	</ul>
+<h3>Dataflows</h3>
+	<ul>
+		<li><b>DataFlow</b>, id: <u> DataCollection2json2csv</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>AmazonDataCollection</u></li>
+			<li>To Task: <u>json2csv</u></li>
+			<li>Type of Data: <u>UserSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> json2csv2DBSCANClustering</u>
+		<ul>
+			<li>Format: csv</li>
+			<li>From Task: <u>json2csv</u></li>
+			<li>To Task: <u>DBSCANClustering</u></li>
+			<li>Type of Data: <u>UserSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> DBSCANClustering2ClusteredDataIntegration</u>
+		<ul>
+			<li>Format: csv</li>
+			<li>From Task: <u>DBSCANClustering</u></li>
+			<li>To Task: <u>ClusteredDataIntegration</u></li>
+			<li>Type of Data: <u>ClusterLabelSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> DBSCANClustering2ClusterHistogram</u>
+		<ul>
+			<li>Format: csv</li>
+			<li>From Task: <u>DBSCANClustering</u></li>
+			<li>To Task: <u>ClusterHistogram</u></li>
+			<li>Type of Data: <u>ClusterLabelSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> ClusterHistogram2ClusterHistogramExport</u>
+		<ul>
+			<li>Format: csv</li>
+			<li>From Task: <u>ClusterHistogram</u></li>
+			<li>To Task: <u>ClusterHistogramExport</u></li>
+			<li>Type of Data: <u>ClusterHistogramSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> ClusteredDataIntegration2ClusteredDataExport</u>
+		<ul>
+			<li>Format: csv</li>
+			<li>From Task: <u>ClusteredDataIntegration</u></li>
+			<li>To Task: <u>ClusteredDataExport</u></li>
+			<li>Type of Data: <u>ClusterLabelAndUserIntegrationSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> json2csv2ClusteredDataIntegration</u>
+		<ul>
+			<li>Format: csv</li>
+			<li>From Task: <u>json2csv</u></li>
+			<li>To Task: <u>ClusteredDataIntegration</u></li>
+			<li>Type of Data: <u>UserSchema</u></li>
+		</ul></li>
+	</ul>
+<h3>Schemas</h3>
+	<ul>
+		<li><b>Schema</b>, id: <u> ClusterHistogramSchema</u>
+		<ul>
+			<li>Primary Key: HistogramID:String</li>
+			<li>Attribute: HistogramImage:Bitmap</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> ClusterLabelAndUserIntegrationSchema</u>
+		<ul>
+			<li>Primary Key: ID2:String</li>
+			<li>Attribute: Username:String</li>
+			<li>Attribute: Gender:String</li>
+			<li>Attribute: Age:Int</li>
+			<li>Attribute: AverageMoneySpentInYear:Float</li>
+			<li>Attribute: ClusterLabel:String</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> ClusterLabelSchema</u>
+		<ul>
+			<li>Primary Key: ID3:String, copies UserSchema.ID1:String</li>
+			<li>Attribute: ClusterLabel:String</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> UserSchema</u>
+		<ul>
+			<li>Primary Key: ID1:String</li>
+			<li>Attribute: Username:String</li>
+			<li>Attribute: Gender:String</li>
+			<li>Attribute: Age:Int</li>
+			<li>Attribute: AverageMoneySpentInYear:Float</li>
+		</ul></li>
+	</ul> 
+<h3>Output Files </h3>
+	<ul>
+		<li><b>Output File</b>, id: <u>ClusteredData</u>
+		<ul>
+			<li>Name: ClusteredData</li>
+			<li>Path: C:/Statistics</li>
+			<li>Format: csv</li>
+			<li>Generated by task with id: <u>ClusteredDataExport</u></li>
+		</ul></li>
+		<li><b>Output File</b>, id: <u>ClusterHistogramFile</u>
+		<ul>
+			<li>Name: ClusterHistogramFile</li>
+			<li>Path: C:/Statistics</li>
+			<li>Format: csv</li>
+			<li>Generated by task with id: <u>ClusterHistogramExport</u></li>
+		</ul></li>
+	</ul>

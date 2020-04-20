@@ -1,0 +1,293 @@
+[comment encoding = UTF-8 /]
+[module task('http://www.ase.it/pm/python')]
+
+
+[template public printTask(task:Task) ?(not task.oclIsTypeOf(ChangeDataFormat))]
+
+#Task [task.id/]
+start_time = time.time()
+[printTaskType(task)/]
+end_time = time.time() 
+print('[task.id/]',start_time, end_time)
+[/template]
+
+[comment dataCollection ######################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(DataCollection))]
+[let dataCollection:DataCollection = task]
+[printGlobalDataFramesName()/] = ['['/][']'/]
+[for (source:InputSourceDeclaration |dataCollection.sourceDeclaration)]
+''' 
+[if (not (source.queryConditions.oclIsUndefined()))]
+query = {'query':'[printQueryCondition(source.queryConditions)/]'}
+query_str = urllib.urlencode(query)[/if]
+r= requests.get('[source.sourceURI.concat(source.queryEndpoint)/][if (not (source.queryConditions.oclIsUndefined()))]?query=[/if]'+query_str)
+print("Downloading from [source.id/], of type [source.sourceType/]")
+'''
+[printFileVariable(source.id)/] = '[printFileName(dataCollection.id,source.id,source.exchangeFormat)/]'
+''' 
+open([printFileVariable(source.id)/],'w').write(r.content) 
+'''
+[printDataVariable(source.id)/] = pd.[printPandasRead(dataCollection.id,source.id,source.exchangeFormat)/]
+[printGlobalDataFramesName()/].append([printDataVariable(source.id)/])
+[if(dataCollection.sourceDeclaration->size() = 1)][printGlobalDF()/] = [printGlobalDataFramesName()/]['['/]0[']'/][/if][/for][/let][/template]
+[template private printValueClause(valueClause:ValueClause)][valueClause.conditionField.name/][if (valueClause.oclIsTypeOf(EqClause))]=[elseif (valueClause.oclIsTypeOf(GeClause))]>=[elseif (valueClause.oclIsTypeOf(LeClause))]<=[elseif (valueClause.oclIsTypeOf(GtClause))]>[elseif (valueClause.oclIsTypeOf(LtClause))]<[elseif (valueClause.oclIsTypeOf(ContainsClause))]contains [/if][valueClause.comparisonValue/][/template]
+[template private printQueryCondition(condition:LogicProposition)][if (condition.oclIsKindOf(ValueClause))][printValueClause(condition.oclAsType(ValueClause))/][elseif (condition.oclIsTypeOf(NotClause))]not([printQueryCondition(condition.oclAsType(NotClause).subClause)/])[elseif (condition.oclIsTypeOf(AndClause))]and([printMultiOperandClauseOperands(condition.oclAsType(AndClause).operands)/])[elseif (condition.oclIsTypeOf(OrClause))]or([printMultiOperandClauseOperands(condition.oclAsType(OrClause).operands)/])[/if][/template]
+[template private printMultiOperandClauseOperands(operands:OrderedSet(LogicProposition))][for(operand:LogicProposition|operands) separator(', ')][printQueryCondition(operand)/][/for][/template]
+[template private printFileName(collectionId:String, sourceId:String, sourceExchangeFormat:Format)][collectionId/]_[sourceId/].[printFormat(sourceExchangeFormat)/][/template]
+[template private printFileVariable(sourceId:String)]filename_[sourceId/][/template]
+[template private printDataVariable(sourceId:String)]data_[sourceId/][/template]
+[template private printSchemaVariable(sourceId:String)]schema_[sourceId/][/template]
+[template private printFormat(format:Format)][if (format = Format::json)]json[elseif (format = Format::csv)]csv[elseif (format = Format::xlsx)]xlsx[elseif (format = Format::html)]html[/if][/template] 
+[template private printPandasRead(dataCollectionId:String,sourceId:String,format:Format)][if(format = Format::json)]read_json([printFileVariable(sourceId)/], orient="records")[elseif (format = Format::csv)]read_csv([printFileVariable(sourceId)/])[elseif (format = Format::html)]read_html([printFileVariable(sourceId)/],header = 0)['['/]0[']'/][elseif (format = Format::xlsx)]read_excel([printFileVariable(sourceId)/])[/if][/template]
+[template private printGlobalDataFramesName()]data_frames[/template]
+[template private printGlobalDF()]df[/template]
+[comment dataIntegration #########################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(DataIntegration))]
+[let di:DataIntegration = task]
+[if (di.joinAttributesList.joinAttributes->forAll(c|c.oclIsTypeOf(PrimaryKey)))]
+temp = [printGlobalDataFramesName()/]['['/]0[']'/]
+for i in range(0,len([printGlobalDataFramesName()/])-1):
+	temp = temp.merge([printGlobalDataFramesName()/]['['/]i+1[']'/],left_index=True, right_index = True)
+
+[printGlobalDF()/] = temp
+[else]
+join_attributes = ['['/][']'/]
+[for (col:Column|di.joinAttributesList.joinAttributes)]
+join_attributes.append('[col.name/]')
+[/for]
+temp = [printGlobalDataFramesName()/]['['/]0[']'/]
+for i in range(0,len([printGlobalDataFramesName()/])-1):
+	temp = temp.merge([printGlobalDataFramesName()/]['['/]i+1[']'/],left_on=join_attributes['['/]i[']'/], right_on = join_attributes['['/]i+1[']'/])
+join_attributes.pop(0)
+drop_attributes = join_attributes
+[printGlobalDF()/] = temp.drop(columns=drop_attributes)
+[/if][/let][/template]
+
+[comment dataCleaning #############################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(ProjectOnAttributes))]
+[let proj:ProjectOnAttributes = task]
+[printGlobalDF()/] = [printGlobalDF()/]['['/]['['/][printAttributesListWoBrackets(proj.projectionAttributes)/][']'/][']'/][/let][/template]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(CustomCleaning))]
+[let custom:CustomCleaning = task]
+[file(custom.name.concat('.py'), false, 'UTF-8')]
+def [custom.name/]([printGlobalDF()/],[printParamsList(custom.customParams)/]):
+	#implement your custom cleaning function here
+	#[protected(custom.name)]
+	#write here your code ...
+	#[/protected]
+	return [printGlobalDF()/]
+
+[/file]
+
+from [custom.name/] import [custom.name/]
+
+#parameter values 
+[for(param:CustomParam|custom.customParams)]
+[param.name/] = [printParamValue(param)/]
+[/for]
+[printGlobalDF()/] = [custom.name/]([printGlobalDF()/],[printParamsList(custom.customParams)/])[/let][/template]
+[template private printParamValue(param:CustomParam)][if(param.type = Type::String)]'[param.value/]'[else][param.value/][/if][/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(NullValuesRemoval))]
+[let nullValuesR:NullValuesRemoval = task]
+[if (nullValuesR.policy = NulValuesPolicy::dropRecord)]
+[printGlobalDF()/] = [printGlobalDF()/].dropna()
+[elseif (nullValuesR.policy = NulValuesPolicy::meanImputation)]
+[printGlobalDF()/] = [printGlobalDF()/].fillna([printGlobalDF()/].mean())
+[elseif (nullValuesR.policy = NulValuesPolicy::medianImputation)]
+[printGlobalDF()/] = [printGlobalDF()/].fillna([printGlobalDF()/].median())
+[/if][/let][/template]
+
+[template private printAttributesList(attributes:Collection(Attribute))]
+[for(attribute:Attribute|attributes) separator(',')]['['/]'[attribute.name/]'[']'/][/for]
+[/template]
+[template private printAttributesListWoBrackets(attributes:Collection(Attribute))]
+[for(attribute:Attribute|attributes) separator(',')]'[attribute.name/]'[/for]
+[/template]
+[template private printParamsList(params:Collection(CustomParam))]
+[for(param:CustomParam|params) separator(',')][param.name/][/for]
+[/template]
+
+[comment prediction ###########################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(LinearRegression))]
+[let linRegr:LinearRegression = task]
+linear_regression_coefficients_[linRegr.id/] = np.array(['['/][printCoefficients(linRegr.estimatedCoefficients)/][']'/])
+
+prediction = ['['/][']'/]
+for index, row in [printGlobalDF()/].iterrows():
+	prediction.append(np.dot(linear_regression_coefficients_[linRegr.id/]['['/]1:len(linear_regression_coefficients_[linRegr.id/])[']'/].T, row.values)+linear_regression_coefficients_[linRegr.id/]['['/]0[']'/])
+
+[printGlobalDF()/]['['/]'[linRegr.predicts.name/]'[']'/] = prediction[/let][/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Ridge))]
+[let ridge:Ridge = task]
+ridge_regression_coefficients_[ridge.id/] = np.array(['['/][printCoefficients(ridge.estimatedCoefficients)/][']'/])
+
+prediction = ['['/][']'/]
+for index, row in [printGlobalDF()/].iterrows():
+	prediction.append(np.dot(ridge_regression_coefficients_[ridge.id/]['['/]1:len(ridge_regression_coefficients_[ridge.id/])[']'/].T, row.values)+ridge_regression_coefficients_[ridge.id/]['['/]0[']'/])
+
+[printGlobalDF()/]['['/]'[ridge.predicts.name/]'[']'/] = prediction[/let][/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Lasso))]
+[let lasso:Lasso = task]
+lasso_regression_coefficients_[lasso.id/] = np.array(['['/][printCoefficients(lasso.estimatedCoefficients)/][']'/])
+
+prediction = ['['/][']'/]
+for index, row in [printGlobalDF()/].iterrows():
+	prediction.append(np.dot(lasso_regression_coefficients_[lasso.id/]['['/]1:len(lasso_regression_coefficients_[lasso.id/])[']'/].T, row.values)+lasso_regression_coefficients_[lasso.id/]['['/]0[']'/])
+
+[printGlobalDF()/]['['/]'[lasso.predicts.name/]'[']'/] = prediction[/let][/template]
+
+[template private printCoefficients(coefficients:Collection(OclAny))]
+[for(coefficient:OclAny|coefficients) separator(', ')][coefficient/][/for]
+[/template]
+
+[comment description ###########################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Mean))]
+[printGlobalDF()/] = [printGlobalDF()/].mean(axis = 0).to_frame().transpose()
+[/template]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(StandardDeviation))]
+[printGlobalDF()/] = [printGlobalDF()/].std(axis = 0).to_frame().transpose()
+[/template]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Median))]
+[printGlobalDF()/] = [printGlobalDF()/].median(axis = 0).to_frame().transpose()
+[/template]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Skewness))]
+[printGlobalDF()/] = [printGlobalDF()/].skew(axis = 0).to_frame().transpose()
+[/template]
+
+
+[comment dataVisualization ##################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(PiePlot))]
+fig, axes = plt.subplots(ncols = len([printGlobalDF()/].columns))
+for i in range(0,len(axes)):
+    colName = [printGlobalDF()/].columns.values.tolist()['['/]i[']'/]
+    axes['['/]i[']'/].pie([printGlobalDF()/]['['/]colName[']'/].value_counts(ascending=True), labels = [printGlobalDF()/]['['/]colName[']'/].value_counts(ascending=True).index)
+    axes['['/]i[']'/].set_title(colName)
+    print("Printing axis {ind} named {name}".format(ind=i, name=colName))
+    plt.tight_layout()  # automatically adjust subplot parameters to give specified padding
+plt.show()[/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Histogram))]
+fig, axes = plt.subplots(ncols = len([printGlobalDF()/].columns))
+for i in range(0,len(axes)):
+    colName = [printGlobalDF()/].columns.values.tolist()['['/]i[']'/]
+    axes['['/]i[']'/].bar([printGlobalDF()/]['['/]colName[']'/].value_counts(ascending=True).index,[printGlobalDF()/]['['/]colName[']'/].value_counts(ascending=True),align='center', alpha=0.4, color='y')
+    axes['['/]i[']'/].set_title(colName)
+    print("Printing axis {ind} named {name}".format(ind=i, name=colName))
+    plt.tight_layout()  # automatically adjust subplot parameters to give specified padding
+plt.show()[/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(ScatterPlot))]
+[let scatter:ScatterPlot = task]
+Xnames = ['['/][printAttributesListWoBrackets(scatter.independentVariables)/][']'/]
+Yname = '[scatter.responseVariable.name/]'
+fig, axes = plt.subplots(ncols = len(Xnames))
+for i in range(0, len(Xnames)):
+	Xname = Xnames['['/]i[']'/]
+	axes[printIndexingIfNeeded('i',scatter.independentVariables)/].scatter([printGlobalDF()/]['['/]Xname[']'/].values,[printGlobalDF()/]['['/]Yname[']'/].values)
+	axes[printIndexingIfNeeded('i',scatter.independentVariables)/].set_xlabel(Xname)
+	axes[printIndexingIfNeeded('i',scatter.independentVariables)/].set_ylabel(Yname)
+
+plt.show()[/let][/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(LabeledScatterPlot))]
+[let lscatter:LabeledScatterPlot = task]
+Xnames = ['['/][printAttributesListWoBrackets(lscatter.independentVariables)/][']'/]
+Yname = '[lscatter.responseVariable.name/]'
+annotateAttribute = '[lscatter.labelAttribute.name/]'
+fig, axes = plt.subplots(ncols = len(Xnames))
+for i in range(0, len(Xnames)):
+	Xname = Xnames['['/]i[']'/]
+	axes[printIndexingIfNeeded('i',lscatter.independentVariables)/].scatter([printGlobalDF()/]['['/]Xname[']'/].values,[printGlobalDF()/]['['/]Yname[']'/].values)
+	axes[printIndexingIfNeeded('i',lscatter.independentVariables)/].set_xlabel(Xname)
+	axes[printIndexingIfNeeded('i',lscatter.independentVariables)/].set_ylabel(Yname)
+	for h,val in enumerate([printGlobalDF()/]['['/]annotateAttribute[']'/].values):
+		axes[printIndexingIfNeeded('i',lscatter.independentVariables)/].annotate(val,([printGlobalDF()/]['['/]Xname[']'/].values['['/]h[']'/],[printGlobalDF()/]['['/]Yname[']'/].values['['/]h[']'/]))
+
+plt.show()[/let][/template]
+
+[template private printIndexingIfNeeded(s:String,att:OrderedSet(Attribute))][if(att->size() = 1)][else]['['/][s/][']'/][/if][/template]
+
+[comment export #######################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Export))]
+[let export:Export = task]
+[for (write:OutputFile|export.writes)]
+[if (write.fileFormat = Format::json)]
+[printGlobalDF()/].to_json('[getExportFileName(write)/].json',orient="records")
+[elseif (write.fileFormat = Format::csv)]
+[printGlobalDF()/].to_csv('[getExportFileName(write)/].csv',index=False)
+[elseif (write.fileFormat = Format::html)]
+[printGlobalDF()/].to_html('[getExportFileName(write)/].html')
+[elseif (write.fileFormat = Format::xlsx)]
+writer = pd.ExcelWriter('[getExportFileName(write)/].xlsx')
+[printGlobalDF()/].to_excel(writer, 'Sheet1')
+writer.save()
+[elseif (write.fileFormat = Format::image)]
+[getFig()/].savefig('[write.storagePath/][write.name/]')
+[/if] 
+[/for][/let][/template]
+[template private getExportFileName(out:OutputFile)][out.storagePath/][out.name/][/template]
+[template private getFig()]fig[/template]
+[comment clustering #################################################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(DBSCAN))]
+[let dbscan:DBSCAN = task]
+from sklearn.cluster import DBSCAN
+
+dbscan = DBSCAN(eps=[dbscan.radius/], min_samples=[dbscan.threshold/]).fit([printGlobalDF()/].values)
+[printGlobalDF()/]['['/]'[dbscan.clusters.name/]'[']'/] = dbscan.labels_[/let][/template]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(KMeans))]
+[let kmeans:KMeans = task]
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters = [kmeans.K/], random_state = 0).fit([printGlobalDF()/].values)
+[printGlobalDF()/]['['/]'[kmeans.clusters.name/]'[']'/] = kmeans.labels_[/let][/template]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(Agglomerative))]
+[let agg:Agglomerative = task]
+from sklearn.cluster import AgglomerativeClustering
+
+agg = AgglomerativeClustering(n_clusters = [agg.CutHeight/], affinity = "euclidean",linkage = "[printLinkage(agg.interClusterSimilarity)/]").fit([printGlobalDF()/].values)
+[printGlobalDF()/]['['/]'[agg.clusters.name/]'[']'/] = agg.labels_[/let][/template]
+[template private printLinkage(interClusterSimilarity:InterClusterSimilarity)]
+[if (interClusterSimilarity = InterClusterSimilarity::CL)]complete[elseif (interClusterSimilarity = InterClusterSimilarity::WD)]ward[elseif (interClusterSimilarity = InterClusterSimilarity::GA)]average[/if]
+[/template]
+
+[comment classification ##############################/]
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(LogisticRegression))]
+[let log:LogisticRegression = task]
+log_regression_coefficients_[log.id/] = np.array(['['/][printCoefficients(log.estimatedCoefficients)/][']'/])
+
+prediction = ['['/][']'/]
+for index, row in [printGlobalDF()/].iterrows():
+	prediction.append(1./(1+np.exp(np.dot(log_regression_coefficients_[log.id/]['['/]1:len(log_regression_coefficients_[log.id/])[']'/].T, row.values)+log_regression_coefficients_[log.id/]['['/]0[']'/])))
+[printGlobalDF()/]['['/]'[log.classifies.name/]'[']'/] = prediction[/let][/template]
+
+[template private printTaskType(task:Task) ?(task.oclIsTypeOf(SVM))]
+[let svm:SVM = task]
+support_vectors = ['['/][']'/]
+[for(v:SupportVector|svm.supportVectors->sortedBy(s|s.index))]
+support_vectors.append(np.array(['['/][printVector(v.vector)/][']'/]))
+[/for]
+svm_coefficients_[svm.id/] = np.array(['['/][printCoefficients(svm.estimatedCoefficients)/][']'/])
+
+prediction = ['['/][']'/]
+for index, row in [printGlobalDF()/].iterrows():
+    lin_comb = svm_coefficients_[svm.id/]['['/]0[']'/]
+    for i in range(0,len(support_vectors)):
+        lin_comb += svm_coefficients_[svm.id/]['['/]i+1[']'/]*[printKernelFormula(svm.kernelFunction, svm.kernelParams)/]
+    prediction.append(np.sign(lin_comb))
+
+[printGlobalDF()/]['['/]'[svm.classifies.name/]'[']'/] = prediction[/let][/template]
+
+[template private printKernelFormula(kernel:KernelFunction,param:OrderedSet(Real))]
+[if(kernel = KernelFunction::Linear)]
+np.dot(support_vectors['['/]i[']'/].T,row.values)
+[else]
+(1+np.dot(support_vectors['['/]i[']'/].T,row.values))^[param->first()/]
+[/if]
+[/template]
+
+[template private printVector(vec:Sequence(OclAny))]
+[for(component:OclAny|vec) separator(', ')][component/][/for]
+[/template]

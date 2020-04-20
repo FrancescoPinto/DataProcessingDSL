@@ -1,0 +1,1543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+
+-->
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="pythonpipeline_diagram"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="pythonpipeline_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/PythonpipelineDiagramFile.gif"
+         extensions="pythonpipeline_diagram"
+         default="true"
+         class="pythonpipeline.diagram.part.PythonpipelineDiagramEditor"
+         matchingStrategy="pythonpipeline.diagram.part.PythonpipelineMatchingStrategy"
+         contributorClass="pythonpipeline.diagram.part.PythonpipelineDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="pythonpipeline.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/PythonpipelineDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="pythonpipeline.diagram.part.PythonpipelineCreationWizard"
+  	     id="pythonpipeline.diagram.part.PythonpipelineCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="aseprojectrecupero.diagram.InitDiagram"
+            nameFilter="*.pythonpipeline"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="pythonpipeline.diagram.part.PythonpipelineInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="aseprojectrecupero.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="PythonpipelinePresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="save">
+               </GlobalActionId>
+            </ElementType>        
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="PythonpipelinePresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="PythonpipelinePresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="PythonpipelineRender">
+         <Priority name="Lowest"/>
+         <ViewId id="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="pythonpipeline.diagram.providers.PythonpipelineMarkerNavigationProvider">
+         <MarkerType name="aseprojectrecupero.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Pythonpipeline Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="pythonpipeline.diagram.providers.PythonpipelineValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="pythonpipeline.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="aseprojectrecupero.diagram.general"
+            name="%prefpage.aseprojectrecupero.diagram.general"
+            class="pythonpipeline.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="aseprojectrecupero.diagram.appearance"
+            name="%prefpage.aseprojectrecupero.diagram.appearance"
+            category="aseprojectrecupero.diagram.general"
+            class="pythonpipeline.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="aseprojectrecupero.diagram.connections"
+            name="%prefpage.aseprojectrecupero.diagram.connections"
+            category="aseprojectrecupero.diagram.general"
+            class="pythonpipeline.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="aseprojectrecupero.diagram.printing"
+            name="%prefpage.aseprojectrecupero.diagram.printing"
+            category="aseprojectrecupero.diagram.general"
+            class="pythonpipeline.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="aseprojectrecupero.diagram.rulersAndGrid"
+            name="%prefpage.aseprojectrecupero.diagram.rulersAndGrid"
+            category="aseprojectrecupero.diagram.general"
+            class="pythonpipeline.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="aseprojectrecupero.diagram"
+            labelProvider="pythonpipeline.diagram.sheet.PythonpipelineSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="aseprojectrecupero.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="aseprojectrecupero.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="pythonpipeline.diagram.sheet.PythonpipelinePropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="pythonpipeline.diagram.navigator.PythonpipelineAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="pythonpipeline.diagram.providers.PythonpipelineViewProvider">
+         <Priority name="Lowest"/>
+         <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
+            <method name="getType()" value="pythonpipeline"/>
+         </object>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Pythonpipeline"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,3001,3035,3002,3003,3004,3005,3006,3007,3008,3009,3010,3011,3012,3013,3014,3015,3016,3017,3018,3019,3020,3021,3022,3023,3024,3025,3026,3027,3028,3029,3030,3031,3032,3033,3034"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004,4005,4006"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="pythonpipeline.diagram.providers.PythonpipelineEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="Pythonpipeline"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,3001,3035,3002,3003,3004,3005,3006,3007,3008,3009,3010,3011,3012,3013,3014,3015,3016,3017,3018,3019,3020,3021,3022,3023,3024,3025,3026,3027,3028,3029,3030,3031,3032,3033,3034"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001,4002,4003,4004,4005,4006"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5017,5018,5019,5020,5021,5022,5052,5054,5055,5058,5059,5001,5060,5016,5051,5042,5041,5040,5024,5023,5025,5026,5027,5028,5029,5039,5030,5031,5032,5033,5034,5035,5036,5037,5038,5043,5044,5045,5046,5047,5048,5049,5050,5053,5056,5057"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value="7001,7002,7003,7004,7057,7005,7006,7007,7008,7009,7010,7011,7012,7013,7014,7015,7016,7017,7018,7019,7020,7021,7022,7023,7024,7025,7026,7027,7028,7029,7030,7031,7032,7033,7034,7035,7036,7037,7038,7039,7040,7041,7042,7043,7044,7045,7046,7047,7048,7049,7050,7051,7052,7053,7054,7055,7056"/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfPipelineEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.PipelineEditPart" id="Pipeline_1000"/>
+         <context elements="Pipeline_1000"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfAgglomerativeEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.AgglomerativeEditPart" id="Agglomerative_2001"/>
+         <context elements="Agglomerative_2001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfRidgeEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.RidgeEditPart" id="Ridge_2002"/>
+         <context elements="Ridge_2002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLassoEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LassoEditPart" id="Lasso_2003"/>
+         <context elements="Lasso_2003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfSVMEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.SVMEditPart" id="SVM_2004"/>
+         <context elements="SVM_2004"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfKMeansEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.KMeansEditPart" id="KMeans_2005"/>
+         <context elements="KMeans_2005"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfDBSCANEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.DBSCANEditPart" id="DBSCAN_2006"/>
+         <context elements="DBSCAN_2006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLinearRegressionEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LinearRegressionEditPart" id="LinearRegression_2007"/>
+         <context elements="LinearRegression_2007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfMeanEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.MeanEditPart" id="Mean_2008"/>
+         <context elements="Mean_2008"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfMedianEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.MedianEditPart" id="Median_2009"/>
+         <context elements="Median_2009"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfStandardDeviationEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.StandardDeviationEditPart" id="StandardDeviation_2010"/>
+         <context elements="StandardDeviation_2010"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLogisticRegressionEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LogisticRegressionEditPart" id="LogisticRegression_2011"/>
+         <context elements="LogisticRegression_2011"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfSkewnessEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.SkewnessEditPart" id="Skewness_2012"/>
+         <context elements="Skewness_2012"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLabeledScatterPlotEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LabeledScatterPlotEditPart" id="LabeledScatterPlot_2013"/>
+         <context elements="LabeledScatterPlot_2013"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfNullValuesRemovalEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.NullValuesRemovalEditPart" id="NullValuesRemoval_2014"/>
+         <context elements="NullValuesRemoval_2014"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfCustomCleaningEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.CustomCleaningEditPart" id="CustomCleaning_2015"/>
+         <context elements="CustomCleaning_2015"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfChangeDataFormatEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ChangeDataFormatEditPart" id="ChangeDataFormat_2016"/>
+         <context elements="ChangeDataFormat_2016"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfScatterPlotEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ScatterPlotEditPart" id="ScatterPlot_2017"/>
+         <context elements="ScatterPlot_2017"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfHistogramEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.HistogramEditPart" id="Histogram_2018"/>
+         <context elements="Histogram_2018"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfPiePlotEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.PiePlotEditPart" id="PiePlot_2019"/>
+         <context elements="PiePlot_2019"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfProjectOnAttributesEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ProjectOnAttributesEditPart" id="ProjectOnAttributes_2020"/>
+         <context elements="ProjectOnAttributes_2020"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfDataCollectionEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.DataCollectionEditPart" id="DataCollection_2021"/>
+         <context elements="DataCollection_2021"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfDataIntegrationEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.DataIntegrationEditPart" id="DataIntegration_2022"/>
+         <context elements="DataIntegration_2022"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfExportEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ExportEditPart" id="Export_2023"/>
+         <context elements="Export_2023"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfSchemaEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.SchemaEditPart" id="Schema_2024"/>
+         <context elements="Schema_2024"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfOutputFileEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.OutputFileEditPart" id="OutputFile_2025"/>
+         <context elements="OutputFile_2025"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfRuntimeInfoEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.RuntimeInfoEditPart" id="RuntimeInfo_3001"/>
+         <context elements="RuntimeInfo_3001"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfSupportVectorEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.SupportVectorEditPart" id="SupportVector_3035"/>
+         <context elements="SupportVector_3035"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfCustomParamEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.CustomParamEditPart" id="CustomParam_3002"/>
+         <context elements="CustomParam_3002"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfInputSourceDeclarationEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.InputSourceDeclarationEditPart" id="InputSourceDeclaration_3003"/>
+         <context elements="InputSourceDeclaration_3003"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfAndClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.AndClauseEditPart" id="AndClause_3004"/>
+         <context elements="AndClause_3004"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfAndClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.AndClause2EditPart" id="AndClause_3005"/>
+         <context elements="AndClause_3005"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfOrClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.OrClauseEditPart" id="OrClause_3006"/>
+         <context elements="OrClause_3006"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLtClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LtClauseEditPart" id="LtClause_3007"/>
+         <context elements="LtClause_3007"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfQueryParamEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.QueryParamEditPart" id="QueryParam_3008"/>
+         <context elements="QueryParam_3008"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfGtClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.GtClauseEditPart" id="GtClause_3009"/>
+         <context elements="GtClause_3009"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfEqClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.EqClauseEditPart" id="EqClause_3010"/>
+         <context elements="EqClause_3010"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLeClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LeClauseEditPart" id="LeClause_3011"/>
+         <context elements="LeClause_3011"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfGeClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.GeClauseEditPart" id="GeClause_3012"/>
+         <context elements="GeClause_3012"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfContainsClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ContainsClauseEditPart" id="ContainsClause_3013"/>
+         <context elements="ContainsClause_3013"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfNotClauseEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.NotClauseEditPart" id="NotClause_3014"/>
+         <context elements="NotClause_3014"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfAndClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.AndClause3EditPart" id="AndClause_3015"/>
+         <context elements="AndClause_3015"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfOrClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.OrClause2EditPart" id="OrClause_3016"/>
+         <context elements="OrClause_3016"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLtClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LtClause2EditPart" id="LtClause_3017"/>
+         <context elements="LtClause_3017"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfGtClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.GtClause2EditPart" id="GtClause_3018"/>
+         <context elements="GtClause_3018"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfEqClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.EqClause2EditPart" id="EqClause_3019"/>
+         <context elements="EqClause_3019"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLeClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LeClause2EditPart" id="LeClause_3020"/>
+         <context elements="LeClause_3020"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfGeClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.GeClause2EditPart" id="GeClause_3021"/>
+         <context elements="GeClause_3021"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfContainsClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ContainsClause2EditPart" id="ContainsClause_3022"/>
+         <context elements="ContainsClause_3022"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfNotClause2EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.NotClause2EditPart" id="NotClause_3023"/>
+         <context elements="NotClause_3023"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfOrClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.OrClause3EditPart" id="OrClause_3024"/>
+         <context elements="OrClause_3024"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLtClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LtClause3EditPart" id="LtClause_3025"/>
+         <context elements="LtClause_3025"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfGtClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.GtClause3EditPart" id="GtClause_3026"/>
+         <context elements="GtClause_3026"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfEqClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.EqClause3EditPart" id="EqClause_3027"/>
+         <context elements="EqClause_3027"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfLeClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.LeClause3EditPart" id="LeClause_3028"/>
+         <context elements="LeClause_3028"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfGeClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.GeClause3EditPart" id="GeClause_3029"/>
+         <context elements="GeClause_3029"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfContainsClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.ContainsClause3EditPart" id="ContainsClause_3030"/>
+         <context elements="ContainsClause_3030"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfNotClause3EditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.NotClause3EditPart" id="NotClause_3031"/>
+         <context elements="NotClause_3031"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfJoinAttributesListEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.JoinAttributesListEditPart" id="JoinAttributesList_3032"/>
+         <context elements="JoinAttributesList_3032"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfAttributeEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.AttributeEditPart" id="Attribute_3033"/>
+         <context elements="Attribute_3033"/>
+      </modelingAssistantProvider>
+            <modelingAssistantProvider class="pythonpipeline.diagram.providers.assistants.PythonpipelineModelingAssistantProviderOfPrimaryKeyEditPart">
+         <Priority name="Lowest"/>
+         <object class="pythonpipeline.diagram.edit.parts.PrimaryKeyEditPart" id="PrimaryKey_3034"/>
+         <context elements="PrimaryKey_3034"/>
+      </modelingAssistantProvider>
+      
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="pythonpipeline.diagram.providers.PythonpipelineIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="pythonpipeline.diagram.providers.PythonpipelineParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="pythonpipeline.diagram.providers.PythonpipelineShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025"/>
+         </object>
+         <context decoratorTargets="generated-top-nodes"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Pipeline_1000"
+               name="%metatype.name.Pipeline_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Pipeline"
+               edithelper="pythonpipeline.diagram.edit.helpers.PipelineEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Agglomerative_2001"
+               name="%metatype.name.Agglomerative_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Agglomerative"
+               edithelper="pythonpipeline.diagram.edit.helpers.AgglomerativeEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Ridge_2002"
+               name="%metatype.name.Ridge_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Ridge"
+               edithelper="pythonpipeline.diagram.edit.helpers.RidgeEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Lasso_2003"
+               name="%metatype.name.Lasso_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Lasso"
+               edithelper="pythonpipeline.diagram.edit.helpers.LassoEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.SVM_2004"
+               name="%metatype.name.SVM_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SVM"
+               edithelper="pythonpipeline.diagram.edit.helpers.SVMEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.KMeans_2005"
+               name="%metatype.name.KMeans_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="KMeans"
+               edithelper="pythonpipeline.diagram.edit.helpers.KMeansEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.DBSCAN_2006"
+               name="%metatype.name.DBSCAN_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DBSCAN"
+               edithelper="pythonpipeline.diagram.edit.helpers.DBSCANEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.LinearRegression_2007"
+               name="%metatype.name.LinearRegression_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LinearRegression"
+               edithelper="pythonpipeline.diagram.edit.helpers.LinearRegressionEditHelper">
+            <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Mean_2008"
+               name="%metatype.name.Mean_2008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Mean"
+               edithelper="pythonpipeline.diagram.edit.helpers.MeanEditHelper">
+            <param name="semanticHint" value="2008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Median_2009"
+               name="%metatype.name.Median_2009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Median"
+               edithelper="pythonpipeline.diagram.edit.helpers.MedianEditHelper">
+            <param name="semanticHint" value="2009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.StandardDeviation_2010"
+               name="%metatype.name.StandardDeviation_2010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StandardDeviation"
+               edithelper="pythonpipeline.diagram.edit.helpers.StandardDeviationEditHelper">
+            <param name="semanticHint" value="2010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.LogisticRegression_2011"
+               name="%metatype.name.LogisticRegression_2011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LogisticRegression"
+               edithelper="pythonpipeline.diagram.edit.helpers.LogisticRegressionEditHelper">
+            <param name="semanticHint" value="2011"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Skewness_2012"
+               name="%metatype.name.Skewness_2012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Skewness"
+               edithelper="pythonpipeline.diagram.edit.helpers.SkewnessEditHelper">
+            <param name="semanticHint" value="2012"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.LabeledScatterPlot_2013"
+               name="%metatype.name.LabeledScatterPlot_2013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LabeledScatterPlot"
+               edithelper="pythonpipeline.diagram.edit.helpers.LabeledScatterPlotEditHelper">
+            <param name="semanticHint" value="2013"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.NullValuesRemoval_2014"
+               name="%metatype.name.NullValuesRemoval_2014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="NullValuesRemoval"
+               edithelper="pythonpipeline.diagram.edit.helpers.NullValuesRemovalEditHelper">
+            <param name="semanticHint" value="2014"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.CustomCleaning_2015"
+               name="%metatype.name.CustomCleaning_2015"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CustomCleaning"
+               edithelper="pythonpipeline.diagram.edit.helpers.CustomCleaningEditHelper">
+            <param name="semanticHint" value="2015"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.ChangeDataFormat_2016"
+               name="%metatype.name.ChangeDataFormat_2016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ChangeDataFormat"
+               edithelper="pythonpipeline.diagram.edit.helpers.ChangeDataFormatEditHelper">
+            <param name="semanticHint" value="2016"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.ScatterPlot_2017"
+               name="%metatype.name.ScatterPlot_2017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ScatterPlot"
+               edithelper="pythonpipeline.diagram.edit.helpers.ScatterPlotEditHelper">
+            <param name="semanticHint" value="2017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Histogram_2018"
+               name="%metatype.name.Histogram_2018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Histogram"
+               edithelper="pythonpipeline.diagram.edit.helpers.HistogramEditHelper">
+            <param name="semanticHint" value="2018"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.PiePlot_2019"
+               name="%metatype.name.PiePlot_2019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="PiePlot"
+               edithelper="pythonpipeline.diagram.edit.helpers.PiePlotEditHelper">
+            <param name="semanticHint" value="2019"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.ProjectOnAttributes_2020"
+               name="%metatype.name.ProjectOnAttributes_2020"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ProjectOnAttributes"
+               edithelper="pythonpipeline.diagram.edit.helpers.ProjectOnAttributesEditHelper">
+            <param name="semanticHint" value="2020"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.DataCollection_2021"
+               name="%metatype.name.DataCollection_2021"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DataCollection"
+               edithelper="pythonpipeline.diagram.edit.helpers.DataCollectionEditHelper">
+            <param name="semanticHint" value="2021"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.DataIntegration_2022"
+               name="%metatype.name.DataIntegration_2022"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DataIntegration"
+               edithelper="pythonpipeline.diagram.edit.helpers.DataIntegrationEditHelper">
+            <param name="semanticHint" value="2022"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Export_2023"
+               name="%metatype.name.Export_2023"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Export"
+               edithelper="pythonpipeline.diagram.edit.helpers.ExportEditHelper">
+            <param name="semanticHint" value="2023"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Schema_2024"
+               name="%metatype.name.Schema_2024"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Schema"
+               edithelper="pythonpipeline.diagram.edit.helpers.SchemaEditHelper">
+            <param name="semanticHint" value="2024"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.OutputFile_2025"
+               name="%metatype.name.OutputFile_2025"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="OutputFile"
+               edithelper="pythonpipeline.diagram.edit.helpers.OutputFileEditHelper">
+            <param name="semanticHint" value="2025"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.RuntimeInfo_3001"
+               name="%metatype.name.RuntimeInfo_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="RuntimeInfo"
+               edithelper="pythonpipeline.diagram.edit.helpers.RuntimeInfoEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.SupportVector_3035"
+               name="%metatype.name.SupportVector_3035"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SupportVector"
+               edithelper="pythonpipeline.diagram.edit.helpers.SupportVectorEditHelper">
+            <param name="semanticHint" value="3035"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.CustomParam_3002"
+               name="%metatype.name.CustomParam_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CustomParam"
+               edithelper="pythonpipeline.diagram.edit.helpers.CustomParamEditHelper">
+            <param name="semanticHint" value="3002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.InputSourceDeclaration_3003"
+               name="%metatype.name.InputSourceDeclaration_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="InputSourceDeclaration"
+               edithelper="pythonpipeline.diagram.edit.helpers.InputSourceDeclarationEditHelper">
+            <param name="semanticHint" value="3003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.AndClause_3004"
+               name="%metatype.name.AndClause_3004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="AndClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.AndClauseEditHelper">
+            <param name="semanticHint" value="3004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.AndClause_3005"
+               name="%metatype.name.AndClause_3005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.AndClause_3004"/>
+            <param name="semanticHint" value="3005"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.OrClause_3006"
+               name="%metatype.name.OrClause_3006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="OrClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.OrClauseEditHelper">
+            <param name="semanticHint" value="3006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.LtClause_3007"
+               name="%metatype.name.LtClause_3007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LtClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.LtClauseEditHelper">
+            <param name="semanticHint" value="3007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.QueryParam_3008"
+               name="%metatype.name.QueryParam_3008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="QueryParam"
+               edithelper="pythonpipeline.diagram.edit.helpers.QueryParamEditHelper">
+            <param name="semanticHint" value="3008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.GtClause_3009"
+               name="%metatype.name.GtClause_3009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GtClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.GtClauseEditHelper">
+            <param name="semanticHint" value="3009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.EqClause_3010"
+               name="%metatype.name.EqClause_3010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="EqClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.EqClauseEditHelper">
+            <param name="semanticHint" value="3010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.LeClause_3011"
+               name="%metatype.name.LeClause_3011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LeClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.LeClauseEditHelper">
+            <param name="semanticHint" value="3011"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.GeClause_3012"
+               name="%metatype.name.GeClause_3012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="GeClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.GeClauseEditHelper">
+            <param name="semanticHint" value="3012"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.ContainsClause_3013"
+               name="%metatype.name.ContainsClause_3013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ContainsClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.ContainsClauseEditHelper">
+            <param name="semanticHint" value="3013"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.NotClause_3014"
+               name="%metatype.name.NotClause_3014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="NotClause"
+               edithelper="pythonpipeline.diagram.edit.helpers.NotClauseEditHelper">
+            <param name="semanticHint" value="3014"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.AndClause_3015"
+               name="%metatype.name.AndClause_3015"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.AndClause_3004"/>
+            <param name="semanticHint" value="3015"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.OrClause_3016"
+               name="%metatype.name.OrClause_3016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.OrClause_3006"/>
+            <param name="semanticHint" value="3016"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.LtClause_3017"
+               name="%metatype.name.LtClause_3017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.LtClause_3007"/>
+            <param name="semanticHint" value="3017"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.GtClause_3018"
+               name="%metatype.name.GtClause_3018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.GtClause_3009"/>
+            <param name="semanticHint" value="3018"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.EqClause_3019"
+               name="%metatype.name.EqClause_3019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.EqClause_3010"/>
+            <param name="semanticHint" value="3019"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.LeClause_3020"
+               name="%metatype.name.LeClause_3020"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.LeClause_3011"/>
+            <param name="semanticHint" value="3020"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.GeClause_3021"
+               name="%metatype.name.GeClause_3021"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.GeClause_3012"/>
+            <param name="semanticHint" value="3021"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.ContainsClause_3022"
+               name="%metatype.name.ContainsClause_3022"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.ContainsClause_3013"/>
+            <param name="semanticHint" value="3022"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.NotClause_3023"
+               name="%metatype.name.NotClause_3023"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.NotClause_3014"/>
+            <param name="semanticHint" value="3023"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.OrClause_3024"
+               name="%metatype.name.OrClause_3024"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.OrClause_3006"/>
+            <param name="semanticHint" value="3024"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.LtClause_3025"
+               name="%metatype.name.LtClause_3025"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.LtClause_3007"/>
+            <param name="semanticHint" value="3025"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.GtClause_3026"
+               name="%metatype.name.GtClause_3026"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.GtClause_3009"/>
+            <param name="semanticHint" value="3026"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.EqClause_3027"
+               name="%metatype.name.EqClause_3027"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.EqClause_3010"/>
+            <param name="semanticHint" value="3027"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.LeClause_3028"
+               name="%metatype.name.LeClause_3028"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.LeClause_3011"/>
+            <param name="semanticHint" value="3028"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.GeClause_3029"
+               name="%metatype.name.GeClause_3029"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.GeClause_3012"/>
+            <param name="semanticHint" value="3029"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.ContainsClause_3030"
+               name="%metatype.name.ContainsClause_3030"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.ContainsClause_3013"/>
+            <param name="semanticHint" value="3030"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.NotClause_3031"
+               name="%metatype.name.NotClause_3031"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="aseprojectrecupero.diagram.NotClause_3014"/>
+            <param name="semanticHint" value="3031"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.JoinAttributesList_3032"
+               name="%metatype.name.JoinAttributesList_3032"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="JoinAttributesList"
+               edithelper="pythonpipeline.diagram.edit.helpers.JoinAttributesListEditHelper">
+            <param name="semanticHint" value="3032"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.Attribute_3033"
+               name="%metatype.name.Attribute_3033"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Attribute"
+               edithelper="pythonpipeline.diagram.edit.helpers.AttributeEditHelper">
+            <param name="semanticHint" value="3033"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.PrimaryKey_3034"
+               name="%metatype.name.PrimaryKey_3034"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="PrimaryKey"
+               edithelper="pythonpipeline.diagram.edit.helpers.PrimaryKeyEditHelper">
+            <param name="semanticHint" value="3034"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <metamodelType
+               id="aseprojectrecupero.diagram.DataFlow_4001"
+               name="%metatype.name.DataFlow_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DataFlow"
+               edithelper="pythonpipeline.diagram.edit.helpers.DataFlowEditHelper">
+            <param name="semanticHint" value="4001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.TaskInputSchema_4002"
+               name="%metatype.name.TaskInputSchema_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.TaskOutputSchema_4003"
+               name="%metatype.name.TaskOutputSchema_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4003"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.ExportWrites_4004"
+               name="%metatype.name.ExportWrites_4004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4004"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.InputSourceDeclarationSourceSchema_4005"
+               name="%metatype.name.InputSourceDeclarationSourceSchema_4005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4005"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://www.ase.it/pm/python">
+         <specializationType
+               id="aseprojectrecupero.diagram.PrimaryKeyCopies_4006"
+               name="%metatype.name.PrimaryKeyCopies_4006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.eclipse.gmf.runtime.emf.type.core.null"/>
+            <param name="semanticHint" value="4006"/>
+         </specializationType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="aseprojectrecupero.diagram.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="aseprojectrecupero.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="aseprojectrecupero.diagram.TypeContext">
+         <elementType ref="aseprojectrecupero.diagram.Pipeline_1000"/>
+         <elementType ref="aseprojectrecupero.diagram.Agglomerative_2001"/>
+         <elementType ref="aseprojectrecupero.diagram.Ridge_2002"/>
+         <elementType ref="aseprojectrecupero.diagram.Lasso_2003"/>
+         <elementType ref="aseprojectrecupero.diagram.SVM_2004"/>
+         <elementType ref="aseprojectrecupero.diagram.KMeans_2005"/>
+         <elementType ref="aseprojectrecupero.diagram.DBSCAN_2006"/>
+         <elementType ref="aseprojectrecupero.diagram.LinearRegression_2007"/>
+         <elementType ref="aseprojectrecupero.diagram.Mean_2008"/>
+         <elementType ref="aseprojectrecupero.diagram.Median_2009"/>
+         <elementType ref="aseprojectrecupero.diagram.StandardDeviation_2010"/>
+         <elementType ref="aseprojectrecupero.diagram.LogisticRegression_2011"/>
+         <elementType ref="aseprojectrecupero.diagram.Skewness_2012"/>
+         <elementType ref="aseprojectrecupero.diagram.LabeledScatterPlot_2013"/>
+         <elementType ref="aseprojectrecupero.diagram.NullValuesRemoval_2014"/>
+         <elementType ref="aseprojectrecupero.diagram.CustomCleaning_2015"/>
+         <elementType ref="aseprojectrecupero.diagram.ChangeDataFormat_2016"/>
+         <elementType ref="aseprojectrecupero.diagram.ScatterPlot_2017"/>
+         <elementType ref="aseprojectrecupero.diagram.Histogram_2018"/>
+         <elementType ref="aseprojectrecupero.diagram.PiePlot_2019"/>
+         <elementType ref="aseprojectrecupero.diagram.ProjectOnAttributes_2020"/>
+         <elementType ref="aseprojectrecupero.diagram.DataCollection_2021"/>
+         <elementType ref="aseprojectrecupero.diagram.DataIntegration_2022"/>
+         <elementType ref="aseprojectrecupero.diagram.Export_2023"/>
+         <elementType ref="aseprojectrecupero.diagram.Schema_2024"/>
+         <elementType ref="aseprojectrecupero.diagram.OutputFile_2025"/>
+         <elementType ref="aseprojectrecupero.diagram.RuntimeInfo_3001"/>
+         <elementType ref="aseprojectrecupero.diagram.SupportVector_3035"/>
+         <elementType ref="aseprojectrecupero.diagram.CustomParam_3002"/>
+         <elementType ref="aseprojectrecupero.diagram.InputSourceDeclaration_3003"/>
+         <elementType ref="aseprojectrecupero.diagram.AndClause_3004"/>
+         <elementType ref="aseprojectrecupero.diagram.AndClause_3005"/>
+         <elementType ref="aseprojectrecupero.diagram.OrClause_3006"/>
+         <elementType ref="aseprojectrecupero.diagram.LtClause_3007"/>
+         <elementType ref="aseprojectrecupero.diagram.QueryParam_3008"/>
+         <elementType ref="aseprojectrecupero.diagram.GtClause_3009"/>
+         <elementType ref="aseprojectrecupero.diagram.EqClause_3010"/>
+         <elementType ref="aseprojectrecupero.diagram.LeClause_3011"/>
+         <elementType ref="aseprojectrecupero.diagram.GeClause_3012"/>
+         <elementType ref="aseprojectrecupero.diagram.ContainsClause_3013"/>
+         <elementType ref="aseprojectrecupero.diagram.NotClause_3014"/>
+         <elementType ref="aseprojectrecupero.diagram.AndClause_3015"/>
+         <elementType ref="aseprojectrecupero.diagram.OrClause_3016"/>
+         <elementType ref="aseprojectrecupero.diagram.LtClause_3017"/>
+         <elementType ref="aseprojectrecupero.diagram.GtClause_3018"/>
+         <elementType ref="aseprojectrecupero.diagram.EqClause_3019"/>
+         <elementType ref="aseprojectrecupero.diagram.LeClause_3020"/>
+         <elementType ref="aseprojectrecupero.diagram.GeClause_3021"/>
+         <elementType ref="aseprojectrecupero.diagram.ContainsClause_3022"/>
+         <elementType ref="aseprojectrecupero.diagram.NotClause_3023"/>
+         <elementType ref="aseprojectrecupero.diagram.OrClause_3024"/>
+         <elementType ref="aseprojectrecupero.diagram.LtClause_3025"/>
+         <elementType ref="aseprojectrecupero.diagram.GtClause_3026"/>
+         <elementType ref="aseprojectrecupero.diagram.EqClause_3027"/>
+         <elementType ref="aseprojectrecupero.diagram.LeClause_3028"/>
+         <elementType ref="aseprojectrecupero.diagram.GeClause_3029"/>
+         <elementType ref="aseprojectrecupero.diagram.ContainsClause_3030"/>
+         <elementType ref="aseprojectrecupero.diagram.NotClause_3031"/>
+         <elementType ref="aseprojectrecupero.diagram.JoinAttributesList_3032"/>
+         <elementType ref="aseprojectrecupero.diagram.Attribute_3033"/>
+         <elementType ref="aseprojectrecupero.diagram.PrimaryKey_3034"/>
+         <elementType ref="aseprojectrecupero.diagram.DataFlow_4001"/>
+         <elementType ref="aseprojectrecupero.diagram.TaskInputSchema_4002"/>
+         <elementType ref="aseprojectrecupero.diagram.TaskOutputSchema_4003"/>
+         <elementType ref="aseprojectrecupero.diagram.ExportWrites_4004"/>
+         <elementType ref="aseprojectrecupero.diagram.InputSourceDeclarationSourceSchema_4005"/>
+         <elementType ref="aseprojectrecupero.diagram.PrimaryKeyCopies_4006"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="aseprojectrecupero.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="aseprojectrecupero.diagram"
+           properties="isURIEditorInput"
+           class="pythonpipeline.diagram.part.PythonpipelineUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isShortcut">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="aseprojectrecupero.diagram.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="aseprojectrecupero.diagram"
+           properties="isShortcut"
+           class="pythonpipeline.diagram.part.PythonpipelineShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="aseprojectrecupero.diagram.resourceContent"/>
+			<contentExtension pattern="aseprojectrecupero.diagram.domainResourceContent"/>
+            <contentExtension pattern="aseprojectrecupero.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="aseprojectrecupero.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="aseprojectrecupero.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="pythonpipeline.diagram.navigator.PythonpipelineNavigatorContentProvider" 
+            labelProvider="pythonpipeline.diagram.navigator.PythonpipelineNavigatorLabelProvider"
+            icon="icons/obj16/PythonpipelineDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="pythonpipeline_diagram"/>
+               </and>
+               <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="aseprojectrecupero.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="aseprojectrecupero.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="aseprojectrecupero.diagram.navigatorSorter" 
+               class="pythonpipeline.diagram.navigator.PythonpipelineNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="pythonpipeline_diagram"/>
+                  </and>
+                  <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="aseprojectrecupero.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="pythonpipeline.diagram.navigator.PythonpipelineDomainNavigatorContentProvider" 
+            labelProvider="pythonpipeline.diagram.navigator.PythonpipelineDomainNavigatorLabelProvider"
+            icon="icons/obj16/PythonpipelineDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="pythonpipeline"/>
+               </and>
+               <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="aseprojectrecupero.diagram.navigatorActionProvider"
+            class="pythonpipeline.diagram.navigator.PythonpipelineNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="aseprojectrecupero.diagram.isShortcut"/>
+           	   </adapt>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="aseprojectrecupero.diagram.navigatorLinkHelper"
+            class="pythonpipeline.diagram.navigator.PythonpipelineNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="aseprojectrecupero.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="pythonpipeline.diagram.navigator.PythonpipelineAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="pythonpipeline.diagram.part.PythonpipelineDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="pythonpipeline.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="pythonpipeline.diagram.updateDiagram"
+         contextId="pythonpipeline.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="aseprojectrecupero.diagram.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="pythonpipeline.diagram.edit.parts.PipelineEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="aseprojectrecupero.diagram.LoadResourceAction"
+         name="Load Resource"
+         categoryId="pythonpipeline.diagram.part.PythonpipelineDiagramEditorID"
+         defaultHandler="pythonpipeline.diagram.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+   </extension>
+
+   <!-- optionally, specify keybindings -->
+</plugin>

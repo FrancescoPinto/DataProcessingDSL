@@ -1,0 +1,688 @@
+@gmf
+@"http://www.eclipse.org/OCL/Import"(ecore="http://www.eclipse.org/emf/2002/Ecore")
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot")
+@namespace(uri="http://www.ase.it/pm/python", prefix="pm")
+package pythonpipeline;
+
+@gmf.diagram
+@Ecore(constraints="UniqueTaskId UniqueRuntimeInfoId UniqueSchemaId NotCopyingPrimaryKeyHaveDistinctNames NotCopyingAttributesHaveDistinctNames")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(UniqueTaskId="Tuple {
+	message : String = 'Task id should be unique',
+	status : Boolean = 
+		Task.allInstances()->forAll(t1,t2|t1<>t2 implies t1.id <> t2.id)
+}.status", UniqueRuntimeInfoId="Tuple {
+	message : String = 'Runtime info id should be unique',
+	status : Boolean = 
+		RuntimeInfo.allInstances()->forAll(r1,r2|r1<>r2 implies r1.executionId <> r2.executionId)
+}.status", UniqueSchemaId="Tuple {
+	message : String = 'Schema id should be unique',
+	status : Boolean = 
+		Schema.allInstances()->forAll(s1,s2|s1<>s2 implies s1.id <> s2.id)
+}.status", NotCopyingPrimaryKeyHaveDistinctNames="Tuple {
+	message : String = 'If a primaryKey does not copy another one, should have unique name',
+	status : Boolean = 
+			PrimaryKey.allInstances()->select(a1|a1.copies.oclIsUndefined())->forAll(b1,b2|b1<>b2 implies b1.name <>b2.name) 
+		and 
+		 	PrimaryKey.allInstances()->select(a1|a1.copies.oclIsUndefined())->forAll(c1| Attribute.allInstances()->select(a2|c1.name=a2.name)->size() = 0)
+}.status", NotCopyingAttributesHaveDistinctNames="Tuple {
+	message : String = 'If an attribute does not copy another one, should have unique name',
+	status : Boolean = 
+			Attribute.allInstances()->select(a1|a1.copies.oclIsUndefined())->forAll(b1,b2|b1<>b2 implies b1.name <>b2.name) 
+			and 
+		 	Attribute.allInstances()->select(a1|a1.copies.oclIsUndefined())->forAll(c1| PrimaryKey.allInstances()->select(a2|c1.name=a2.name)->size() = 0)
+}.status")
+class Pipeline {
+  val Task[2..*] tasks;
+  val DataFlow[+] dataFlows;
+  val Schema[*] schema;
+  val OutputFile[*] outputFile;
+  attr String[1] pipelineName;
+}
+
+@gmf.node(label="id")
+@Ecore(constraints="TasksWithOneAndOnlyOneInputAndInputSchema TasksWithNoInputAndNoInputSchema TasksWithOneOrMoreInputAndInputSchema1 TasksWithOneOrMoreInputAndInputSchema2 TasksWithInputShouldHaveConsistentSchemas TasksWithNoOutputAndNoOutputSchema TasksWithOneOutput DataCollectionMultipleOutput ExportNoOutput TasksWithOutputShouldHaveConsistentOutputSchemas ConsistentInputOutputFormat ConsistentFormatConversion1 StartTimeAfterPreviousTasksEndTime OrderedRuntimeIDsInTaskSequence DataVisualizationOutputMustContainAtLeastOneImage DataVisualizationNotFollowedByExportCannotProduceIMage NotDataVisualizationOrExportShouldNotProcessImages JoinShouldHaveDataWithSameFormatInInput TasksWithSameInputAndOutputSchema TasksWithIDCopyShouldHaveSchemaWithCopiedID TasksThatDontAllowIDCopyShouldntHaveSchemaWithCopiedID")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(TasksWithOneAndOnlyOneInputAndInputSchema="Tuple {
+	message : String = 'The task should have one and only one input dataflow and one and only one input schema',
+	status : Boolean = 
+			(self.oclIsKindOf(DataAnalysis) or (self.oclIsKindOf(DataCleaning) and not self.oclIsTypeOf(ChangeDataFormat)) or self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(Export) or self.oclIsTypeOf(ProjectOnAttributes))
+ 				implies (self.input <> null and self.input->size() = 1 and self.inputSchema <> null and self.inputSchema->size() = 1)
+}.status", TasksWithNoInputAndNoInputSchema="Tuple {
+	message : String = 'The task should have no input dataflow and no input schema',
+	status : Boolean = 
+			self.oclIsTypeOf(DataCollection) implies (self.input->size() = 0 and self.inputSchema->size() = 0)
+}.status", TasksWithOneOrMoreInputAndInputSchema1="Tuple {
+	message : String = 'The task should have two or more input dataflow and input schema',
+	status : Boolean = 
+			self.oclIsTypeOf(DataIntegration) implies (self.input->size() > 1 and self.inputSchema->size() > 1)
+}.status", TasksWithOneOrMoreInputAndInputSchema2="Tuple {
+	message : String = 'The task should have two or more input dataflow and input schema',
+	status : Boolean = 
+			self.oclIsTypeOf(ChangeDataFormat) implies (self.input->size() >= 1 and self.inputSchema->size() >= 1)
+}.status", TasksWithInputShouldHaveConsistentSchemas="Tuple {
+	message : String = 'The inputSchema should be consistent with the input dataflow schema',
+	status : Boolean = 
+		--self.input <>null and self.input->size() > 0 implied by other rule
+			(self.oclIsKindOf(DataAnalysis) or self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(Export) or self.oclIsTypeOf(DataIntegration))
+			 implies (self.input.typeOfData->forAll(s| self.inputSchema->includes(s)) and self.input.typeOfData->size() = self.inputSchema->size())
+}.status", TasksWithNoOutputAndNoOutputSchema="Tuple {
+	message : String = 'The task should have no output dataflow and no output schema',
+	status : Boolean = 
+			self.oclIsTypeOf(Export) implies (self.output->size() = 0 and self.outputSchema->size() = 0)
+}.status", TasksWithOneOutput="Tuple {
+	message : String = 'The task should have output dataflow and output schema',
+	status : Boolean = 
+			 not (self.oclIsTypeOf(Export) or self.oclIsTypeOf(DataCollection) or self.oclIsTypeOf(ChangeDataFormat)) implies (self.output->size() = 1)
+}.status", DataCollectionMultipleOutput="Tuple {
+	message : String = 'DataCollection has one ouput for each source',
+	status : Boolean = 
+			self.oclIsTypeOf(DataCollection) implies (self.output->size() = self.oclAsType(DataCollection).sourceDeclaration->size() and self.output->size() >= 1)
+}.status", ExportNoOutput="Tuple {
+	message : String = 'export should have no output dataflow',
+	status : Boolean = 
+			self.oclIsTypeOf(Export) implies (self.output->size() = 0)
+}.status", TasksWithOutputShouldHaveConsistentOutputSchemas="Tuple {
+	message : String = 'The outputSchema should be consistent with the output dataflow schema',
+	status : Boolean = 
+			--self.output <> null and self.output->size() > 0 
+			(self.oclIsKindOf(DataAnalysis) or self.oclIsTypeOf(DataCollection) or self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(DataIntegration))
+			implies (self.output.typeOfData->forAll(s| self.outputSchema->includes(s)))
+}.status", ConsistentInputOutputFormat="Tuple {
+	message : String = 'The input/output format of dataflows to/from the task should be the same',
+	status : Boolean = 
+			(not self.oclIsTypeOf(ChangeDataFormat)) implies 
+				(self.output->forAll(o| self.input->forAll(i| i.format = o.format)))
+}.status", ConsistentFormatConversion1="Tuple {
+	message : String = 'The format conversion should make sense (i.e. input != output format )',
+	status : Boolean = 
+			self.oclIsTypeOf(ChangeDataFormat) implies 
+				(self.oclAsType(ChangeDataFormat)).input->exists(is|(self.oclAsType(ChangeDataFormat)).output->exists(os| os.typeOfData= is.typeOfData and os.format <> is.format ))
+}.status", StartTimeAfterPreviousTasksEndTime="Tuple {
+	message : String = 'Start time of the task should come after the End time of previous tasks',
+	status : Boolean = 
+			 self.input.from.runtimeInfo->select(r| self.runtimeInfo.startTime < r.endTime)->size() = 0
+}.status", OrderedRuntimeIDsInTaskSequence="Tuple {
+	message : String = 'The IDs of Runtime elements define the execution order of the task in the sequence, hence should be properly ordered',
+	status : Boolean = 
+			if self.oclIsKindOf(DataCollection) then
+			 self.runtimeInfo.executionId = 1  
+			else 
+				self.input->size()>0 implies self.input.from.runtimeInfo->forAll(r|self.runtimeInfo.executionId = r.executionId +1)
+			endif
+}.status", DataVisualizationOutputMustContainAtLeastOneImage="Tuple {
+	message : String = 'Datavisualization tasks should either output a image or copy the input schema',
+	status : Boolean = 
+		 	self.oclIsKindOf(DataVisualization) implies ((self.outputSchema.attributes.type->select(t|t = Type::Bitmap)->size() = 1) xor (self.outputSchema->first() = self.inputSchema->first()))
+}.status", DataVisualizationNotFollowedByExportCannotProduceIMage="Tuple {
+	message : String = 'DataVisualization tasks should not produce output image if they are not follwed by an export',
+	status : Boolean = 
+			(self.oclIsKindOf(DataVisualization) and self.outputSchema.attributes.type->select(t|t = Type::Bitmap)->size() > 0) implies (self.output->first().to.oclIsKindOf(Export))
+}.status", NotDataVisualizationOrExportShouldNotProcessImages="Tuple {
+	message : String = 'Tasks other than data visualization and export are not supposed to process images',
+	status : Boolean = 
+ 			not (self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(Export)) implies 
+ 			(self.outputSchema.attributes.type->select(t|t = Type::Bitmap)->size() = 0) 
+ 				and (not (self.inputSchema->size() <> 0) implies self.inputSchema.attributes.type->select(t|t = Type::Bitmap)->size() = 0)
+}.status", JoinShouldHaveDataWithSameFormatInInput="Tuple {
+	message : String = 'DataIntegration tasks should have inputs with same format (use ChangeDataFormat nodes if needed)',
+	status : Boolean = 
+		self.oclIsTypeOf(DataIntegration) implies self.input.format->asSet()->size() = 1
+}.status", TasksWithSameInputAndOutputSchema="Tuple {
+	message : String = 'ChangeData/NullValuesRemoval/Descriptions tasks should have same input and output schema',
+	status : Boolean = 
+		self.oclIsTypeOf(ChangeDataFormat) or self.oclIsTypeOf(NullValuesRemoval) or self.oclIsKindOf(Description) implies self.inputSchema->forAll(is| self.outputSchema->includes(is))
+}.status", TasksWithIDCopyShouldHaveSchemaWithCopiedID="Tuple {
+	message : String = 'Tasks that can mantain the row identity from input to output should mark the fact that the ID value is copied from the input schema',
+	status : Boolean = 
+		self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(Prediction) or self.oclIsKindOf(Classification) or self.oclIsKindOf(Clustering) implies 
+		  ((self.outputSchema->first().idColumn.copies = self.inputSchema->first().idColumn) or (self.outputSchema->first() = self.inputSchema->first()))
+}.status", TasksThatDontAllowIDCopyShouldntHaveSchemaWithCopiedID="Tuple {
+	message : String = 'Tasks that can not mantain the row identity from input to output shouldn\'t mark the fact that the ID value is copied from the input schema',
+	status : Boolean = 
+		not(self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(Prediction) or self.oclIsKindOf(Classification) or self.oclIsKindOf(Clustering) or self.oclIsKindOf(Export)) implies
+		(self.outputSchema->forAll(s|s.idColumn.copies = null) or (self.outputSchema->first() = self.inputSchema->first()))
+}.status")
+abstract class Task {
+  ref DataFlow[*]#to input;
+  ref DataFlow[*]#from output;
+
+  @gmf.compartment
+  val RuntimeInfo[1] runtimeInfo;
+
+  @gmf.link(target="inputSchema", style="dash", color="0,255,0")
+  ref Schema[*] inputSchema;
+
+  @gmf.link(target="outputSchema", style="dash", color="255,0,0")
+  ref Schema[*] outputSchema;
+  attr String[1] ~id;
+}
+
+@gmf.link(source="from", target="to", target.decoration="filledclosedarrow", style="solid", label="format", width="4")
+class DataFlow {
+  ref Task[1]#output from;
+  ref Task[1]#input to;
+  attr Format format = "";
+  attr String[1] ~id;
+  ref Schema typeOfData;
+}
+
+@Ecore(constraints="ConsistentDataCollectionFormat")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentDataCollectionFormat="Tuple {
+	message : String = 'output of dataCollection should have consistent format with inputDataSource',
+	status : Boolean = 
+		self.sourceDeclaration->forAll(is|self.output->exists(o|o.format = is.exchangeFormat and o.typeOfData = is.sourceSchema))
+}.status")
+class DataCollection extends Task {
+
+  @gmf.compartment
+  val InputSourceDeclaration[+] sourceDeclaration;
+}
+
+@Ecore(constraints="JoinAttributesShouldBeOverAllSchemas AttributeContainedInSchema JoinAttributesSameType JoinedOutputSchemaShouldHaveOneKeyAndContainAllOtherAttributes JoinEitherOnAttributesOrOnKeys OutputSchemaIfPrimaryKeyJoin OutputSchemaIfAttributeJoin")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(JoinAttributesShouldBeOverAllSchemas="Tuple {
+	message : String = 'Join attribute lists should be over all the input tables',
+	status : Boolean = 
+			not self.joinAttributesList.oclIsUndefined() and self.joinAttributesList.joinAttributes->size() = self.inputSchema->size()
+}.status", AttributeContainedInSchema="Tuple {
+	message : String = 'Each attribute in a list should be contained once and only once in an input schema',
+	status : Boolean = 
+			not self.joinAttributesList.oclIsUndefined() and self.joinAttributesList.joinAttributes->forAll(j| self.inputSchema->select(s|s.attributes->includes(j) or s.idColumn = j)->size() = 1)
+}.status", JoinAttributesSameType="Tuple {
+	message : String = 'Join attributes should have same type',
+	status : Boolean = 
+			not self.joinAttributesList.oclIsUndefined() and self.joinAttributesList.joinAttributes.type->asSet()->size() = 1
+}.status", JoinedOutputSchemaShouldHaveOneKeyAndContainAllOtherAttributes="Tuple {
+	message : String = 'Output schema of join should contain at most one attribute identical to the first attribute in the joinAttributesList (0 if it is a generatedID join), and all the attributes in the input tables',
+	status : Boolean = 
+			self.outputSchema.attributes->select(a| self.joinAttributesList.joinAttributes->first().name = a.name and a.type = self.joinAttributesList.joinAttributes->first().type)->size() <= 1 and
+			self.outputSchema.attributes->forAll(a| self.inputSchema.attributes->select(a1|a1.name = a.name and a1.type = a.type)->size() >= 1 or (self.joinAttributesList.joinAttributes->first().name = a.name and a.type = self.joinAttributesList.joinAttributes->first().type))
+}.status", JoinEitherOnAttributesOrOnKeys="Tuple {
+	message : String = 'Joins on keys should be only among keys (automatically generated indices), and joins on attributes should only be among attributes',
+	status : Boolean = 
+			(self.joinAttributesList.joinAttributes->forAll(a|a.oclIsTypeOf(PrimaryKey)) or self.joinAttributesList.joinAttributes->forAll(a|a.oclIsTypeOf(Attribute)))
+}.status", OutputSchemaIfPrimaryKeyJoin="Tuple {
+	message : String = 'Output schema should contain all input attributes, since join is on primary keys',
+	status : Boolean = 
+		self.joinAttributesList.joinAttributes->forAll(a|a.oclIsTypeOf(PrimaryKey)) implies self.inputSchema.attributes->forAll(a|self.outputSchema.attributes.copies->exists(a1|a1.name = a.name and a1.type = a.type))
+}.status", OutputSchemaIfAttributeJoin="Tuple {
+	message : String = 'Output schema should drop attributes in join attribute list',
+	status : Boolean = 
+		self.joinAttributesList.joinAttributes->forAll(a|a.oclIsTypeOf(Attribute)) implies self.inputSchema.attributes->reject(a|self.joinAttributesList.joinAttributes->exists(a1|a1.name = a.name and a1.type = a.type))->forAll(a|self.outputSchema.attributes.copies->exists(a1|a1.name = a.name and a1.type = a.type))
+		and self.outputSchema.attributes->forAll(a| a.name <> self.joinAttributesList.joinAttributes->first().name implies self.joinAttributesList.joinAttributes->select(a2|a2.name = a.name)->size() = 0)
+}.status")
+class DataIntegration extends Task {
+
+  @gmf.compartment
+  val JoinAttributesList[1] joinAttributesList;
+}
+
+abstract class DataAnalysis extends Task {
+}
+
+abstract class DataCleaning extends Task {
+}
+
+abstract class DataVisualization extends Task {
+}
+
+class Export extends Task {
+
+  @gmf.link(label="writes", target="writes", style="dot")
+  ref OutputFile[+]#export writes;
+}
+
+@gmf.node(label="sourceURI", figure="rectangle")
+@Ecore(constraints="InputShouldNotCopy InputSOurceIDMustBeSpecified")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(InputShouldNotCopy="Tuple {
+	message : String = 'input source schema should not be copying',
+	status : Boolean = 
+		self.sourceSchema.idColumn.copies.oclIsUndefined() and self.sourceSchema.attributes.copies->forAll(a|a.oclIsUndefined())
+}.status", InputSOurceIDMustBeSpecified="Tuple {
+	message : String = 'input source id should be specified',
+	status : Boolean = 
+		self.id <> '' or self.id.size() > 0
+}.status")
+class InputSourceDeclaration {
+  attr String[1] sourceURI;
+  attr String queryEndpoint;
+  attr Format[1] exchangeFormat;
+
+  @gmf.link(target="sourceSchema", style="dot")
+  ref Schema[1] sourceSchema;
+  attr SourceType[1] sourceType;
+
+  @gmf.compartment
+  val LogicProposition queryConditions;
+  attr String[1] ~id = "";
+}
+
+enum Format {
+  json = 0;
+  csv = 0;
+  html = 0;
+  xlsx = 0;
+  image = 0;
+}
+
+@gmf.node(label="name", figure="rectangle")
+@Ecore(constraints="OutputFileNotEmptyName OutputFile_NotEmptyPath NoImageExportIfNotPreviousDV")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(OutputFileNotEmptyName="Tuple {
+	message : String = 'File Name should not be empty',
+	status : Boolean = self.name.size()> 0 or self.name <> null
+}.status", OutputFile_NotEmptyPath="Tuple {
+	message : String = 'File Path should not be empty',
+	status : Boolean = self.storagePath.size()>= 0 or self.storagePath <> null
+}.status", NoImageExportIfNotPreviousDV="Tuple {
+	message : String = 'Image export is only for data visualization tasks',
+	status : Boolean = self.fileFormat = Format::image implies self.export.input->first().from.oclIsKindOf(DataVisualization)
+}.status")
+class OutputFile {
+  attr Format[1] fileFormat;
+  attr String[1] storagePath;
+  attr String[1] name;
+  ref Export[1]#writes export;
+}
+
+@Ecore(constraints="ClassificationIsForClassLabels ConsistentDataTypesInInputForClassification")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ClassificationIsForClassLabels="Tuple {
+	message : String = 'Classification output should be only for class labels!',
+	status : Boolean = 
+		self.outputSchema.attributes->includes(self.classifies) and self.classifies.type = Type::Float
+}.status", ConsistentDataTypesInInputForClassification="Tuple {
+	message : String = 'Classification here only works on int/float data',
+	status : Boolean = 
+			self.inputSchema->size() = 1 and self.inputSchema->first().attributes->forAll(a|a.type = Type::Int or a.type = Type::Float) 
+}.status")
+abstract class Classification extends DataAnalysis {
+  ref Attribute[1] classifies;
+}
+
+@Ecore(constraints="PredictionIsForRealResponse ConsistentDataTypesInInputForPrediction")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(PredictionIsForRealResponse="Tuple {
+	message : String = 'Prediction output should be in output schema and should be real',
+	status : Boolean = 
+			self.outputSchema.attributes->includes(self.predicts) and self.predicts.type = Type::Float
+}.status", ConsistentDataTypesInInputForPrediction="Tuple {
+	message : String = 'Prediction here only works on int/float data',
+	status : Boolean = 
+			self.inputSchema->size() = 1 and self.inputSchema->first().attributes->forAll(a|a.type = Type::Int or a.type = Type::Float) 
+}.status")
+abstract class Prediction extends DataAnalysis {
+  ref Attribute[1] predicts;
+}
+
+@Ecore(constraints="ConsistentDataTypesInInputForClustering")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentDataTypesInInputForClustering="Tuple {
+	message : String = 'clustering here only works on int/float data',
+	status : Boolean = 
+			self.inputSchema->size() = 1 and self.inputSchema->first().attributes->forAll(a|a.type = Type::Int or a.type = Type::Float) 
+}.status")
+abstract class Clustering extends DataAnalysis {
+  ref Attribute[1] clusters;
+}
+
+@Ecore(constraints="ConsistentDataTypesForDescription")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentDataTypesForDescription="Tuple {
+	message : String = 'Mean/median/variance/skeweness compute mean/median/variance/skeweness by column, inputSchema and outputSchema should have only float attributes',
+	status : Boolean = 
+		self.inputSchema->size() = 1 and self.inputSchema->first().attributes->forAll(a|a.type = Type::Int or a.type = Type::Float) 
+			and
+		self.outputSchema.attributes->forAll(a|a.type = Type::Int or a.type = Type::Float)
+}.status")
+abstract class Description extends DataAnalysis {
+}
+
+@gmf.node(label="name")
+abstract class Column {
+  attr String[1] name;
+  attr Type[1] type;
+}
+
+@Ecore(constraints="ConsistentDataTypesInInputForCleaning")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentDataTypesInInputForCleaning="Tuple {
+	message : String = 'some forms of cleaning work only for numeric values',
+	status : Boolean = 
+		self.policy <> NulValuesPolicy::dropRecord implies (self.inputSchema->size() = 1 and self.inputSchema->first().attributes->forAll(a|a.type = Type::Int or a.type = Type::Float))
+}.status")
+class NullValuesRemoval extends DataCleaning {
+  attr NulValuesPolicy[1] policy;
+}
+
+class CustomCleaning extends DataCleaning {
+  attr String[1] name;
+
+  @gmf.compartment
+  val CustomParam[*] customParams;
+}
+
+@gmf.node(label="id", border.style="dash", border.color="150,150,255")
+@Ecore(constraints="UniqueAttributeNameInSameSchema")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(UniqueAttributeNameInSameSchema="Tuple {
+	message : String = 'Attribute name in same schema should be unique',
+	status : Boolean = 
+		self.attributes->forAll(a1,a2| a1 <> a2 implies a1.name <> a2.name)
+}.status")
+class Schema {
+  attr String[1] ~id;
+
+  @gmf.compartment
+  val Attribute[+] attributes;
+
+  @gmf.compartment
+  val PrimaryKey[1] idColumn;
+}
+
+enum Type {
+  String = 0;
+  Boolean = 0;
+  Int = 0;
+  Float = 0;
+  Bitmap = 0;
+}
+
+@gmf.node(label="id")
+class JoinAttributesList {
+  ref Column[2..*] joinAttributes;
+  attr String[1] ~id;
+}
+
+@gmf.node(label="executionId")
+@Ecore(constraints="StartTimeBeforeEndTime")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(StartTimeBeforeEndTime="Tuple {
+	message : String = 'Start time must come before End time in a same task',
+	status : Boolean = 
+			self.startTime < self.endTime
+}.status")
+class RuntimeInfo {
+  attr EBigDecimal[1] startTime;
+  attr EBigDecimal[1] endTime;
+  attr EBigDecimal[1] executionId;
+}
+
+@Ecore(constraints="NumberOfOutputEqualsNumberOfInput")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(NumberOfOutputEqualsNumberOfInput="Tuple {
+	message : String = 'ChangeDataFormat should produce one output for each input',
+	status : Boolean = 
+			self.output->size() = self.input->size() and self.inputSchema->forAll(s|self.outputSchema->includes(s))
+}.status")
+class ChangeDataFormat extends DataCleaning {
+}
+
+enum NulValuesPolicy {
+  dropRecord = 0;
+  meanImputation = 0;
+  medianImputation = 0;
+}
+
+@Ecore(constraints="ConsistentSVMCoefficientsAndVectors ConsistentKernelParams ConsistentSupportVectorsDimensionality")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentSVMCoefficientsAndVectors="Tuple {
+	message : String = 'Wrong number of coefficients (should be 1 + number of support vectors)',
+	status : Boolean = 
+		self.estimatedCoefficients->size() = self.supportVectors->size()+1
+}.status", ConsistentKernelParams="Tuple {
+	message : String = 'Wrong number of kernel params',
+	status : Boolean = 
+		if self.kernelFunction = KernelFunction::Polynomial then
+		   self.kernelParams->size() = 1
+		else 
+			self.kernelParams->size() = 0
+		endif
+}.status", ConsistentSupportVectorsDimensionality="Tuple {
+	message : String = 'Support vector is of the wrong dimensionality with respect to input schema',
+	status : Boolean = 
+		self.supportVectors->forAll(v|v.vector->size() = self.inputSchema->first().attributes->size())
+}.status")
+class SVM extends Classification {
+  attr KernelFunction kernelFunction;
+
+  @"http://www.eclipse.org/OCL/Collection"(nullFree="false")
+  !unique attr EBigDecimal[+] estimatedCoefficients;
+  attr EBigDecimal[*] kernelParams;
+
+  @gmf.compartment
+  val SupportVector[*] supportVectors;
+}
+
+enum KernelFunction {
+  Linear = 0;
+  Polynomial = 0;
+}
+
+@Ecore(constraints="positiveK")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(positiveK="Tuple {
+	message : String = 'K should be positive',
+	status : Boolean = self.K > 0
+}.status")
+class KMeans extends Clustering {
+  attr EBigInteger[1] K;
+}
+
+abstract class Hierarchical extends Clustering {
+}
+
+@Ecore(constraints="CutHeightGe1")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(CutHeightGe1="Tuple {
+	message : String = 'Cut Height >= 1',
+	status : Boolean = self.CutHeight >= 1
+}.status")
+class Agglomerative extends Hierarchical {
+  attr InterClusterSimilarity[1] interClusterSimilarity;
+  attr EBigInteger[1] CutHeight;
+}
+
+enum InterClusterSimilarity {
+  WD = 0;
+  CL = 0;
+  GA = 0;
+}
+
+@Ecore(constraints="PositiveRadiusAndThreshold")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(PositiveRadiusAndThreshold="Tuple {
+	message : String = 'The radius and the threshold should be positive',
+	status : Boolean = self.radius > 0 and self.threshold > 0
+}.status")
+class DBSCAN extends Clustering {
+  attr EBigDecimal[1] radius;
+  attr EBigInteger[1] threshold;
+}
+
+@Ecore(constraints="ConsistentNumberOfEstimatedCoefficients")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentNumberOfEstimatedCoefficients="Tuple {
+	message : String = 'The number of estimated coefficients should correspond to the number of input predictors, i.e. columns of inputSchema',
+	status : Boolean = 
+			self.estimatedCoefficients->size() = self.inputSchema->first().attributes->size()+1
+}.status")
+class LinearRegression extends Prediction {
+
+  @"http://www.eclipse.org/OCL/Collection"(nullFree="false")
+  !unique attr EBigDecimal[+] estimatedCoefficients;
+}
+
+@Ecore(constraints="PositivePenaltyFactor")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(PositivePenaltyFactor="Tuple {
+	message : String = 'Penalty factor should be positive, otherwise, if it is zero, use plain linear regression',
+	status : Boolean = 
+			self.penaltyFactor > 0
+}.status")
+class Ridge extends LinearRegression {
+  attr EBigDecimal[1] penaltyFactor;
+}
+
+@Ecore(constraints="PositivePenaltyFactor")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(PositivePenaltyFactor="Tuple {
+	message : String = 'Penalty factor should be positive, otherwise, if it is zero, use plain linear regression',
+	status : Boolean = 
+			self.penaltyFactor > 0
+}.status")
+class Lasso extends LinearRegression {
+  attr EBigDecimal[1] penaltyFactor;
+}
+
+class Mean extends Description {
+}
+
+class Median extends Description {
+}
+
+class StandardDeviation extends Description {
+}
+
+enum SourceType {
+  IoT = 0;
+  SocialMedia = 0;
+  Web = 0;
+}
+
+@gmf.node(label="id")
+abstract class LogicProposition {
+  attr String[1] ~id;
+}
+
+class NotClause extends LogicProposition {
+
+  @gmf.compartment
+  val LogicProposition[1] subClause;
+}
+
+abstract class MultiOperandClause extends LogicProposition {
+
+  @gmf.compartment
+  val LogicProposition[2..*] operands;
+}
+
+class AndClause extends MultiOperandClause {
+}
+
+class OrClause extends MultiOperandClause {
+}
+
+@Ecore(constraints="ConsistenValueClauseTypes")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistenValueClauseTypes="Tuple {
+	message : String = 'ComparisonValue and QueryParam should have same type',
+	status : Boolean = 
+		self.type = self.conditionField.type
+}.status")
+abstract class ValueClause extends LogicProposition {
+  attr String[1] comparisonValue;
+
+  @gmf.compartment
+  val QueryParam[1] conditionField;
+  attr Type[1] type;
+}
+
+class LtClause extends ValueClause {
+}
+
+class GtClause extends ValueClause {
+}
+
+class EqClause extends ValueClause {
+}
+
+class LeClause extends ValueClause {
+}
+
+class GeClause extends ValueClause {
+}
+
+class ContainsClause extends ValueClause {
+}
+
+@gmf.node(label="name")
+class QueryParam {
+  attr String[1] name;
+  attr Type[1] type;
+}
+
+@gmf.node(label="name")
+class CustomParam {
+  attr String[1] name;
+  attr Type[1] type;
+  attr String value;
+}
+
+@Ecore(constraints="IfCopiesThenSameTypeAndName")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(IfCopiesThenSameTypeAndName="Tuple {
+	message : String = 'A primarykey can\'t copy primarykeys with different type or name',
+	status : Boolean = 
+		self.copies <> null implies (self.type = self.copies.type and self.name = self.copies.name)
+}.status")
+class PrimaryKey extends Column {
+
+  @gmf.link(target="copies", target.decoration="arrow", style="dot", color="0,0,255")
+  ref PrimaryKey copies;
+}
+
+@Ecore(constraints="IfCopiesThenSameSignature")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(IfCopiesThenSameSignature="Tuple {
+	message : String = 'An attribute must be completely copied (in type and name)!',
+	status : Boolean = 
+		self.copies <> null implies self.type = self.copies.type and self.name = self.copies.name
+}.status")
+class Attribute extends Column {
+  ref Attribute copies;
+}
+
+@Ecore(constraints="ConsistentNumberOfEstimatedCoefficients")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ConsistentNumberOfEstimatedCoefficients="Tuple {
+	message : String = 'The number of estimated coefficients should correspond to the number of input predictors, i.e. columns of inputSchema',
+	status : Boolean = 
+			self.estimatedCoefficients->size() = self.inputSchema->first().attributes->size()+1
+}.status")
+class LogisticRegression extends Classification {
+  !unique attr EBigDecimal[+] estimatedCoefficients;
+}
+
+class Skewness extends Description {
+}
+
+@Ecore(constraints="IndependentAndResponseShouldBeInInputSchema IndependentAndResponseShouldBeDifferent")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(IndependentAndResponseShouldBeInInputSchema="Tuple {
+	message : String = 'Independent variables and response variables should be specified within the attributes of the input schema',
+	status : Boolean = 
+		self.independentVariables->forAll(v|self.inputSchema->first().attributes->includes(v) or self.inputSchema.idColumn = v) and (self.inputSchema->first().attributes->includes(responseVariable) or self.inputSchema.idColumn = responseVariable)
+}.status", IndependentAndResponseShouldBeDifferent="Tuple {
+	message : String = 'Independent variables and response variables should not be the same variables',
+	status : Boolean = 
+		self.independentVariables->intersection(Set{self.responseVariable})->size() = 0
+}.status")
+class ScatterPlot extends DataVisualization {
+  ref Attribute[+] independentVariables;
+  ref Attribute[1] responseVariable;
+}
+
+@Ecore(constraints="LabelAttributeShouldBeInInputSchema")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(LabelAttributeShouldBeInInputSchema="Tuple {
+	message : String = 'Label variables should be specified within the attributes of the input schema',
+	status : Boolean = 
+		self.inputSchema.attributes->includes(self.labelAttribute) or self.inputSchema.idColumn = self.labelAttribute
+}.status")
+class LabeledScatterPlot extends ScatterPlot {
+  ref Attribute[1] labelAttribute;
+}
+
+class Histogram extends DataVisualization {
+}
+
+class PiePlot extends DataVisualization {
+}
+
+@Ecore(constraints="ProjectOnAttributesInInputSchema ProjectOnAttributesShouldBeTheOneAndOnlyOneInOutputSchema")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"(ProjectOnAttributesInInputSchema="Tuple {
+	message : String = 'Projection should occur on attributes of input schema',
+	status : Boolean = 
+		self.projectionAttributes->forAll(a|self.inputSchema->first().attributes->includes(a))
+}.status", ProjectOnAttributesShouldBeTheOneAndOnlyOneInOutputSchema="Tuple {
+	message : String = 'Projection attributes should be the one and only one in output schema',
+	status : Boolean = 
+		self.projectionAttributes->forAll(a|self.outputSchema.attributes->exists(a1|a.name=a1.name and a.type = a1.type)) and self.outputSchema.attributes->forAll(a|self.projectionAttributes->exists(a1|a.name=a1.name and a.type = a1.type))
+}.status")
+class ProjectOnAttributes extends DataCleaning {
+  ref Attribute[+] projectionAttributes;
+}
+
+@gmf.node(label="index")
+class SupportVector {
+  !unique attr EBigDecimal[*] vector;
+  attr EBigDecimal[1] index;
+}
+

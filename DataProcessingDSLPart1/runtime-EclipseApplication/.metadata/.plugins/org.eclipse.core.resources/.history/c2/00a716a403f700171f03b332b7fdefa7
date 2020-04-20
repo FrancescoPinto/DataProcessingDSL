@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm" pipelineName="AmazonExample">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.0" outputSchema="//@schema.0" id="AmazonDataCollection">
+    <runtimeInfo startTime="82673781" endTime="82673790" executionId="1"/>
+    <sourceDeclaration sourceURI="www.amazon.co.uk/" queryEndpoint="users" sourceSchema="//@schema.0" sourceType="Web"/>
+  </tasks>
+  <tasks xsi:type="pm:ChangeDataFormat" input="//@dataFlows.0" output="//@dataFlows.1 //@dataFlows.6" inputSchema="//@schema.0" outputSchema="//@schema.0" id="json2csv" outputFormat="csv">
+    <runtimeInfo startTime="82673791" endTime="82673800" executionId="2"/>
+  </tasks>
+  <tasks xsi:type="pm:DBSCAN" input="//@dataFlows.1" output="//@dataFlows.2 //@dataFlows.3" inputSchema="//@schema.0" outputSchema="//@schema.1" id="DBSCANClustering" radius="33.4" threshold="12">
+    <runtimeInfo startTime="82673801" endTime="82673814" executionId="3"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.2 //@dataFlows.6" output="//@dataFlows.5" inputSchema="//@schema.1 //@schema.0" outputSchema="//@schema.3" id="ClusteredDataIntegration">
+    <runtimeInfo startTime="82673818" endTime="82673823" executionId="6"/>
+    <joinAttributesList joinAttributes="//@schema.0/@idColumn //@schema.1/@idColumn" id="IDJoin"/>
+  </tasks>
+  <tasks xsi:type="pm:Histogram" input="//@dataFlows.3" output="//@dataFlows.4" inputSchema="//@schema.1" outputSchema="//@schema.2" id="ClusterHistogram">
+    <runtimeInfo startTime="82673815" endTime="82673828" executionId="4"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.4" inputSchema="//@schema.2" id="ClusterHistogramExport" writes="//@outputFile.1">
+    <runtimeInfo startTime="82673829" endTime="82673844" executionId="5"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.5" inputSchema="//@schema.3" id="ClusteredDataExport" writes="//@outputFile.0">
+    <runtimeInfo startTime="82673825" endTime="82673843" executionId="7"/>
+  </tasks>
+  <dataFlows from="//@tasks.0" to="//@tasks.1" typeOfData="//@schema.0" id="DataCollection2json2csv"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.2" typeOfData="//@schema.0" format="csv" id="json2csv2DBSCANClustering"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.3" typeOfData="//@schema.1" format="csv" id="DBSCANClustering2ClusteredDataIntegration"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.4" typeOfData="//@schema.1" format="csv" id="DBSCANClustering2ClusterHistogram"/>
+  <dataFlows from="//@tasks.4" to="//@tasks.5" typeOfData="//@schema.2" format="csv" id="ClusterHistogram2ClusterHistogramExport"/>
+  <dataFlows from="//@tasks.3" to="//@tasks.6" typeOfData="//@schema.3" format="csv" id="ClusteredDataIntegration2ClusteredDataExport"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.3" typeOfData="//@schema.0" format="csv" id="json2csv2ClusteredDataIntegration"/>
+  <schema id="UserSchema">
+    <attributes name="Username"/>
+    <attributes name="Gender"/>
+    <attributes name="Age" type="Int"/>
+    <attributes name="AverageMoneySpentInYear" type="Float"/>
+    <idColumn name="ID1"/>
+  </schema>
+  <schema id="ClusterOutputSchema">
+    <attributes name="ClusterLabel"/>
+    <idColumn name="ID3"/>
+  </schema>
+  <schema id="HistogramSchema">
+    <attributes name="HistogramImage" type="Bitmap"/>
+    <idColumn name="HistogramID"/>
+  </schema>
+  <schema id="ClusteredDataSchema">
+    <attributes name="Username"/>
+    <attributes name="Gender"/>
+    <attributes name="Age"/>
+    <attributes name="AverageMoneySpentInYear"/>
+    <attributes name="ClusterLabel"/>
+    <idColumn name="ID2"/>
+  </schema>
+  <outputFile fileFormat="csv" storagePath="C:/Statistics" name="ClusteredData" export="//@tasks.6"/>
+  <outputFile fileFormat="csv" storagePath="C:/Statistics" name="ClusterHistogramFile" export="//@tasks.5"/>
+</pm:Pipeline>

@@ -1,0 +1,450 @@
+<h1>Pipeline: Example1</h1>
+<h3>Tasks</h3>
+	<ul>
+		<li>	<b>Data Collection</b>, id: <u>AmazonOrdersData</u> with Input Source:
+			<ul>
+				<li> Source URI: www.amazon.co.uk </li>
+				<li> Query Endpoint: /orders </li>
+				<li> Exchange Format: json </li>
+				<li> Source Type: Web </li>
+				<li> Source Schema: <br/><b>Schema</b>, id: <u> CombinedShoeAndClothOrdersSchema</u>
+				<ul>
+					<li>Primary Key: ID2:String</li>
+					<li>Attribute: TotalCost:Float</li>
+					<li>Attribute: UserID:String</li>
+					<li>Attribute: ClothSize:Int</li>
+					<li>Attribute: ShoeSize:Int</li>
+					<li>Attribute: TargetGender:String</li>
+					<li>Attribute: OrderID:String</li>
+				</ul></li>
+				<li> Query Condition: <b>and</b>(<b>or</b>(ShoeSize<44, ClothSize>52), TotalCost>=3000, Gender=Unisex) </li>
+				
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>1</u>
+					<ul>
+						<li>Start Time: 82783712 (epoch format)</li>
+						<li>End Time: 82783755(epoch format)</li>
+					</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>AmazonOrdersData2UserDataJoinOrderData</u>, with schema <u>CombinedShoeAndClothOrdersSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>SVM</b> classification, id: <u>SVMOrdersClassification</u> with Kernel Function = Gaussian and estimated coefficients (23.593, 21.43, 23.658, 12.124, 7.432) :
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>8</u>
+					<ul>
+						<li>Start Time: 82783781 (epoch format)</li>
+						<li>End Time: 82783788(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>NullValuesRemoval2SVMOrdersClassification</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>SVMOrdersClassification2SVMIntegration</u>, with schema <u>UserClassesSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Labeled Scatter Plot</b> Task, id: <u>SVMLabeledScatterPlot</u>
+			<ul>
+					<li>Independent variables:
+						<ul>
+							<li>ClothSize:Int</li>
+							<li>ShoeSize:Int</li>
+							<li>AverageAnnualMoneySpent:Float</li>
+							<li>TargetGender:String</li>
+						</ul>
+					</li>
+					<li>Dependent variables:
+						<ul>
+							<li>PredictedClass:String</li>
+						</ul>
+					</li>
+				<li>Label attribute: PredictedClass:String</li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>10</u>
+					<ul>
+						<li>Start Time: 82783804 (epoch format)</li>
+						<li>End Time: 82783824(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>SVMIntegration2SVMLabledScatterPlot</u>, with schema <u>IntegratedUserClassesAndUserOrdersJoinSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>SVMLabeledScatterPlot2LabeledScatterPlot</u>, with schema <u>LabeledScatterPlotSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Data Integration</b>, id: <u>SVMIntegration</u>:<br/>
+			<ul><li><b>Join Attributes list </b>:
+			<ol>
+				UserClassesSchema.ID5:String=RemoveIrrelevantAttributesSchema.ID4:String
+			</ol>
+			</li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>9</u>
+					<ul>
+						<li>Start Time: 82783793 (epoch format)</li>
+						<li>End Time: 82783803(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>SVMOrdersClassification2SVMIntegration</u>, with schema <u>UserClassesSchema</u></li>
+						<li>Dataflow <u>NullValuesRemoval2SVMIntegration</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>SVMIntegration2SVMLabledScatterPlot</u>, with schema <u>IntegratedUserClassesAndUserOrdersJoinSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Ridge Regression</b>, id: <u>PredictNextYearIncome</u> with Penalty Factor = 2 and coefficients (65.23, 12.342, 34.29, 56.348, 5.32) :
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>6</u>
+					<ul>
+						<li>Start Time: 82783782 (epoch format)</li>
+						<li>End Time: 82783793(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>NullValuesRemoval2PredictNextYearIncome</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>PredictNextYearIncome2PredictedIncomeExport</u>, with schema <u>NextYearIncomeSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Export</b> Task, id: <u>PredictedIncomeExport</u>
+			<ul>
+				<li><b>Output File</b>, id: <u>PredictedIncome</u>
+				<ul>
+					<li>Name: PredictedIncome</li>
+					<li>Path: C:/Statistics</li>
+					<li>Format: json</li>
+				</ul></li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>7</u>
+					<ul>
+						<li>Start Time: 82783799 (epoch format)</li>
+						<li>End Time: 82783830(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>PredictNextYearIncome2PredictedIncomeExport</u>, with schema <u>NextYearIncomeSchema</u></li>
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Export</b> Task, id: <u>LabeledScatterPlotExport</u>
+			<ul>
+				<li><b>Output File</b>, id: <u>UserOrdersClassification</u>
+				<ul>
+					<li>Name: UserOrdersClassification</li>
+					<li>Path: C:/Statistics</li>
+					<li>Format: json</li>
+				</ul></li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>11</u>
+					<ul>
+						<li>Start Time: 82783826 (epoch format)</li>
+						<li>End Time: 82783835(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>SVMLabeledScatterPlot2LabeledScatterPlot</u>, with schema <u>LabeledScatterPlotSchema</u></li>
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Data Collection</b>, id: <u>AmazonUserData</u> with Input Source:
+			<ul>
+				<li> Source URI: www.amazon.co.uk </li>
+				<li> Query Endpoint: /userAnnualMoneySpent </li>
+				<li> Exchange Format: json </li>
+				<li> Source Type: IoT </li>
+				<li> Source Schema: <br/><b>Schema</b>, id: <u> UserAnnualMoneySpentSchema</u>
+				<ul>
+					<li>Primary Key: ID1:String</li>
+					<li>Attribute: AverageAnnualMoneySpent:Float</li>
+					<li>Attribute: UserID:String</li>
+				</ul></li>
+				
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>2</u>
+					<ul>
+						<li>Start Time: 82783712 (epoch format)</li>
+						<li>End Time: 82783738(epoch format)</li>
+					</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>AmazonUserData2xml2json</u>, with schema <u>UserAnnualMoneySpentSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Data Integration</b>, id: <u>UserDataJoinOrderData</u>:<br/>
+			<ul><li><b>Join Attributes list </b>:
+			<ol>
+				UserAnnualMoneySpentSchema.ID1:String=CombinedShoeAndClothOrdersSchema.ID2:String
+			</ol>
+			</li>
+			</ul>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>4</u>
+					<ul>
+						<li>Start Time: 82783755 (epoch format)</li>
+						<li>End Time: 82783758(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>xml2json2UserDataJoinOrderData</u>, with schema <u>UserAnnualMoneySpentSchema</u></li>
+						<li>Dataflow <u>AmazonOrdersData2UserDataJoinOrderData</u>, with schema <u>CombinedShoeAndClothOrdersSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>UserDataJoinOrderData2RemoveIrrelevantAttributes</u>, with schema <u>UserOrdersJoinSchema</u></li>	
+						</ul></li>
+				</ul>
+		</li>
+		<li>	<b>Change Data Format</b> Task, id: <u>xml2json</u>
+			<ul>
+				<li>From xml to json</li>
+			</ul>
+					<ul>
+						<li><b>Runtime Information</b>, id: <u>3</u>
+						<ul>
+							<li>Start Time: 82783739 (epoch format)</li>
+							<li>End Time: 82783743(epoch format)</li>
+						</ul></li>
+						<li><b>Input Dataflow</b>:	
+							<ul>
+							<li>Dataflow <u>AmazonUserData2xml2json</u>, with schema <u>UserAnnualMoneySpentSchema</u></li>
+							</ul></li>
+						<li><b>Output Dataflow</b>:
+							<ul>
+							<li>DataFlow <u>xml2json2UserDataJoinOrderData</u>, with schema <u>UserAnnualMoneySpentSchema</u></li>	
+							</ul></li>
+					</ul>
+		</li>
+		<li>	<b>Null Values Removal</b>, id: <u>NullValuesRemoval</u>, with policy regressionImputation
+					<ul>
+						<li><b>Runtime Information</b>, id: <u>12</u>
+						<ul>
+							<li>Start Time: 82783770 (epoch format)</li>
+							<li>End Time: 82783780(epoch format)</li>
+						</ul></li>
+						<li><b>Input Dataflow</b>:	
+							<ul>
+							<li>Dataflow <u>RemoveIrrelevantAttributes2NullValuesRemoval</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>
+							</ul></li>
+						<li><b>Output Dataflow</b>:
+							<ul>
+							<li>DataFlow <u>NullValuesRemoval2SVMOrdersClassification</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>	
+							<li>DataFlow <u>NullValuesRemoval2PredictNextYearIncome</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>	
+							<li>DataFlow <u>NullValuesRemoval2SVMIntegration</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>	
+							</ul></li>
+					</ul>
+		</li>
+		<li>	<b>Projection on attributes</b>, id: <u>RemoveIrrelevantAttributes</u>
+			<ul>
+				<li>This tasks perform the projection of InputSchema on the attributes:
+				<ul>
+					<li>ClothSize:Int</li>
+					<li>ShoeSize:Int</li>
+					<li>TargetGender:String</li>
+					<li>AverageAnnualMoneySpent:Float</li>
+				</ul>
+				</li>
+				<ul>
+					<li><b>Runtime Information</b>, id: <u>5</u>
+					<ul>
+						<li>Start Time: 82783763 (epoch format)</li>
+						<li>End Time: 82783770(epoch format)</li>
+					</ul></li>
+					<li><b>Input Dataflow</b>:	
+						<ul>
+						<li>Dataflow <u>UserDataJoinOrderData2RemoveIrrelevantAttributes</u>, with schema <u>UserOrdersJoinSchema</u></li>
+						</ul></li>
+					<li><b>Output Dataflow</b>:
+						<ul>
+						<li>DataFlow <u>RemoveIrrelevantAttributes2NullValuesRemoval</u>, with schema <u>RemoveIrrelevantAttributesSchema</u></li>	
+						</ul></li>
+				</ul>
+			</ul>
+		</li>
+	</ul>
+<h3>Dataflows</h3>
+	<ul>
+		<li><b>DataFlow</b>, id: <u> SVMLabeledScatterPlot2LabeledScatterPlot</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>SVMLabeledScatterPlot</u></li>
+			<li>To Task: <u>LabeledScatterPlotExport</u></li>
+			<li>Type of Data: <u>LabeledScatterPlotSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> SVMIntegration2SVMLabledScatterPlot</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>SVMIntegration</u></li>
+			<li>To Task: <u>SVMLabeledScatterPlot</u></li>
+			<li>Type of Data: <u>IntegratedUserClassesAndUserOrdersJoinSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> SVMOrdersClassification2SVMIntegration</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>SVMOrdersClassification</u></li>
+			<li>To Task: <u>SVMIntegration</u></li>
+			<li>Type of Data: <u>UserClassesSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> AmazonUserData2xml2json</u>
+		<ul>
+			<li>Format: xml</li>
+			<li>From Task: <u>AmazonUserData</u></li>
+			<li>To Task: <u>xml2json</u></li>
+			<li>Type of Data: <u>UserAnnualMoneySpentSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> xml2json2UserDataJoinOrderData</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>xml2json</u></li>
+			<li>To Task: <u>UserDataJoinOrderData</u></li>
+			<li>Type of Data: <u>UserAnnualMoneySpentSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> AmazonOrdersData2UserDataJoinOrderData</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>AmazonOrdersData</u></li>
+			<li>To Task: <u>UserDataJoinOrderData</u></li>
+			<li>Type of Data: <u>CombinedShoeAndClothOrdersSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> NullValuesRemoval2SVMOrdersClassification</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>NullValuesRemoval</u></li>
+			<li>To Task: <u>SVMOrdersClassification</u></li>
+			<li>Type of Data: <u>RemoveIrrelevantAttributesSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> NullValuesRemoval2PredictNextYearIncome</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>NullValuesRemoval</u></li>
+			<li>To Task: <u>PredictNextYearIncome</u></li>
+			<li>Type of Data: <u>RemoveIrrelevantAttributesSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> PredictNextYearIncome2PredictedIncomeExport</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>PredictNextYearIncome</u></li>
+			<li>To Task: <u>PredictedIncomeExport</u></li>
+			<li>Type of Data: <u>NextYearIncomeSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> UserDataJoinOrderData2RemoveIrrelevantAttributes</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>UserDataJoinOrderData</u></li>
+			<li>To Task: <u>RemoveIrrelevantAttributes</u></li>
+			<li>Type of Data: <u>UserOrdersJoinSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> RemoveIrrelevantAttributes2NullValuesRemoval</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>RemoveIrrelevantAttributes</u></li>
+			<li>To Task: <u>NullValuesRemoval</u></li>
+			<li>Type of Data: <u>RemoveIrrelevantAttributesSchema</u></li>
+		</ul></li>
+		<li><b>DataFlow</b>, id: <u> NullValuesRemoval2SVMIntegration</u>
+		<ul>
+			<li>Format: json</li>
+			<li>From Task: <u>NullValuesRemoval</u></li>
+			<li>To Task: <u>SVMIntegration</u></li>
+			<li>Type of Data: <u>RemoveIrrelevantAttributesSchema</u></li>
+		</ul></li>
+	</ul>
+<h3>Schemas</h3>
+	<ul>
+		<li><b>Schema</b>, id: <u> CombinedShoeAndClothOrdersSchema</u>
+		<ul>
+			<li>Primary Key: ID2:String</li>
+			<li>Attribute: TotalCost:Float</li>
+			<li>Attribute: UserID:String</li>
+			<li>Attribute: ClothSize:Int</li>
+			<li>Attribute: ShoeSize:Int</li>
+			<li>Attribute: TargetGender:String</li>
+			<li>Attribute: OrderID:String</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> UserAnnualMoneySpentSchema</u>
+		<ul>
+			<li>Primary Key: ID1:String</li>
+			<li>Attribute: AverageAnnualMoneySpent:Float</li>
+			<li>Attribute: UserID:String</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> UserOrdersJoinSchema</u>
+		<ul>
+			<li>Primary Key: ID3:String</li>
+			<li>Attribute: TargetGender:String</li>
+			<li>Attribute: ShoeSize:Int</li>
+			<li>Attribute: ClothSize:Int</li>
+			<li>Attribute: TotalCost:Float</li>
+			<li>Attribute: UserID:String</li>
+			<li>Attribute: AverageAnnualMoneySpent:Float</li>
+			<li>Attribute: OrderID:String</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> NextYearIncomeSchema</u>
+		<ul>
+			<li>Primary Key: NextYearIncomeID:String, copies RemoveIrrelevantAttributesSchema.ID4:String</li>
+			<li>Attribute: PredictedIncome:Float</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> UserClassesSchema</u>
+		<ul>
+			<li>Primary Key: ID5:String, copies RemoveIrrelevantAttributesSchema.ID4:String</li>
+			<li>Attribute: PredictedClass:String</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> IntegratedUserClassesAndUserOrdersJoinSchema</u>
+		<ul>
+			<li>Primary Key: ID6:String</li>
+			<li>Attribute: PredictedClass:String</li>
+			<li>Attribute: TargetGender:String</li>
+			<li>Attribute: ShoeSize:Int</li>
+			<li>Attribute: ClothSize:Int</li>
+			<li>Attribute: AverageAnnualMoneySpent:Float</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> LabeledScatterPlotSchema</u>
+		<ul>
+			<li>Primary Key: ID7:Boolean</li>
+			<li>Attribute: ScatterPlot:Bitmap</li>
+		</ul></li>
+		<li><b>Schema</b>, id: <u> RemoveIrrelevantAttributesSchema</u>
+		<ul>
+			<li>Primary Key: ID4:String, copies UserOrdersJoinSchema.ID3:String</li>
+			<li>Attribute: TargetGender:String</li>
+			<li>Attribute: ShoeSize:Int</li>
+			<li>Attribute: ClothSize:Int</li>
+			<li>Attribute: AverageAnnualMoneySpent:Float</li>
+		</ul></li>
+	</ul> 
+<h3>Output Files </h3>
+	<ul>
+		<li><b>Output File</b>, id: <u>UserOrdersClassification</u>
+		<ul>
+			<li>Name: UserOrdersClassification</li>
+			<li>Path: C:/Statistics</li>
+			<li>Format: json</li>
+			<li>Generated by task with id: <u>LabeledScatterPlotExport</u></li>
+		</ul></li>
+		<li><b>Output File</b>, id: <u>PredictedIncome</u>
+		<ul>
+			<li>Name: PredictedIncome</li>
+			<li>Path: C:/Statistics</li>
+			<li>Format: json</li>
+			<li>Generated by task with id: <u>PredictedIncomeExport</u></li>
+		</ul></li>
+	</ul>

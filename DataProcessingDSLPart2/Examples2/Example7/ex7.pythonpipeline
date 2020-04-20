@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm/python" pipelineName="pip7">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.0 //@dataFlows.1 //@dataFlows.14" outputSchema="//@schema.1 //@schema.0 //@schema.2" id="datacollection">
+    <runtimeInfo startTime="0" endTime="0.5" executionId="1"/>
+    <sourceDeclaration sourceURI="www.sr2.it" queryEndpoint="/table" exchangeFormat="html" sourceSchema="//@schema.0" sourceType="SocialMedia" id="src2">
+      <queryConditions xsi:type="pm:ContainsClause" id="contains" comparisonValue="Dada">
+        <conditionField name="param4"/>
+      </queryConditions>
+    </sourceDeclaration>
+    <sourceDeclaration sourceURI="www.sr3.com" queryEndpoint="/scores" exchangeFormat="csv" sourceSchema="//@schema.1" sourceType="Web" id="src3">
+      <queryConditions xsi:type="pm:AndClause" id="and">
+        <operands xsi:type="pm:OrClause" id="or">
+          <operands xsi:type="pm:LeClause" id="lessOrEqual" comparisonValue="32" type="Float">
+            <conditionField name="param2" type="Float"/>
+          </operands>
+          <operands xsi:type="pm:GeClause" id="greaterOrEqual" comparisonValue="78884" type="Int">
+            <conditionField name="param3" type="Int"/>
+          </operands>
+        </operands>
+        <operands xsi:type="pm:LtClause" id="lessThan" comparisonValue="30" type="Int">
+          <conditionField name="param1" type="Int"/>
+        </operands>
+      </queryConditions>
+    </sourceDeclaration>
+    <sourceDeclaration sourceURI="www.sr1.com" queryEndpoint="/data1" exchangeFormat="xlsx" sourceSchema="//@schema.2" id="src1"/>
+  </tasks>
+  <tasks xsi:type="pm:LabeledScatterPlot" input="//@dataFlows.5" output="//@dataFlows.8" inputSchema="//@schema.6" outputSchema="//@schema.6" id="labeledScatterPlot" independentVariables="//@schema.6/@attributes.0" responseVariable="//@schema.6/@attributes.2" labelAttribute="//@schema.6/@attributes.2">
+    <runtimeInfo startTime="13" endTime="14" executionId="8"/>
+  </tasks>
+  <tasks xsi:type="pm:Agglomerative" input="//@dataFlows.6" output="//@dataFlows.5" inputSchema="//@schema.5" outputSchema="//@schema.6" id="aggClustering" clusters="//@schema.6/@attributes.2" interClusterSimilarity="GA" CutHeight="3">
+    <runtimeInfo startTime="11" endTime="12" executionId="7"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.7" inputSchema="//@schema.6" id="export" writes="//@outputFile.0 //@outputFile.1 //@outputFile.2">
+    <runtimeInfo startTime="21" endTime="22" executionId="12"/>
+  </tasks>
+  <tasks xsi:type="pm:LinearRegression" input="//@dataFlows.3" output="//@dataFlows.4" inputSchema="//@schema.3" outputSchema="//@schema.4" id="linRegr" predicts="//@schema.4/@attributes.6">
+    <runtimeInfo startTime="7" endTime="8" executionId="5"/>
+    <estimatedCoefficients>0.2</estimatedCoefficients>
+    <estimatedCoefficients>0.84</estimatedCoefficients>
+    <estimatedCoefficients>1.23</estimatedCoefficients>
+    <estimatedCoefficients>-0.86</estimatedCoefficients>
+    <estimatedCoefficients>-0.78</estimatedCoefficients>
+    <estimatedCoefficients>-1.234</estimatedCoefficients>
+    <estimatedCoefficients>2</estimatedCoefficients>
+  </tasks>
+  <tasks xsi:type="pm:NullValuesRemoval" input="//@dataFlows.2" output="//@dataFlows.3" inputSchema="//@schema.3" outputSchema="//@schema.3" id="medianImputation" policy="medianImputation">
+    <runtimeInfo startTime="5" endTime="6" executionId="4"/>
+  </tasks>
+  <tasks xsi:type="pm:ProjectOnAttributes" input="//@dataFlows.4" output="//@dataFlows.6" inputSchema="//@schema.4" outputSchema="//@schema.5" id="select" projectionAttributes="//@schema.4/@attributes.2 //@schema.4/@attributes.6">
+    <runtimeInfo startTime="9" endTime="10" executionId="6"/>
+  </tasks>
+  <tasks xsi:type="pm:StandardDeviation" input="//@dataFlows.10" output="//@dataFlows.7" inputSchema="//@schema.6" outputSchema="//@schema.6" id="std">
+    <runtimeInfo startTime="19" endTime="20" executionId="11"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.11 //@dataFlows.12 //@dataFlows.13" output="//@dataFlows.2" inputSchema="//@schema.2 //@schema.0 //@schema.1" outputSchema="//@schema.3" id="join">
+    <runtimeInfo startTime="3" endTime="4" executionId="3"/>
+    <joinAttributesList joinAttributes="//@schema.1/@idColumn //@schema.0/@idColumn //@schema.2/@idColumn" id="j"/>
+  </tasks>
+  <tasks xsi:type="pm:Histogram" input="//@dataFlows.8" output="//@dataFlows.9" inputSchema="//@schema.6" outputSchema="//@schema.6" id="histogram">
+    <runtimeInfo startTime="15" endTime="16" executionId="9"/>
+  </tasks>
+  <tasks xsi:type="pm:PiePlot" input="//@dataFlows.9" output="//@dataFlows.10" inputSchema="//@schema.6" outputSchema="//@schema.6" id="pieplot">
+    <runtimeInfo startTime="17" endTime="18" executionId="10"/>
+  </tasks>
+  <tasks xsi:type="pm:ChangeDataFormat" input="//@dataFlows.1 //@dataFlows.0 //@dataFlows.14" output="//@dataFlows.12 //@dataFlows.13 //@dataFlows.11" inputSchema="//@schema.0 //@schema.1 //@schema.2" outputSchema="//@schema.0 //@schema.1 //@schema.2" id="html2json">
+    <runtimeInfo startTime="1" endTime="2" executionId="2"/>
+  </tasks>
+  <dataFlows from="//@tasks.0" to="//@tasks.11" format="xlsx" id="df3" typeOfData="//@schema.2"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.11" format="html" id="df2" typeOfData="//@schema.0"/>
+  <dataFlows from="//@tasks.8" to="//@tasks.5" id="df4" typeOfData="//@schema.3"/>
+  <dataFlows from="//@tasks.5" to="//@tasks.4" id="df5" typeOfData="//@schema.3"/>
+  <dataFlows from="//@tasks.4" to="//@tasks.6" id="df6" typeOfData="//@schema.4"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.1" id="df8" typeOfData="//@schema.6"/>
+  <dataFlows from="//@tasks.6" to="//@tasks.2" id="df7" typeOfData="//@schema.5"/>
+  <dataFlows from="//@tasks.7" to="//@tasks.3" id="df12" typeOfData="//@schema.6"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.9" id="df9" typeOfData="//@schema.6"/>
+  <dataFlows from="//@tasks.9" to="//@tasks.10" id="df10" typeOfData="//@schema.6"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.7" id="df11" typeOfData="//@schema.6"/>
+  <dataFlows from="//@tasks.11" to="//@tasks.8" id="df_1" typeOfData="//@schema.2"/>
+  <dataFlows from="//@tasks.11" to="//@tasks.8" id="df_2" typeOfData="//@schema.0"/>
+  <dataFlows from="//@tasks.11" to="//@tasks.8" id="df_3" typeOfData="//@schema.1"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.11" format="csv" id="df1" typeOfData="//@schema.1"/>
+  <schema id="schema2">
+    <attributes name="att2" type="Float"/>
+    <attributes name="att3" type="Float"/>
+    <idColumn name="k2"/>
+  </schema>
+  <schema id="schema3">
+    <attributes name="att1" type="Float"/>
+    <idColumn name="k1"/>
+  </schema>
+  <schema id="schema1">
+    <attributes name="att4" type="Float"/>
+    <attributes name="att5" type="Float"/>
+    <attributes name="att6" type="Float"/>
+    <idColumn name="k3"/>
+  </schema>
+  <schema id="joinSchema">
+    <attributes name="att1" type="Float" copies="//@schema.1/@attributes.0"/>
+    <attributes name="att2" type="Float" copies="//@schema.0/@attributes.0"/>
+    <attributes name="att3" type="Float" copies="//@schema.3/@attributes.2"/>
+    <attributes name="att4" type="Float" copies="//@schema.2/@attributes.0"/>
+    <attributes name="att5" type="Float" copies="//@schema.2/@attributes.1"/>
+    <attributes name="att6" type="Float" copies="//@schema.2/@attributes.2"/>
+    <idColumn name="k4"/>
+  </schema>
+  <schema id="regression">
+    <attributes name="att1" type="Float" copies="//@schema.3/@attributes.0"/>
+    <attributes name="att2" type="Float" copies="//@schema.3/@attributes.1"/>
+    <attributes name="att3" type="Float" copies="//@schema.0/@attributes.1"/>
+    <attributes name="att4" type="Float" copies="//@schema.3/@attributes.3"/>
+    <attributes name="att5" type="Float" copies="//@schema.3/@attributes.4"/>
+    <attributes name="att6" type="Float" copies="//@schema.3/@attributes.5"/>
+    <attributes name="prediction" type="Float"/>
+    <idColumn name="k4" copies="//@schema.3/@idColumn"/>
+  </schema>
+  <schema id="select">
+    <attributes name="att3" type="Float" copies="//@schema.5/@attributes.0"/>
+    <attributes name="prediction" type="Float" copies="//@schema.4/@attributes.6"/>
+    <idColumn name="k4" copies="//@schema.4/@idColumn"/>
+  </schema>
+  <schema id="cluster">
+    <attributes name="att3" type="Float" copies="//@schema.5/@attributes.0"/>
+    <attributes name="prediction" type="Float" copies="//@schema.5/@attributes.1"/>
+    <attributes name="cluster" type="Int"/>
+    <idColumn name="k4" copies="//@schema.5/@idColumn"/>
+  </schema>
+  <outputFile fileFormat="html" storagePath="" name="out1" export="//@tasks.3"/>
+  <outputFile fileFormat="csv" storagePath="" name="out2" export="//@tasks.3"/>
+  <outputFile fileFormat="xlsx" storagePath="" name="out3" export="//@tasks.3"/>
+</pm:Pipeline>

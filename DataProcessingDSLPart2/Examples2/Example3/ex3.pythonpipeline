@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm/python" pipelineName="pip3">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.0" outputSchema="//@schema.0" id="datacollection">
+    <runtimeInfo startTime="1" endTime="2" executionId="1"/>
+    <sourceDeclaration sourceURI="www.amazon.it" queryEndpoint="/income" sourceSchema="//@schema.0" id="in1"/>
+  </tasks>
+  <tasks xsi:type="pm:KMeans" input="//@dataFlows.0" output="//@dataFlows.1" inputSchema="//@schema.0" outputSchema="//@schema.1" id="kmeans" clusters="//@schema.1/@attributes.1" K="2">
+    <runtimeInfo startTime="3" endTime="4" executionId="2"/>
+  </tasks>
+  <tasks xsi:type="pm:Lasso" input="//@dataFlows.1" output="//@dataFlows.2" inputSchema="//@schema.1" outputSchema="//@schema.2" id="lasso" predicts="//@schema.2/@attributes.2" penaltyFactor="42">
+    <runtimeInfo startTime="5" endTime="6" executionId="3"/>
+    <estimatedCoefficients>12</estimatedCoefficients>
+    <estimatedCoefficients>22</estimatedCoefficients>
+    <estimatedCoefficients>12</estimatedCoefficients>
+  </tasks>
+  <tasks xsi:type="pm:ProjectOnAttributes" input="//@dataFlows.2" output="//@dataFlows.3" inputSchema="//@schema.2" outputSchema="//@schema.3" id="proj" projectionAttributes="//@schema.2/@attributes.2">
+    <runtimeInfo startTime="7" endTime="8" executionId="4"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.3" inputSchema="//@schema.3" id="exp" writes="//@outputFile.0">
+    <runtimeInfo startTime="9" endTime="10" executionId="5"/>
+  </tasks>
+  <dataFlows from="//@tasks.0" to="//@tasks.1" id="df1" typeOfData="//@schema.0"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.2" id="df2" typeOfData="//@schema.1"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.3" id="df3" typeOfData="//@schema.2"/>
+  <dataFlows from="//@tasks.3" to="//@tasks.4" id="df4" typeOfData="//@schema.3"/>
+  <schema id="s1">
+    <attributes name="att1" type="Float"/>
+    <idColumn name="id"/>
+  </schema>
+  <schema id="s2">
+    <attributes name="att1" type="Float" copies="//@schema.0/@attributes.0"/>
+    <attributes name="cluster" type="Int"/>
+    <idColumn name="id" copies="//@schema.0/@idColumn"/>
+  </schema>
+  <schema id="s3">
+    <attributes name="att1" type="Float" copies="//@schema.1/@attributes.0"/>
+    <attributes name="cluster" type="Int" copies="//@schema.1/@attributes.1"/>
+    <attributes name="prediction" type="Float"/>
+    <idColumn name="id" copies="//@schema.1/@idColumn"/>
+  </schema>
+  <schema id="s4">
+    <attributes name="prediction" type="Float" copies="//@schema.2/@attributes.2"/>
+    <idColumn name="id" copies="//@schema.2/@idColumn"/>
+  </schema>
+  <outputFile storagePath="" name="out" export="//@tasks.4"/>
+</pm:Pipeline>

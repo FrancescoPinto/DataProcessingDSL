@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm/python" pipelineName="pip6">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.2 //@dataFlows.4 //@dataFlows.5" outputSchema="//@schema.0 //@schema.1 //@schema.2" id="dc1">
+    <runtimeInfo startTime="1" endTime="2" executionId="1"/>
+    <sourceDeclaration sourceURI="www.i1.com" sourceSchema="//@schema.0" sourceType="SocialMedia" id="i1"/>
+    <sourceDeclaration sourceURI="www.i2.com" sourceSchema="//@schema.1" sourceType="SocialMedia" id="i2"/>
+    <sourceDeclaration sourceURI="www.i3.com" sourceSchema="//@schema.2" sourceType="SocialMedia" id="i3"/>
+  </tasks>
+  <tasks xsi:type="pm:CustomCleaning" input="//@dataFlows.3" output="//@dataFlows.0" inputSchema="//@schema.3" outputSchema="//@schema.3" id="customCleaning" name="performMyCleaning">
+    <runtimeInfo startTime="5" endTime="6" executionId="3"/>
+    <customParams name="param1" value="HelloWorld"/>
+  </tasks>
+  <tasks xsi:type="pm:NullValuesRemoval" input="//@dataFlows.0" output="//@dataFlows.6" inputSchema="//@schema.3" outputSchema="//@schema.3" id="nullRemoval" policy="meanImputation">
+    <runtimeInfo startTime="7" endTime="8" executionId="4"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.1" inputSchema="//@schema.5" id="export" writes="//@outputFile.0">
+    <runtimeInfo startTime="13" endTime="14" executionId="7"/>
+  </tasks>
+  <tasks xsi:type="pm:ScatterPlot" input="//@dataFlows.7" output="//@dataFlows.1" inputSchema="//@schema.4" outputSchema="//@schema.5" id="scatterplot" independentVariables="//@schema.4/@attributes.0" responseVariable="//@schema.4/@attributes.2">
+    <runtimeInfo startTime="11" endTime="12" executionId="6"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.2 //@dataFlows.4 //@dataFlows.5" output="//@dataFlows.3" inputSchema="//@schema.0 //@schema.1 //@schema.2" outputSchema="//@schema.3" id="dataIntegration">
+    <runtimeInfo startTime="3" endTime="4" executionId="2"/>
+    <joinAttributesList joinAttributes="//@schema.0/@attributes.0 //@schema.1/@attributes.1 //@schema.2/@attributes.0" id="jlist"/>
+  </tasks>
+  <tasks xsi:type="pm:ProjectOnAttributes" input="//@dataFlows.6" output="//@dataFlows.7" inputSchema="//@schema.3" outputSchema="//@schema.4" id="selectAttributes" projectionAttributes="//@schema.3/@attributes.0 //@schema.3/@attributes.2 //@schema.3/@attributes.3">
+    <runtimeInfo startTime="9" endTime="10" executionId="5"/>
+  </tasks>
+  <dataFlows from="//@tasks.1" to="//@tasks.2" id="df5" typeOfData="//@schema.3"/>
+  <dataFlows from="//@tasks.4" to="//@tasks.3" id="df8" typeOfData="//@schema.5"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.5" id="df1" typeOfData="//@schema.0"/>
+  <dataFlows from="//@tasks.5" to="//@tasks.1" id="df4" typeOfData="//@schema.3"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.5" id="df2" typeOfData="//@schema.1"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.5" id="df3" typeOfData="//@schema.2"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.6" id="df6" typeOfData="//@schema.3"/>
+  <dataFlows from="//@tasks.6" to="//@tasks.4" id="df7" typeOfData="//@schema.4"/>
+  <schema id="s1">
+    <attributes name="att1" type="Float"/>
+    <attributes name="att2" type="Float"/>
+    <idColumn name="k1"/>
+  </schema>
+  <schema id="s2">
+    <attributes name="att3" type="Float"/>
+    <attributes name="att4" type="Float"/>
+    <idColumn name="k2"/>
+  </schema>
+  <schema id="s3">
+    <attributes name="att5" type="Float"/>
+    <attributes name="att6" type="Float"/>
+    <attributes name="att7" type="Float"/>
+    <idColumn name="k3"/>
+  </schema>
+  <schema id="s4">
+    <attributes name="att1" type="Float" copies="//@schema.4/@attributes.0"/>
+    <attributes name="att2" type="Float" copies="//@schema.0/@attributes.1"/>
+    <attributes name="att3" type="Float" copies="//@schema.3/@attributes.2"/>
+    <attributes name="att6" type="Float" copies="//@schema.4/@attributes.2"/>
+    <attributes name="att7" type="Float" copies="//@schema.2/@attributes.2"/>
+    <idColumn name="k4"/>
+  </schema>
+  <schema id="s5">
+    <attributes name="att1" type="Float" copies="//@schema.0/@attributes.0"/>
+    <attributes name="att3" type="Float" copies="//@schema.1/@attributes.0"/>
+    <attributes name="att6" type="Float" copies="//@schema.2/@attributes.1"/>
+    <idColumn name="k4" copies="//@schema.3/@idColumn"/>
+  </schema>
+  <schema id="s6">
+    <attributes name="a1" type="Bitmap"/>
+    <idColumn name="k6"/>
+  </schema>
+  <outputFile fileFormat="image" storagePath="" name="out" export="//@tasks.3"/>
+</pm:Pipeline>

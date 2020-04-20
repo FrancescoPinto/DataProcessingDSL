@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated default -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="pythonpipeline.presentation.PythonpipelineModelWizardID"
+            name="%_UI_PythonpipelineModelWizard_label"
+            class="pythonpipeline.presentation.PythonpipelineModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/PythonpipelineModelFile.gif">
+         <description>%_UI_PythonpipelineModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated default -->
+      <editor
+            id="pythonpipeline.presentation.PythonpipelineEditorID"
+            name="%_UI_PythonpipelineEditor_label"
+            icon="icons/full/obj16/PythonpipelineModelFile.gif"
+            extensions="pythonpipeline"
+            class="pythonpipeline.presentation.PythonpipelineEditor"
+            contributorClass="pythonpipeline.presentation.PythonpipelineActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

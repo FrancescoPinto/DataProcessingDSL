@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xmi:id="_-ZRHYKASEeiCO904_pHNxA" version="11.1.0.201608251200">
+  <semanticResources>ex1.pythonpipeline</semanticResources>
+  <semanticResources>ex1.pythonpipeline_diagram</semanticResources>
+  <semanticResources>Example2/ex2.pythonpipeline</semanticResources>
+  <semanticResources>Example2/ex2.pythonpipeline_diagram</semanticResources>
+  <semanticResources>Example5/ex6.pythonpipeline</semanticResources>
+  <semanticResources>Example5/ex6.pythonpipeline_diagram</semanticResources>
+  <semanticResources>Example7/ex7.pythonpipeline</semanticResources>
+  <semanticResources>Example7/ex7.pythonpipeline_diagram</semanticResources>
+  <semanticResources>Play1/play1.pythonpipeline</semanticResources>
+  <semanticResources>Play1/play1.pythonpipeline_diagram</semanticResources>
+</viewpoint:DAnalysis>

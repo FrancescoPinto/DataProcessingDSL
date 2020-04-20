@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm" pipelineName="ComplexExample2">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.5" outputSchema="//@schema.0" id="AmazonOrdersData">
+    <runtimeInfo startTime="82783712" endTime="82783755" executionId="1"/>
+    <sourceDeclaration sourceURI="www.amazon.co.uk" queryEndpoint="/orders" sourceSchema="//@schema.0" sourceType="Web">
+      <queryConditions xsi:type="pm:AndClause" id="LargeShoesORLargeClothesANDHighCostANDUnisexGender">
+        <operands xsi:type="pm:OrClause" id="LargeShoesORLargeClothes">
+          <operands xsi:type="pm:LtClause" id="VeryLargeShoes" comparisonValue="44" type="Int">
+            <conditionField name="ShoeSize" type="Int"/>
+          </operands>
+          <operands xsi:type="pm:GtClause" id="VeryLargeClothes" comparisonValue="52" type="Int">
+            <conditionField name="ClothSize" type="Int"/>
+          </operands>
+        </operands>
+        <operands xsi:type="pm:GeClause" id="CostGreaterOrEqual" comparisonValue="3000">
+          <conditionField name="TotalCost"/>
+        </operands>
+        <operands xsi:type="pm:EqClause" id="GenderEqual" comparisonValue="Unisex">
+          <conditionField name="Gender"/>
+        </operands>
+      </queryConditions>
+    </sourceDeclaration>
+  </tasks>
+  <tasks xsi:type="pm:SVM" input="//@dataFlows.6" output="//@dataFlows.2" inputSchema="//@schema.7" outputSchema="//@schema.4" id="SVMOrdersClassification">
+    <runtimeInfo startTime="82783781" endTime="82783788" executionId="8"/>
+    <classLabels>LowExpense</classLabels>
+    <classLabels>MediumExpense</classLabels>
+    <classLabels>HighExpense</classLabels>
+    <estimatedCoefficients>21.43</estimatedCoefficients>
+    <estimatedCoefficients>23.658</estimatedCoefficients>
+    <estimatedCoefficients>12.124</estimatedCoefficients>
+    <estimatedCoefficients>23.593</estimatedCoefficients>
+    <estimatedCoefficients>7.432</estimatedCoefficients>
+  </tasks>
+  <tasks xsi:type="pm:LabeledScatterPlot" input="//@dataFlows.1" output="//@dataFlows.0" inputSchema="//@schema.5" outputSchema="//@schema.6" id="SVMLabeledScatterPlot" labelAttribute="//@schema.4/@attributes.0">
+    <runtimeInfo startTime="82783804" endTime="82783824" executionId="10"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.2 //@dataFlows.9" output="//@dataFlows.1" id="SVMIntegration">
+    <runtimeInfo startTime="82783793" endTime="82783803" executionId="9"/>
+    <joinAttributesList/>
+  </tasks>
+  <tasks xsi:type="pm:Ridge" input="//@dataFlows.7" output="//@dataFlows.8" inputSchema="//@schema.7" outputSchema="//@schema.3" id="PredictNextYearIncome" penaltyFactor="2">
+    <runtimeInfo startTime="82783782" endTime="82783793" executionId="6"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.8" inputSchema="//@schema.3" id="PredictedIncomeExport" writes="//@outputFile.1">
+    <runtimeInfo startTime="82783799" endTime="82783830" executionId="7"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.0" inputSchema="//@schema.6" id="LabeledScatterPlotExport" writes="//@outputFile.0">
+    <runtimeInfo startTime="82783826" endTime="82783835" executionId="11"/>
+  </tasks>
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.3" outputSchema="//@schema.1" id="AmazonUserData">
+    <runtimeInfo startTime="82783712" endTime="82783738" executionId="2"/>
+    <sourceDeclaration sourceURI="www.amazon.co.uk" queryEndpoint="/userAnnualMoneySpent" sourceSchema="//@schema.1"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.4 //@dataFlows.5" output="//@dataFlows.10" inputSchema="//@schema.1 //@schema.0" outputSchema="//@schema.2" id="UserDataJoinOrderData">
+    <runtimeInfo startTime="82783755" endTime="82783758" executionId="4"/>
+    <joinAttributesList joinAttributes="//@schema.0/@attributes.1 //@schema.1/@attributes.1" id="JoinAttributes"/>
+  </tasks>
+  <tasks xsi:type="pm:ChangeDataFormat" input="//@dataFlows.3" output="//@dataFlows.4" inputSchema="//@schema.1" outputSchema="//@schema.3" id="xml2json" inputFormat="xml">
+    <runtimeInfo startTime="82783739" endTime="82783743" executionId="3"/>
+  </tasks>
+  <tasks xsi:type="pm:NullValuesRemoval" input="//@dataFlows.11" output="//@dataFlows.6 //@dataFlows.7 //@dataFlows.9" inputSchema="//@schema.7" outputSchema="//@schema.7" id="NullValuesRemoval">
+    <runtimeInfo startTime="82783763" endTime="82783780" executionId="12"/>
+  </tasks>
+  <tasks xsi:type="pm:ProjectOnAttributes" input="//@dataFlows.10" output="//@dataFlows.11" inputSchema="//@schema.2" outputSchema="//@schema.7" id="RemoveIrrelevantAttributes">
+    <runtimeInfo startTime="82783763" endTime="82783770" executionId="5"/>
+  </tasks>
+  <dataFlows from="//@tasks.2" to="//@tasks.6" typeOfData="//@schema.6" id="SVMLabeledScatterPlot2LabeledScatterPlot"/>
+  <dataFlows from="//@tasks.3" to="//@tasks.2" typeOfData="//@schema.5" id="SVMIntegration2SVMLabledScatterPlot"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.3" typeOfData="//@schema.4" id="SVMOrdersClassification2SVMIntegration"/>
+  <dataFlows from="//@tasks.7" to="//@tasks.9" typeOfData="//@schema.1" format="xml" id="AmazonUserData2xml2json"/>
+  <dataFlows from="//@tasks.9" to="//@tasks.8" typeOfData="//@schema.1" id="xml2json2UserDataJoinOrderData"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.8" typeOfData="//@schema.0" id="AmazonOrdersData2UserDataJoinOrderData"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.1" typeOfData="//@schema.7" id="NullValuesRemoval2SVMOrdersClassification"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.4" typeOfData="//@schema.7" id="NullValuesRemoval2PredictNextYearIncome"/>
+  <dataFlows from="//@tasks.4" to="//@tasks.5" typeOfData="//@schema.3" id="PredictNextYearIncome2PredictedIncomeExport"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.3" typeOfData="//@schema.7" id="NullValuesRemoval2SVMIntegration"/>
+  <dataFlows from="//@tasks.8" to="//@tasks.11" typeOfData="//@schema.2" id="UserDataJoinOrderData2RemoveIrrelevantAttributes"/>
+  <dataFlows from="//@tasks.11" to="//@tasks.10" typeOfData="//@schema.7" id="RemoveIrrelevantAttributes2NullValuesRemoval"/>
+  <schema id="CombinedShoeAndClothOrdersSchema">
+    <attributes name="TotalCost" type="Float"/>
+    <attributes name="UserID"/>
+    <attributes name="ClothSize" type="Int"/>
+    <attributes name="ShoeSize" type="Int"/>
+    <attributes name="TargetGender"/>
+    <attributes name="OrderID"/>
+    <idColumn name="ID2"/>
+  </schema>
+  <schema id="UserAnnualMoneySpentSchema">
+    <attributes name="AverageAnnualMoneySpent" type="Float"/>
+    <attributes name="UserID"/>
+    <idColumn name="ID1"/>
+  </schema>
+  <schema id="UserOrdersJoinSchema">
+    <attributes name="TargetGender"/>
+    <attributes name="ShoeSize" type="Int"/>
+    <attributes name="ClothSize" type="Int"/>
+    <attributes name="TotalCost" type="Float"/>
+    <attributes name="UserID"/>
+    <attributes name="AverageAnnualMoneySpent" type="Float"/>
+    <attributes name="OrderID"/>
+    <idColumn name="ID3"/>
+  </schema>
+  <schema id="NextYearIncomeSchema">
+    <attributes name="PredictedIncome" type="Float"/>
+    <idColumn name="NextYearIncomeID"/>
+  </schema>
+  <schema id="UserClassesSchema">
+    <attributes name="PredictedClass"/>
+    <idColumn name="UserID"/>
+  </schema>
+  <schema id="IntegratedUserClassesAndUserOrdersJoinSchema">
+    <attributes/>
+    <idColumn name="JoinSVMandOrdersID"/>
+  </schema>
+  <schema id="LabeledScatterPlotSchema">
+    <attributes/>
+    <idColumn name="ScatterPlotID"/>
+  </schema>
+  <schema id="RemoveOrderIDSchema">
+    <attributes name="Gender"/>
+    <attributes name="ShoeSize" type="Int"/>
+    <attributes name="ClothSize" type="Int"/>
+    <attributes name="TotalCost" type="Float"/>
+    <idColumn name="ID4"/>
+  </schema>
+  <outputFile storagePath="C:/Statistics" name="UserOrdersClassification" export="//@tasks.6"/>
+  <outputFile storagePath="C:/Statistics" name="PredictedIncome" export="//@tasks.5"/>
+</pm:Pipeline>

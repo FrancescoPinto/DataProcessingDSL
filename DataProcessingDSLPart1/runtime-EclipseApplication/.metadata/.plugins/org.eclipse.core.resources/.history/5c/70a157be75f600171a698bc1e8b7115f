@@ -1,0 +1,13 @@
+import 'default.ecore'
+
+package pipelineproject
+
+context Pipeline
+--
+-- example invariant with a custom error message to verify that
+-- the 'tasks' property of all 'pipelineproject::Pipeline' instances is non-null
+--
+inv ImportantInvariant('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm'):
+	tasks->size() = 3
+
+endpackage

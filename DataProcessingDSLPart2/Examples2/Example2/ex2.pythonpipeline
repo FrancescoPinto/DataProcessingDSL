@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm/python" pipelineName="ex2">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.0" outputSchema="//@schema.0" id="DataCollection">
+    <runtimeInfo startTime="1" endTime="2" executionId="1"/>
+    <sourceDeclaration sourceURI="www.amazon.it" queryEndpoint="/user" sourceSchema="//@schema.0" id="source1"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.1" inputSchema="//@schema.1" id="export" writes="//@outputFile.0">
+    <runtimeInfo startTime="5" endTime="6" executionId="3"/>
+  </tasks>
+  <tasks xsi:type="pm:DBSCAN" input="//@dataFlows.0" output="//@dataFlows.1" inputSchema="//@schema.0" outputSchema="//@schema.1" id="DBSCAN" clusters="//@schema.1/@attributes.1" radius="2" threshold="2">
+    <runtimeInfo startTime="3" endTime="4" executionId="2"/>
+  </tasks>
+  <dataFlows from="//@tasks.0" to="//@tasks.2" id="df1" typeOfData="//@schema.0"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.1" id="df2" typeOfData="//@schema.1"/>
+  <schema id="MySchema">
+    <attributes name="att1" type="Float"/>
+    <idColumn name="id"/>
+  </schema>
+  <schema id="MySchema2">
+    <attributes name="att1" type="Float" copies="//@schema.0/@attributes.0"/>
+    <attributes name="cluster"/>
+    <idColumn name="id" copies="//@schema.0/@idColumn"/>
+  </schema>
+  <outputFile storagePath="" name="out1" export="//@tasks.1"/>
+</pm:Pipeline>

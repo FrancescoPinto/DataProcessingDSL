@@ -1,0 +1,17 @@
+[comment encoding = UTF-8 /]
+[module schema('http://www.ase.it/pm')]
+
+
+[template public printSchema(schema:Schema)]
+<b>Schema</b>, id: <u> [schema.id/]</u>
+<ul>
+	<li>Primary Key: [printColumn(schema.idColumn)/][if (not schema.idColumn.copies.oclIsUndefined())], copies [schema.idColumn.copies.eContainer().oclAsType(Schema).id.concat('.').concat(printColumn(schema.idColumn.copies))/][/if]</li>
+	[for(a:Attribute| schema.attributes)]
+	<li>Attribute: [printColumn(a)/]</li>
+	[/for]
+</ul>
+[/template]
+
+[comment done/]
+[template public printColumn(column : Column)][column.name.concat(':').concat(column.type.toString())/][/template]
+

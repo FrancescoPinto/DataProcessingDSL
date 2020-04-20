@@ -1,0 +1,248 @@
+[comment encoding = UTF-8 /]
+[module task('http://www.ase.it/pm')]
+
+[import it::ase::project::acceleo::common::inputSource/]
+[import it::ase::project::acceleo::common::schema/]
+[import it::ase::project::acceleo::common::outputFile/]
+
+
+[template public printTask(task:Task)]
+[if task.oclIsTypeOf(KNN)]
+	[printKNN(task.oclAsType(KNN))/]
+[elseif (task.oclIsTypeOf(LogisticRegression)) ]
+	[printLogisticRegression(task.oclAsType(LogisticRegression))/]
+[elseif (task.oclIsTypeOf(SVM)) ]
+	[printSVM(task.oclAsType(SVM))/]
+[elseif (task.oclIsTypeOf(LinearRegression)) ]
+	[printLinearRegression(task.oclAsType(LinearRegression))/]
+[elseif (task.oclIsTypeOf(Ridge)) ]
+	[printRidgeRegression(task.oclAsType(Ridge))/]
+[elseif (task.oclIsTypeOf(Lasso)) ]
+	[printLassoRegression(task.oclAsType(Lasso))/]
+[elseif (task.oclIsKindOf(Description))]
+	[printDescriptiveTask(task.oclAsType(Description))/]
+[elseif (task.oclIsTypeOf(JarvisPatrick)) ]
+	[printJarvisPatrick(task.oclAsType(JarvisPatrick))/]
+[elseif (task.oclIsTypeOf(DBSCAN)) ]
+	[printDBSCAN(task.oclAsType(DBSCAN))/]
+[elseif (task.oclIsTypeOf(KMeans)) ]
+	[printKMeans(task.oclAsType(KMeans))/]
+[elseif (task.oclIsTypeOf(Agglomerative))]
+	[printAgglomerativeClustering(task.oclAsType(Agglomerative))/]
+[elseif (task.oclIsTypeOf(NullValuesRemoval)) ]
+	[printNullValuesRemoval(task.oclAsType(NullValuesRemoval))/]
+[elseif (task.oclIsTypeOf(ChangeDataFormat)) ]
+	[printChangeDataFormat(task.oclAsType(ChangeDataFormat))/]
+[elseif (task.oclIsTypeOf(CustomCleaning)) ]
+	[printCustomCleaning(task.oclAsType(CustomCleaning))/]
+[elseif (task.oclIsTypeOf(DataCollection))]
+	[printDataCollection(task.oclAsType(DataCollection))/]
+[elseif (task.oclIsTypeOf(Export))]
+	[printExportTask(task.oclAsType(Export))/]
+[elseif (task.oclIsTypeOf(DataIntegration))]
+	[printDataIntegration(task.oclAsType(DataIntegration))/]
+[elseif (task.oclIsTypeOf(ScatterPlot))]
+	[printScatterPlot(task.oclAsType(ScatterPlot))/]
+[elseif (task.oclIsTypeOf(LabeledScatterPlot))]
+	[printLabeledScatterPlot(task.oclAsType(LabeledScatterPlot))/]
+[elseif (task.oclIsTypeOf(Histogram))]
+	[printHistogram(task.oclAsType(Histogram))/]
+[elseif (task.oclIsTypeOf(PiePlot))]
+	[printPiePlot(task.oclAsType(PiePlot))/]
+[elseif (task.oclIsTypeOf(ProjectOnAttributes))]
+	[printProjectOnAttributes(task.oclAsType(ProjectOnAttributes))/]
+[/if]
+[/template]
+[template private printDataIntegration(dataInteg:DataIntegration)]
+<b>Data Integration</b>, id: <u>[dataInteg.id/]</u>:<br/>
+<ul><li><b>Join Attributes list </b>:
+<ol>
+	[for(attribute:Column|dataInteg.joinAttributesList.joinAttributes) separator('=')][attribute.eContainer().oclAsType(Schema).id/].[printColumn(attribute)/][/for]
+</ol>
+</li>
+</ul>
+	[printGenericTaskInfo(dataInteg)/]
+[/template]
+[template private printInputDataFlows(task:Task)]
+<b>Input Dataflow</b>:	
+	<ul>
+	[for(i:DataFlow|task.input)]
+	<li>Dataflow <u>[i.id/]</u>, with schema <u>[i.typeOfData.id/]</u></li>[comment inputSchema and input.typeOfData must be consistent, hence one does not need to print both/]
+	[/for]
+	</ul>
+[/template]
+[template private printOutputDataFlows(task:Task)]
+<b>Output Dataflow</b>:
+	<ul>
+	[for(o:DataFlow|task.output)]
+	<li>DataFlow <u>[o.id/]</u>, with schema <u>[o.typeOfData.id/]</u></li>	[comment outputSchema and output.typeOfData must be consistent, hence one does not need to print both/]
+	[/for]
+	</ul>
+[/template]
+[template private printGenericTaskInfo(task:Task)]
+<ul>
+	<li>[printRuntimeInfo(task.runtimeInfo)/]</li>
+[if (task.input->size() <> 0)]
+	<li>[printInputDataFlows(task)/]</li>
+[/if]
+[if (task.output->size() <> 0)]
+	<li>[printOutputDataFlows(task)/]</li>
+[/if]
+</ul>
+[/template]
+[comment done/]
+[template private printExportTask(export:Export)]
+<b>Export</b> Task, id: <u>[export.id/]</u>
+<ul>
+	[for (out:OutputFile|export.writes)]
+	<li>[printOutputFile(out, true)/]</li>
+	[/for]
+</ul>
+	[printGenericTaskInfo(export)/]
+[/template]
+[comment done/]
+[template private printScatterPlot(visualize:ScatterPlot)]
+<b>Scatter Plot</b> Task, id: <u>[visualize.id/]</u>
+<ul>
+	[printIndependendAndResponseVariables(visualize.independentVariables,visualize.responseVariables)/]
+</ul>
+	[printGenericTaskInfo(visualize)/]
+[/template]
+[template private printLabeledScatterPlot(visualize:LabeledScatterPlot)]
+<b>Labeled Scatter Plot</b> Task, id: <u>[visualize.id/]</u>
+<ul>
+	[printIndependendAndResponseVariables(visualize.independentVariables,visualize.responseVariables)/]
+	<li>Label attribute: [printColumn(visualize.labelAttribute)/]</li>
+</ul>
+	[printGenericTaskInfo(visualize)/]
+[/template]
+[template private printIndependendAndResponseVariables(independentVariables:Collection(Column), responseVariables:Collection(Column))]
+	<li>Independent variables:
+		<ul>
+		[for (indep:Column|independentVariables)]
+			<li>[printColumn(indep)/]</li>
+		[/for]
+		</ul>
+	</li>
+	<li>Dependent variables:
+		<ul>
+		[for (indep:Column|responseVariables)]
+			<li>[printColumn(indep)/]</li>
+		[/for]
+		</ul>
+	</li>
+[/template]
+[template private printHistogram(visualize:Histogram)]
+<b>Histogram</b> Task, id: <u>[visualize.id/]</u>
+	[printGenericTaskInfo(visualize)/]
+[/template]
+[template private printPiePlot(visualize:PiePlot)]
+<b>Pie Plot</b> Task, id: <u>[visualize.id/]</u>
+	[printGenericTaskInfo(visualize)/]
+[/template]
+[template private printChangeDataFormat(changeFormat:ChangeDataFormat)]
+<b>Change Data Format</b> Task, id: <u>[changeFormat.id/]</u>
+<ul>
+	<li>From [changeFormat.inputFormat/] to [changeFormat.outputFormat/]</li>
+</ul>
+		[printGenericTaskInfo(changeFormat)/]
+[/template]
+[template private printCustomCleaning(customCleaning:CustomCleaning)]
+<b>Custom Cleaning Function</b> <u>[customCleaning.id/]</u>
+Signature:
+<ul>
+	<li>[customCleaning.name/]</li>
+	[for(customParams:CustomParam|customCleaning.customParams)]
+	<li> Parameter: [customParams.name/]:[customParams.type/]</li>
+	[/for]
+</ul>
+		[printGenericTaskInfo(customCleaning)/]
+[/template]
+[template private printNullValuesRemoval(nullVal:NullValuesRemoval)]
+<b>Null Values Removal</b>, id: <u>[nullVal.id/]</u>, with policy [nullVal.policy/]
+		[printGenericTaskInfo(nullVal)/]
+[/template]
+[template private printJarvisPatrick(JP:JarvisPatrick)]
+<b>Jarvis Patrick</b>, id: <u>[JP.id/]</u>, with K = [JP.K/] and threshold = [JP.threshold/]
+		[printGenericTaskInfo(JP)/]
+[/template]
+[template private printKMeans(KM: KMeans)]
+<b>K-Means</b>, id: <u>[KM.id/]</u> with K = [KM.K/]
+		[printGenericTaskInfo(KM)/]
+[/template]
+[template private printDBSCAN(DBS:DBSCAN)]
+<b>DBSCAN</b>, id: <u>[DBS.id/]</u> with radius = [DBS.radius/] and threshold = [DBS.threshold/]
+		[printGenericTaskInfo(DBS)/]
+[/template]
+[template private printAgglomerativeClustering(agglomerative:Agglomerative)]
+<b>Agglomerative Clustering</b>, id: <u>[agglomerative.id/]</u> with cut height = [agglomerative.CutHeight/] and inter-cluster similarity = [agglomerative.interClusterSimilarity/]
+		[printGenericTaskInfo(agglomerative)/]
+[/template]
+[template private printClassLabels(classification:Classification)]
+Class labels:
+<ul>
+[for(classLabel:String|classification.classLabels)]
+	<li>[classLabel/]</li>
+[/for]
+</ul>
+[/template]
+[template private printKNN(knn:KNN)]
+<b>KNN</b> classification, id: <u>[knn.id/]</u> with K = [knn.K/]
+	[printGenericTaskInfo(knn)/]
+[/template]
+[template private printLogisticRegression(logRegr:LogisticRegression)]
+<b>Logistic Regression</b>, id: <u>[logRegr.id/]</u> with coefficients [printCoefficients(logRegr.estimatedCoefficients)/] :
+	[printGenericTaskInfo(logRegr)/]
+[/template]
+[template private printSVM(svm:SVM)]
+<b>SVM</b> classification, id: <u>[svm.id/]</u> with Kernel Function = [svm.kernelFunction/] and estimated coefficients [printCoefficients(svm.estimatedCoefficients)/] :
+	[printGenericTaskInfo(svm)/]
+[/template]
+[template private printCoefficients(coefficients:Collection(OclAny))]
+([for(coefficient:OclAny|coefficients) separator(', ')][coefficient/][/for])
+[/template]
+[template private printLinearRegression(linRegr:LinearRegression)]
+<b>Linear Regression</b>, id: <u>[linRegr.id/]</u> with coefficients [printCoefficients(linRegr.estimatedCoefficients)/] :
+	[printGenericTaskInfo(linRegr)/]
+[/template]
+[template private printRidgeRegression(ridge:Ridge)]
+<b>Ridge Regression</b>, id: <u>[ridge.id/]</u> with Penalty Factor = [ridge.penaltyFactor/] and coefficients [printCoefficients(ridge.estimatedCoefficients)/] :
+	[printGenericTaskInfo(ridge)/]
+[/template]
+[template private printLassoRegression(lasso:Lasso)]
+<b>Ridge Regression</b>, id: <u>[lasso.id/]</u> with Penalty Factor = [lasso.penaltyFactor/] and coefficients [printCoefficients(lasso.estimatedCoefficients)/] :
+	[printGenericTaskInfo(lasso)/]
+[/template]
+[template private printDataCollection(dataColl:DataCollection)]
+<b>Data Collection</b>, id: <u>[dataColl.id/]</u> with Input Source:
+<ul>
+	[printInputSource(dataColl.sourceDeclaration)/]
+</ul>
+	[printGenericTaskInfo(dataColl)/]
+[/template]
+[template private printDescriptiveTask(descr:Description)]
+<b>Descriptive Task</b> [descr.eClass().name/], id: <u>[descr.id/]</u>:
+	[printGenericTaskInfo(descr)/]
+[/template]
+[template private printProjectOnAttributes(projectOnAttributes:ProjectOnAttributes)]
+<b>Projection on attributes</b>, id: <u>[projectOnAttributes.id/]</u>
+<ul>
+	<li>This tasks perform the projection of InputSchema on the attributes:
+	<ul>
+	[for(att: Attribute|projectOnAttributes.projectionAttributes)]
+		<li>[printColumn(att)/]</li>
+	[/for]
+	</ul>
+	</li>
+	[printGenericTaskInfo(projectOnAttributes)/]
+</ul>
+[/template]
+[comment done/]
+[template private printRuntimeInfo(runtimeInfo:RuntimeInfo)]
+<b>Runtime Information</b>, id: <u>[runtimeInfo.executionId/]</u>
+<ul>
+	<li>Start Time: [runtimeInfo.startTime/] (epoch format)</li>
+	<li>End Time: [runtimeInfo.endTime/](epoch format)</li>
+</ul>
+[/template]
+

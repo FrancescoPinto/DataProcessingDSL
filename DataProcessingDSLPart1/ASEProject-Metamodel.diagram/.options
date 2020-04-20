@@ -1,0 +1,7 @@
+# Tracing options for the ASEProject-Metamodel.diagram plug-in
+
+# Common issues
+ASEProject-Metamodel.diagram/debug=false
+
+# Visual IDs
+ASEProject-Metamodel.diagram/debug/visualID=false

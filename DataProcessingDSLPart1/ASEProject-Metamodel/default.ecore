@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pipelineproject" nsURI="http://www.ase.it/pm" nsPrefix="pm">
+  <eAnnotations source="gmf"/>
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Pipeline">
+    <eAnnotations source="gmf.diagram"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueTaskId UniqueDataflowId UniqueRuntimeInfoId UniqueSchemaId"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="UniqueTaskId" value="Tuple {&#xA;&#x9;message : String = 'Task id should be unique',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;Task.allInstances()->forAll(t1,t2|t1&lt;>t2 implies t1.id &lt;> t2.id)&#xA;}.status"/>
+      <details key="UniqueDataflowId" value="Tuple {&#xA;&#x9;message : String = 'Dataflow id should be unique',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;DataFlow.allInstances()->forAll(d1,d2|d1&lt;>d2 implies d1.id&lt;>d2.id)&#xA;}.status"/>
+      <details key="UniqueRuntimeInfoId" value="Tuple {&#xA;&#x9;message : String = 'Runtime info id should be unique',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;RuntimeInfo.allInstances()->forAll(r1,r2|r1&lt;>r2 implies r1.executionId &lt;> r2.executionId)&#xA;}.status"/>
+      <details key="UniqueSchemaId" value="Tuple {&#xA;&#x9;message : String = 'Schema id should be unique',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;Schema.allInstances()->forAll(s1,s2|s1&lt;>s2 implies s1.id &lt;> s2.id)&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" lowerBound="2" upperBound="-1"
+        eType="#//Task" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataFlows" lowerBound="1"
+        upperBound="-1" eType="#//DataFlow" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schema" upperBound="-1"
+        eType="#//Schema" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputFile" upperBound="-1"
+        eType="#//OutputFile" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pipelineName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TasksWithOneAndOnlyOneInputAndInputSchema TasksWithNoInputAndNoInputSchmea TasksWithOneOrMoreInputAndInputSchema TasksWithInputShouldHaveConsistentSchemas TasksWithNoOutputAndNoOutputSchema TasksWithOutput TasksWithOutputShouldHaveConsistentOutputSchemas ConsistentInputOutputFormat ConsistentFormatConversion1 ConsistentFormatConversion2 StartTimeAfterPreviousTasksEndTime DataVisualizationOutputMustContainAtLeastOneImage NotDataVisualizationOrExportShouldNotProcessImages JoinShouldHaveDataWithSameFormatInInput TasksWithSameInputAndOutputSchema TasksWithIDCopyShouldHaveSchemaWithCopiedID TasksThatDontAllowIDCopyShouldntHaveSchemaWithCopiedID"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TasksWithOneAndOnlyOneInputAndInputSchema" value="Tuple {&#xA;&#x9;message : String = 'The task should have one and only one input dataflow and one and only one input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;(self.oclIsKindOf(DataAnalysis) or self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(Export) or self.oclIsTypeOf(ProjectOnAttributes))&#xA; &#x9;&#x9;&#x9;&#x9;implies (self.input &lt;> null and self.input->size() = 1 and self.inputSchema &lt;> null and self.inputSchema->size() = 1)&#xA;}.status"/>
+      <details key="TasksWithNoInputAndNoInputSchmea" value="Tuple {&#xA;&#x9;message : String = 'The task should have no input dataflow and no input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.oclIsTypeOf(DataCollection) implies (self.input->size() = 0 and self.inputSchema->size() = 0)&#xA;}.status"/>
+      <details key="TasksWithOneOrMoreInputAndInputSchema" value="Tuple {&#xA;&#x9;message : String = 'The task should have two or more input dataflow and input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.oclIsTypeOf(DataIntegration) implies (self.input->size() > 1)&#xA;}.status"/>
+      <details key="TasksWithInputShouldHaveConsistentSchemas" value="Tuple {&#xA;&#x9;message : String = 'The inputSchema should be consistent with the input dataflow schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;--self.input &lt;>null and self.input->size() > 0 implied by other rule&#xA;&#x9;&#x9;&#x9;(self.oclIsKindOf(DataAnalysis) or self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(Export) or self.oclIsTypeOf(DataIntegration))&#xA;&#x9;&#x9;&#x9; implies (self.input.typeOfData->forAll(s| self.inputSchema->includes(s)) and self.input.typeOfData->size() = self.inputSchema->size())&#xA;}.status"/>
+      <details key="TasksWithNoOutputAndNoOutputSchema" value="Tuple {&#xA;&#x9;message : String = 'The task should have no output dataflow and no output schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.oclIsTypeOf(Export) implies (self.output->size() = 0 and self.outputSchema->size() = 0)&#xA;}.status"/>
+      <details key="TasksWithOutput" value="Tuple {&#xA;&#x9;message : String = 'The task should have output dataflow and output schema',&#xA;&#x9;status : Boolean = &#x9;&#xA;&#x9;&#x9;&#x9; not self.oclIsTypeOf(Export) implies (self.output->size() > 0 and not self.outputSchema.oclIsUndefined())&#xA;}.status"/>
+      <details key="TasksWithOutputShouldHaveConsistentOutputSchemas" value="Tuple {&#xA;&#x9;message : String = 'The outputSchema should be consistent with the output dataflow schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;--self.output &lt;> null and self.output->size() > 0 &#xA;&#x9;&#x9;&#x9;(self.oclIsKindOf(DataAnalysis) or self.oclIsTypeOf(DataCollection) or self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(DataIntegration))&#xA;&#x9;&#x9;&#x9;implies (self.output.typeOfData->forAll(s| s = self.outputSchema))&#xA;}.status"/>
+      <details key="ConsistentInputOutputFormat" value="Tuple {&#xA;&#x9;message : String = 'The input/output format of dataflows to/from the task should be the same',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;(not self.oclIsTypeOf(ChangeDataFormat)) implies &#xA;&#x9;&#x9;&#x9;&#x9;(self.output->forAll(o| self.input->forAll(i| i.format = o.format)))&#xA;}.status"/>
+      <details key="ConsistentFormatConversion1" value="Tuple {&#xA;&#x9;message : String = 'The format conversion should make sense (i.e. input != output format)',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.oclIsTypeOf(ChangeDataFormat) implies &#xA;&#x9;&#x9;&#x9;&#x9;(self.oclAsType(ChangeDataFormat)).outputFormat &lt;> (self.oclAsType(ChangeDataFormat)).inputFormat&#xA;}.status"/>
+      <details key="ConsistentFormatConversion2" value="Tuple {&#xA;&#x9;message : String = 'The format of input/output dataflow should be consistent',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.oclIsTypeOf(ChangeDataFormat) implies&#xA;&#x9;&#x9;&#x9;&#x9;(self.oclAsType(ChangeDataFormat)).output.format->forAll(f| f = (self.oclAsType(ChangeDataFormat)).outputFormat)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;and&#xA;&#x9;&#x9;&#x9;&#x9;(self.oclAsType(ChangeDataFormat)).input.format->forAll(f| f =(self.oclAsType(ChangeDataFormat)).inputFormat)&#xA;}.status"/>
+      <details key="StartTimeAfterPreviousTasksEndTime" value="Tuple {&#xA;&#x9;message : String = 'Start time of the task should come after the End time of previous tasks',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9; self.input.from.runtimeInfo->select(r| self.runtimeInfo.startTime &lt; r.endTime)->size() = 0&#xA;}.status"/>
+      <details key="DataVisualizationOutputMustContainAtLeastOneImage" value="Tuple {&#xA;&#x9;message : String = 'Datavisualization tasks should produce, in output, at least one image',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9; &#x9;self.oclIsKindOf(DataVisualization) implies (not self.outputSchema.oclIsUndefined() implies self.outputSchema.attributes.type->select(t|t = Type::Bitmap)->size() > 0)&#xA;}.status"/>
+      <details key="NotDataVisualizationOrExportShouldNotProcessImages" value="Tuple {&#xA;&#x9;message : String = 'Tasks other than data visualization and export are not supposed to process images',&#xA;&#x9;status : Boolean = &#xA; &#x9;&#x9;&#x9;not (self.oclIsKindOf(DataVisualization) or self.oclIsTypeOf(Export)) implies &#xA; &#x9;&#x9;&#x9;(not self.outputSchema.oclIsUndefined() implies self.outputSchema.attributes.type->select(t|t = Type::Bitmap)->size() = 0) &#xA; &#x9;&#x9;&#x9;&#x9;and (not (self.inputSchema->size() &lt;> 0) implies self.inputSchema.attributes.type->select(t|t = Type::Bitmap)->size() = 0)&#xA;}.status"/>
+      <details key="JoinShouldHaveDataWithSameFormatInInput" value="Tuple {&#xA;&#x9;message : String = 'DataIntegration tasks should have inputs with same format (use ChangeDataFormat nodes if needed)',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.oclIsTypeOf(DataIntegration) implies self.input.format->asSet()->size() = 1&#xA;}.status"/>
+      <details key="TasksWithSameInputAndOutputSchema" value="Tuple {&#xA;&#x9;message : String = 'ChangeData/NullValuesRemoval/Descriptions tasks should have same input and output schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.oclIsTypeOf(ChangeDataFormat) or self.oclIsTypeOf(NullValuesRemoval) or self.oclIsKindOf(Description) implies self.inputSchema->forAll(is| is = self.outputSchema)&#xA;}.status"/>
+      <details key="TasksWithIDCopyShouldHaveSchemaWithCopiedID" value="Tuple {&#xA;&#x9;message : String = 'Tasks that can mantain the row identity from input to output should mark the fact that the ID value is copied from the input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(Prediction) or self.oclIsKindOf(Classification) or self.oclIsKindOf(Clustering) implies &#xA;&#x9;&#x9;((self.outputSchema.idColumn &lt;> self.inputSchema->first().idColumn) implies self.outputSchema.idColumn.copies = self.inputSchema->first().idColumn)&#xA;}.status"/>
+      <details key="TasksThatDontAllowIDCopyShouldntHaveSchemaWithCopiedID" value="Tuple {&#xA;&#x9;message : String = 'Tasks that can not mantain the row identity from input to output shouldn\'t mark the fact that the ID value is copied from the input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;not(self.oclIsKindOf(DataCleaning) or self.oclIsKindOf(Prediction) or self.oclIsKindOf(Classification) or self.oclIsKindOf(Clustering)) implies&#xA;&#x9;&#x9;((not self.outputSchema.oclIsUndefined()) implies self.outputSchema.idColumn.copies = null)&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" upperBound="-1"
+        eType="#//DataFlow" eOpposite="#//DataFlow/to"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" upperBound="-1"
+        eType="#//DataFlow" eOpposite="#//DataFlow/from"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runtimeInfo" lowerBound="1"
+        eType="#//RuntimeInfo" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputSchema" upperBound="-1"
+        eType="#//Schema">
+      <eAnnotations source="gmf.link">
+        <details key="target" value="inputSchema"/>
+        <details key="style" value="dash"/>
+        <details key="color" value="0,255,0"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputSchema" eType="#//Schema">
+      <eAnnotations source="gmf.link">
+        <details key="target" value="outputSchema"/>
+        <details key="style" value="dash"/>
+        <details key="color" value="255,0,0"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlow">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="from"/>
+      <details key="target" value="to"/>
+      <details key="target.decoration" value="filledclosedarrow"/>
+      <details key="style" value="solid"/>
+      <details key="label" value="format"/>
+      <details key="width" value="4"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Task"
+        eOpposite="#//Task/output"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Task"
+        eOpposite="#//Task/input"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeOfData" lowerBound="1"
+        eType="#//Schema" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="self.from.outputSchema"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" lowerBound="1"
+        eType="#//Format"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCollection" eSuperTypes="#//Task">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceDeclaration" lowerBound="1"
+        eType="#//InputSourceDeclaration" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataIntegration" eSuperTypes="#//Task">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="JoinAttributesShouldBeOverAllSchemas AttributeContainedInSchema JoinAttributesSameType JoinedOutputSchemaShouldHaveOneKeyAndContainAllOtherAttributes"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="JoinAttributesShouldBeOverAllSchemas" value="Tuple {&#xA;&#x9;message : String = 'Join attribute lists should be over all the input tables',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;not self.joinAttributesList.oclIsUndefined() and self.joinAttributesList.joinAttributes->size() = self.inputSchema->size()&#xA;}.status"/>
+      <details key="AttributeContainedInSchema" value="Tuple {&#xA;&#x9;message : String = 'Each attribute in a list should be contained once and only once in an input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;not self.joinAttributesList.oclIsUndefined() and self.joinAttributesList.joinAttributes->forAll(j| self.inputSchema->select(s|s.attributes->includes(j) or s.idColumn = j)->size() = 1)&#xA;}.status"/>
+      <details key="JoinAttributesSameType" value="Tuple {&#xA;&#x9;message : String = 'Join attributes should have same type',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;not self.joinAttributesList.oclIsUndefined() and self.joinAttributesList.joinAttributes.type->asSet()->size() = 1&#xA;}.status"/>
+      <details key="JoinedOutputSchemaShouldHaveOneKeyAndContainAllOtherAttributes"
+          value="Tuple {&#xA;&#x9;message : String = 'Output schema of join should contain at most one attribute identical to the first attribute in the joinAttributesList (0 if it is a generatedID join), and all the attributes in the input tables',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;not self.joinAttributesList.oclIsUndefined() and&#xA;&#x9;&#x9;&#x9;self.outputSchema.attributes->select(a| self.joinAttributesList.joinAttributes->first().name = a.name and a.type = self.joinAttributesList.joinAttributes->first().type)->size() &lt;= 1 and&#xA;&#x9;&#x9;&#x9;self.outputSchema.attributes->forAll(a| self.inputSchema.attributes->select(a1|a1.name = a.name and a1.type = a.type)->size() >= 1 or (self.joinAttributesList.joinAttributes->first().name = a.name and a.type = self.joinAttributesList.joinAttributes->first().type))&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joinAttributesList" lowerBound="1"
+        eType="#//JoinAttributesList" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataAnalysis" abstract="true" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataCleaning" abstract="true" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataVisualization" abstract="true" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Export" eSuperTypes="#//Task">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writes" lowerBound="1"
+        upperBound="-1" eType="#//OutputFile" eOpposite="#//OutputFile/export">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="writes"/>
+        <details key="target" value="writes"/>
+        <details key="style" value="dot"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputSourceDeclaration">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="sourceURI"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceURI" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="queryEndpoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exchangeFormat" lowerBound="1"
+        eType="#//Format"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceSchema" eType="#//Schema">
+      <eAnnotations source="gmf.link">
+        <details key="target" value="sourceSchema"/>
+        <details key="style" value="dot"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceType" lowerBound="1"
+        eType="#//SourceType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queryConditions" eType="#//LogicProposition"
+        containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Format">
+    <eLiterals name="json"/>
+    <eLiterals name="csv"/>
+    <eLiterals name="xml"/>
+    <eLiterals name="xlsx"/>
+    <eLiterals name="pdf"/>
+    <eLiterals name="png"/>
+    <eLiterals name="jpg"/>
+    <eLiterals name="html"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputFile">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="OutputFileNotEmptyName OutputFile_NotEmptyPath OutputFile_ConsistentFileFormat"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="OutputFileNotEmptyName" value="Tuple {&#xA;&#x9;message : String = 'File Name should not be empty',&#xA;&#x9;status : Boolean = self.name.size()> 0 or self.name &lt;> null&#xA;}.status"/>
+      <details key="OutputFile_NotEmptyPath" value="Tuple {&#xA;&#x9;message : String = 'File Path should not be empty',&#xA;&#x9;status : Boolean = self.storagePath.size()> 0 or self.storagePath &lt;> null&#xA;}.status"/>
+      <details key="OutputFile_ConsistentFileFormat" value="Tuple {&#xA;&#x9;message : String = 'File format should be the same as the one of the input dataflow. To perform format conversion, use a ChangeDataFormat Task',&#xA;&#x9;status : Boolean = &#xA;&#x9; &#x9;self.fileFormat = self.export.input->first().format&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileFormat" lowerBound="1"
+        eType="#//Format"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="storagePath" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="export" lowerBound="1"
+        eType="#//Export" eOpposite="#//Export/writes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Classification" abstract="true" eSuperTypes="#//DataAnalysis">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ClassificationIsForClassLabels"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ClassificationIsForClassLabels" value="Tuple {&#xA;&#x9;message : String = 'Classification output should be only for class labels!',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.outputSchema.attributes->forAll(a|a.type = Type::_'String')&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="classLabels" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Prediction" abstract="true" eSuperTypes="#//DataAnalysis">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PredictionIsForRealResponse"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="PredictionIsForRealResponse" value="Tuple {&#xA;&#x9;message : String = 'Prediction output should be only for real response!',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.outputSchema.attributes->forAll(a|a.type = Type::Float)&#xA;}.status"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clustering" abstract="true" eSuperTypes="#//DataAnalysis"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Description" abstract="true" eSuperTypes="#//DataAnalysis">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentNumberOfInputOutputColumns ConsistentOperationsOverTypeOfData"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ConsistentNumberOfInputOutputColumns" value="Tuple {&#xA;&#x9;message : String = 'Mean/median/variance/skeweness compute mean/median/variance/skeweness by column, inputSchema and outputSchema should have the same number of attirbutes',&#xA;&#x9;status : Boolean = &#xA;&#x9; &#x9;self.oclIsTypeOf(Mean) or self.oclIsTypeOf(Median) or self.oclIsTypeOf(Variance) or self.oclIsTypeOf(Skewness)&#xA;&#x9;&#x9;implies self.inputSchema->size() = 1 and self.inputSchema->first().attributes->size() = self.outputSchema.attributes->size()&#xA;}.status"/>
+      <details key="ConsistentOperationsOverTypeOfData" value="Tuple {&#xA;&#x9;message : String = 'Mean/variance/skeweness only make sense over numerical data',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.oclIsTypeOf(Mean) or self.oclIsTypeOf(Variance) or self.oclIsTypeOf(Skewness) implies&#xA;&#x9;&#x9;self.outputSchema.attributes->forAll(a|a.type = Type::Float or a.type = Type::Int)&#xA;}.status"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Column" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValuesRemoval" eSuperTypes="#//DataCleaning">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="policy" lowerBound="1"
+        eType="#//NulValuesPolicy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomCleaning" eSuperTypes="#//DataCleaning">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="customParams" upperBound="-1"
+        eType="#//CustomParam" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Schema">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="border.style" value="dash"/>
+      <details key="border.color" value="150,150,255"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="UniqueAttributeNameInSameSchema"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="UniqueAttributeNameInSameSchema" value="Tuple {&#xA;&#x9;message : String = 'Attribute name in same schema should be unique',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.attributes->forAll(a1,a2| a1 &lt;> a2 implies a1.name &lt;> a2.name)&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="idColumn" lowerBound="1"
+        eType="#//PrimaryKey" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type">
+    <eLiterals name="String"/>
+    <eLiterals name="Boolean"/>
+    <eLiterals name="Int"/>
+    <eLiterals name="Float"/>
+    <eLiterals name="Bitmap"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JoinAttributesList">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="joinAttributes" lowerBound="2"
+        upperBound="-1" eType="#//Column"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RuntimeInfo">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="executionId"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="StartTimeBeforeEndTime"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="StartTimeBeforeEndTime" value="Tuple {&#xA;&#x9;message : String = 'Start time must come before End time in a same task',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.startTime &lt; self.endTime&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="executionId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChangeDataFormat" eSuperTypes="#//DataCleaning">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputFormat" lowerBound="1"
+        eType="#//Format"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outputFormat" lowerBound="1"
+        eType="#//Format"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NulValuesPolicy">
+    <eLiterals name="regressionImputation"/>
+    <eLiterals name="dropRecord"/>
+    <eLiterals name="meanImputation"/>
+    <eLiterals name="medianImputation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KNN" eSuperTypes="#//Classification">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="KGreaterThanZero"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="KGreaterThanZero" value="Tuple {&#xA;&#x9;message : String = 'K should be greater than zero',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.K > 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="K" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SVM" eSuperTypes="#//Classification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kernelFunction" eType="#//KernelFunction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="estimatedCoefficients"
+        ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="KernelFunction">
+    <eLiterals name="Gaussian"/>
+    <eLiterals name="Polynomial"/>
+    <eLiterals name="Tanh"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KMeans" eSuperTypes="#//Clustering">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="positiveK"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="positiveK" value="Tuple {&#xA;&#x9;message : String = 'K should be positive',&#xA;&#x9;status : Boolean = self.K > 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="K" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Hierarchical" abstract="true" eSuperTypes="#//Clustering"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Agglomerative" eSuperTypes="#//Hierarchical">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="CutHeightGe1"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="CutHeightGe1" value="Tuple {&#xA;&#x9;message : String = 'Cut Height >= 1',&#xA;&#x9;status : Boolean = self.CutHeight >= 1&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interClusterSimilarity"
+        lowerBound="1" eType="#//InterClusterSimilarity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="CutHeight" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="InterClusterSimilarity">
+    <eLiterals name="SL"/>
+    <eLiterals name="CL"/>
+    <eLiterals name="GA"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DBSCAN" eSuperTypes="#//Clustering">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PositiveRadiusAndThreshold"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="PositiveRadiusAndThreshold" value="Tuple {&#xA;&#x9;message : String = 'The radius and the threshold should be positive',&#xA;&#x9;status : Boolean = self.radius > 0 and self.threshold > 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JarvisPatrick" eSuperTypes="#//Clustering">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PositiveKAndThreshold"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="PositiveKAndThreshold" value="Tuple {&#xA;&#x9;message : String = 'The K and threshold should be positive',&#xA;&#x9;status : Boolean = self.K > 0 and self.threshold > 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="K" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinearRegression" eSuperTypes="#//Prediction">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentNumberOfEstimatedCoefficients"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ConsistentNumberOfEstimatedCoefficients" value="Tuple {&#xA;&#x9;message : String = 'The number of estimated coefficients should correspond to the number of input predictors, i.e. columns of inputSchema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.estimatedCoefficients->size() = self.inputSchema->first().attributes->size()+1&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="estimatedCoefficients"
+        ordered="false" lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ridge" eSuperTypes="#//LinearRegression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PositivePenaltyFactor"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="PositivePenaltyFactor" value="Tuple {&#xA;&#x9;message : String = 'Penalty factor should be positive, otherwise, if it is zero, use plain linear regression',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.penaltyFactor > 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="penaltyFactor" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lasso" eSuperTypes="#//LinearRegression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PositivePenaltyFactor"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="PositivePenaltyFactor" value="Tuple {&#xA;&#x9;message : String = 'Penalty factor should be positive, otherwise, if it is zero, use plain linear regression',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;&#x9;self.penaltyFactor > 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="penaltyFactor" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mean" eSuperTypes="#//Description"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Median" eSuperTypes="#//Description"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variance" eSuperTypes="#//Description"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SourceType">
+    <eLiterals name="IoT"/>
+    <eLiterals name="SocialMedia"/>
+    <eLiterals name="Web"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicProposition" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotClause" eSuperTypes="#//LogicProposition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subClause" lowerBound="1"
+        eType="#//LogicProposition" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiOperandClause" abstract="true"
+      eSuperTypes="#//LogicProposition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="2"
+        upperBound="-1" eType="#//LogicProposition" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndClause" eSuperTypes="#//MultiOperandClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrClause" eSuperTypes="#//MultiOperandClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueClause" abstract="true" eSuperTypes="#//LogicProposition">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistenValueClauseTypes"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ConsistenValueClauseTypes" value="Tuple {&#xA;&#x9;message : String = 'ComparisonValue and QueryParam should have same type',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.type = self.conditionField.type&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparisonValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionField" lowerBound="1"
+        eType="#//QueryParam" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LtClause" eSuperTypes="#//ValueClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GtClause" eSuperTypes="#//ValueClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EqClause" eSuperTypes="#//ValueClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LeClause" eSuperTypes="#//ValueClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeClause" eSuperTypes="#//ValueClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainsClause" eSuperTypes="#//ValueClause"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QueryParam">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomParam">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimaryKey" eSuperTypes="#//Column">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="IfCopiesThenSameType"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="IfCopiesThenSameType" value="Tuple {&#xA;&#x9;message : String = 'A primarykey can\'t copy primarykeys with different type',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.copies &lt;> null implies self.type = self.copies.type&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="copies" eType="#//PrimaryKey">
+      <eAnnotations source="gmf.link">
+        <details key="target" value="copies"/>
+        <details key="target.decoration" value="arrow"/>
+        <details key="style" value="dot"/>
+        <details key="color" value="0,0,255"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//Column"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogisticRegression" eSuperTypes="#//Classification">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ConsistentCoefficientSize"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ConsistentCoefficientSize" value="Tuple {&#xA;&#x9;message : String = 'The number of coefficients should be (#predictors+1)*#classLabels',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.estimatedCoefficients->size() = self.classLabels->size()*(self.inputSchema.attributes->size() + 1)&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="estimatedCoefficients"
+        lowerBound="1" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Skewness" eSuperTypes="#//Description"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScatterPlot" eSuperTypes="#//DataVisualization">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="IndependentAndResponseShouldBeInInputSchema IndependentAndResponseShouldBeDifferent"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="IndependentAndResponseShouldBeInInputSchema" value="Tuple {&#xA;&#x9;message : String = 'Independent variables and response variables should be specified within the attributes of the input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.independentVariables->forAll(v|self.inputSchema.attributes->includes(v) or self.inputSchema.idColumn = v) and self.responseVariables->forAll(v|self.inputSchema.attributes->includes(v) or self.inputSchema.idColumn = v)&#xA;}.status"/>
+      <details key="IndependentAndResponseShouldBeDifferent" value="Tuple {&#xA;&#x9;message : String = 'Independent variables and response variables should not be the same variables',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.independentVariables->intersection(self.responseVariables)->size() = 0&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="independentVariables" lowerBound="1"
+        upperBound="-1" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responseVariables" lowerBound="1"
+        upperBound="-1" eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LabeledScatterPlot" eSuperTypes="#//ScatterPlot">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="LabelAttributeShouldBeInInputSchema"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="LabelAttributeShouldBeInInputSchema" value="Tuple {&#xA;&#x9;message : String = 'Label variables should be specified within the attributes of the input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.labelAttribute->forAll(v|self.inputSchema.attributes->includes(v) or self.inputSchema.idColumn = v)&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelAttribute" lowerBound="1"
+        eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Histogram" eSuperTypes="#//DataVisualization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PiePlot" eSuperTypes="#//DataVisualization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ProjectOnAttributes" eSuperTypes="#//DataCleaning">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ProjectOnAttributesInInputSchema ProjectOnAttributesShouldBeTheOneAndOnlyOneInOutputSchema"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ProjectOnAttributesInInputSchema" value="Tuple {&#xA;&#x9;message : String = 'Projection should occur on attributes of input schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.projectionAttributes->forAll(a|self.inputSchema->first().attributes->includes(a))&#xA;}.status"/>
+      <details key="ProjectOnAttributesShouldBeTheOneAndOnlyOneInOutputSchema" value="Tuple {&#xA;&#x9;message : String = 'Projection attributes should be the one and only one in output schema',&#xA;&#x9;status : Boolean = &#xA;&#x9;&#x9;self.projectionAttributes->forAll(a|self.outputSchema.attributes->exists(a1|a.name=a1.name and a.type = a1.type)) and self.outputSchema.attributes->forAll(a|self.projectionAttributes->exists(a1|a.name=a1.name and a.type = a1.type))&#xA;}.status"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projectionAttributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute"/>
+  </eClassifiers>
+</ecore:EPackage>

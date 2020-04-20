@@ -1,0 +1,22 @@
+[comment encoding = UTF-8 /]
+[module inputSource('http://www.ase.it/pm')]
+
+[import it::ase::project::acceleo::common::schema /]
+
+[template public printInputSource(source:InputSourceDeclaration)]
+<li> Source URI: [source.sourceURI/] </li>
+<li> Query Endpoint: [source.queryEndpoint/] </li>
+<li> Exchange Format: [source.exchangeFormat/] </li>
+<li> Source Type: [source.sourceType/] </li>
+<li> Source Schema: <br/>[printSchema(source.sourceSchema)/]</li>
+[if (not (source.queryConditions.oclIsUndefined()))]
+<li> Query Condition: [printQueryCondition(source.queryConditions)/] </li>
+[/if]
+[/template]
+
+
+[comment da testare come concatena /]
+[template private printValueClause(valueClause:ValueClause)][valueClause.conditionField.name/][if (valueClause.oclIsTypeOf(EqClause))]=[elseif (valueClause.oclIsTypeOf(GeClause))]>=[elseif (valueClause.oclIsTypeOf(LeClause))]<=[elseif (valueClause.oclIsTypeOf(GtClause))]>[elseif (valueClause.oclIsTypeOf(LtClause))]<[elseif (valueClause.oclIsTypeOf(ContainsClause))]contains [/if][valueClause.comparisonValue/][/template]
+
+[template private printQueryCondition(condition:LogicProposition)][if (condition.oclIsKindOf(ValueClause))][printValueClause(condition.oclAsType(ValueClause))/][elseif (condition.oclIsTypeOf(NotClause))]<b>not</b>([printQueryCondition(condition.oclAsType(NotClause).subClause)/])[elseif (condition.oclIsTypeOf(AndClause))]<b>and</b>([printMultiOperandClauseOperands(condition.oclAsType(AndClause).operands)/])[elseif (condition.oclIsTypeOf(OrClause))]<b>or</b>([printMultiOperandClauseOperands(condition.oclAsType(OrClause).operands)/])[/if][/template]
+[template private printMultiOperandClauseOperands(operands:OrderedSet(LogicProposition))][for(operand:LogicProposition|operands) separator(', ')][printQueryCondition(operand)/][/for][/template]

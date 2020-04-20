@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xmi:id="_yD21APWcEeelzOW7UcqACA" version="11.1.0.201608251200">
+  <semanticResources>example2.pipelineproject</semanticResources>
+  <semanticResources>example2.pipelineproject_diagram</semanticResources>
+  <semanticResources>example1.pipelineproject</semanticResources>
+  <semanticResources>example1.pipelineproject_diagram</semanticResources>
+  <semanticResources>example2converted.pipelineproject</semanticResources>
+  <semanticResources>example2converted.pipelineproject_diagram</semanticResources>
+  <semanticResources>example1converted.pipelineproject</semanticResources>
+  <semanticResources>example1converted.pipelineproject_diagram</semanticResources>
+  <semanticResources>http://www.eclipse.org/ocl/2015/Pivot</semanticResources>
+  <semanticResources>complexExample2.pipelineproject_diagram</semanticResources>
+  <semanticResources>complexExample2.pipelineproject</semanticResources>
+</viewpoint:DAnalysis>

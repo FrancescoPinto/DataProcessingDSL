@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:pm="http://www.ase.it/pm" xmi:id="_gRm3MPWjEeeeqrd-YPDJyw" type="Pipelineproject" name="default.pipelineproject_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_hDlGsPWjEeeeqrd-YPDJyw" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_hD2zgPWjEeeeqrd-YPDJyw" type="5002"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_hD4BoPWjEeeeqrd-YPDJyw" type="7001"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_hDlGsfWjEeeeqrd-YPDJyw"/>
+    <element xmi:type="pm:Agglomerative" href="default.pipelineproject#//@tasks.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hDlGsvWjEeeeqrd-YPDJyw" x="502" y="196"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_gRm3MfWjEeeeqrd-YPDJyw"/>
+  <element xmi:type="pm:Pipeline" href="default.pipelineproject#/"/>
+</notation:Diagram>

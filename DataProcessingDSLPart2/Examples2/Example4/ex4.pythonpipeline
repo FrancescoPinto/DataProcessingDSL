@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm/python" pipelineName="pip4">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.0 //@dataFlows.3" outputSchema="//@schema.0 //@schema.1" id="dc1">
+    <runtimeInfo startTime="1" endTime="2" executionId="1"/>
+    <sourceDeclaration sourceURI="www.facebook.com" queryEndpoint="/user" sourceSchema="//@schema.0" sourceType="SocialMedia" id="sour1">
+      <queryConditions xsi:type="pm:AndClause" id="and">
+        <operands xsi:type="pm:EqClause" id="eq" comparisonValue="32" type="Int">
+          <conditionField name="age" type="Int"/>
+        </operands>
+        <operands xsi:type="pm:NotClause" id="not">
+          <subClause xsi:type="pm:LtClause" id="lt" comparisonValue="4000" type="Int">
+            <conditionField name="likes" type="Int"/>
+          </subClause>
+        </operands>
+      </queryConditions>
+    </sourceDeclaration>
+    <sourceDeclaration sourceURI="www.amazon.com" queryEndpoint="/user" sourceSchema="//@schema.1" sourceType="Web" id="sour2">
+      <queryConditions xsi:type="pm:EqClause" id="eq" comparisonValue="32" type="Int">
+        <conditionField name="age" type="Int"/>
+      </queryConditions>
+    </sourceDeclaration>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.0 //@dataFlows.3" output="//@dataFlows.1" inputSchema="//@schema.0 //@schema.1" outputSchema="//@schema.2" id="di1">
+    <runtimeInfo startTime="3" endTime="4" executionId="2"/>
+    <joinAttributesList joinAttributes="//@schema.0/@idColumn //@schema.1/@idColumn" id="jl"/>
+  </tasks>
+  <tasks xsi:type="pm:SVM" input="//@dataFlows.1" output="//@dataFlows.2" inputSchema="//@schema.2" outputSchema="//@schema.3" id="svm" classifies="//@schema.3/@attributes.2" kernelFunction="Polynomial">
+    <runtimeInfo startTime="5" endTime="6" executionId="3"/>
+    <estimatedCoefficients>12</estimatedCoefficients>
+    <estimatedCoefficients>31</estimatedCoefficients>
+    <estimatedCoefficients>-23</estimatedCoefficients>
+    <kernelParams>3</kernelParams>
+    <supportVectors index="1">
+      <vector>2</vector>
+      <vector>4</vector>
+    </supportVectors>
+    <supportVectors index="2">
+      <vector>1</vector>
+      <vector>0</vector>
+    </supportVectors>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.2" inputSchema="//@schema.3" id="export" writes="//@outputFile.0">
+    <runtimeInfo startTime="7" endTime="8" executionId="4"/>
+  </tasks>
+  <dataFlows from="//@tasks.0" to="//@tasks.1" id="df1" typeOfData="//@schema.0"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.2" id="df3" typeOfData="//@schema.2"/>
+  <dataFlows from="//@tasks.2" to="//@tasks.3" id="df4" typeOfData="//@schema.3"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.1" id="df2" typeOfData="//@schema.1"/>
+  <schema id="s1">
+    <attributes name="att1" type="Float"/>
+    <idColumn name="k1"/>
+  </schema>
+  <schema id="s2">
+    <attributes name="att2" type="Float"/>
+    <idColumn name="k2"/>
+  </schema>
+  <schema id="s3">
+    <attributes name="att1" type="Float" copies="//@schema.0/@attributes.0"/>
+    <attributes name="att2" type="Float" copies="//@schema.1/@attributes.0"/>
+    <idColumn name="k3"/>
+  </schema>
+  <schema id="s4">
+    <attributes name="att1" type="Float" copies="//@schema.2/@attributes.0"/>
+    <attributes name="att2" type="Float" copies="//@schema.2/@attributes.1"/>
+    <attributes name="att3" type="Float"/>
+    <idColumn name="k3" copies="//@schema.2/@idColumn"/>
+  </schema>
+  <outputFile storagePath="" name="out" export="//@tasks.3"/>
+</pm:Pipeline>

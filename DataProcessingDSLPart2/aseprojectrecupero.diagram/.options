@@ -1,0 +1,7 @@
+# Tracing options for the aseprojectrecupero.diagram plug-in
+
+# Common issues
+aseprojectrecupero.diagram/debug=false
+
+# Visual IDs
+aseprojectrecupero.diagram/debug/visualID=false

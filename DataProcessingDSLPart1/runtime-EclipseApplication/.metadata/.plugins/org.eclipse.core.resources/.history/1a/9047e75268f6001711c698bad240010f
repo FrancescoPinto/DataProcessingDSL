@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm:Pipeline xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pm="http://www.ase.it/pm">
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.5" id="AmazonOrdersData">
+    <runtimeInfo startTime="82783712" endTime="82783755" executionId="1"/>
+    <sourceDeclaration sourceURI="www.amazon.co.uk" queryEndpoint="/orders" sourceType="Web">
+      <queryConditions xsi:type="pm:AndClause">
+        <operands xsi:type="pm:OrClause" id="OrDate">
+          <operands xsi:type="pm:LtClause" id="Before" comparisonValue="">
+            <conditionField name="Date" type="Int"/>
+          </operands>
+          <operands xsi:type="pm:GtClause" id="After" comparisonValue="">
+            <conditionField name="Date" type="Int"/>
+          </operands>
+        </operands>
+        <operands xsi:type="pm:GeClause" id="CostGreaterOrEqual" comparisonValue="3000">
+          <conditionField name="TotalCost"/>
+        </operands>
+        <operands xsi:type="pm:EqClause" id="GenderEqual" comparisonValue="Male">
+          <conditionField name="Gender"/>
+        </operands>
+      </queryConditions>
+    </sourceDeclaration>
+  </tasks>
+  <tasks xsi:type="pm:SVM" input="//@dataFlows.7" output="//@dataFlows.2" id="SVMOrdersClassification">
+    <runtimeInfo startTime="82783781" endTime="82783788" executionId="8"/>
+  </tasks>
+  <tasks xsi:type="pm:LabeledScatterPlot" input="//@dataFlows.1" output="//@dataFlows.0" id="SVMLabeledScatterPlot">
+    <runtimeInfo startTime="82783804" endTime="82783824" executionId="10"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.2 //@dataFlows.10" output="//@dataFlows.1" id="SVMIntegration">
+    <runtimeInfo startTime="82783793" endTime="82783803" executionId="9"/>
+  </tasks>
+  <tasks xsi:type="pm:Ridge" input="//@dataFlows.8" output="//@dataFlows.9" id="PredictNextYearIncome" penaltyFactor="2">
+    <runtimeInfo startTime="82783782" endTime="82783793" executionId="6"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.9" id="PredictedIncomeExport" writes="//@outputFile.1">
+    <runtimeInfo startTime="82783799" endTime="82783830" executionId="7"/>
+  </tasks>
+  <tasks xsi:type="pm:Export" input="//@dataFlows.0" id="LabeledScatterPlotExport" writes="//@outputFile.0">
+    <runtimeInfo startTime="82783826" endTime="82783835" executionId="11"/>
+  </tasks>
+  <tasks xsi:type="pm:DataCollection" output="//@dataFlows.3" id="AmazonUserData">
+    <runtimeInfo startTime="82783712" endTime="82783738" executionId="2"/>
+  </tasks>
+  <tasks xsi:type="pm:DataIntegration" input="//@dataFlows.4 //@dataFlows.5" output="//@dataFlows.6" id="UserDataJoinOrderData">
+    <runtimeInfo startTime="82783755" endTime="82783758" executionId="4"/>
+  </tasks>
+  <tasks xsi:type="pm:ChangeDataFormat" input="//@dataFlows.3" output="//@dataFlows.4" id="xml2json" inputFormat="xml">
+    <runtimeInfo startTime="82783739" endTime="82783743" executionId="3"/>
+  </tasks>
+  <tasks xsi:type="pm:NullValuesRemoval" input="//@dataFlows.6" output="//@dataFlows.7 //@dataFlows.8 //@dataFlows.10" id="NullValuesRemoval">
+    <runtimeInfo startTime="82783763" endTime="82783780" executionId="5"/>
+  </tasks>
+  <dataFlows from="//@tasks.2" to="//@tasks.6"/>
+  <dataFlows from="//@tasks.3" to="//@tasks.2"/>
+  <dataFlows from="//@tasks.1" to="//@tasks.3"/>
+  <dataFlows from="//@tasks.7" to="//@tasks.9" format="xml" id=""/>
+  <dataFlows from="//@tasks.9" to="//@tasks.8"/>
+  <dataFlows from="//@tasks.0" to="//@tasks.8"/>
+  <dataFlows from="//@tasks.8" to="//@tasks.10"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.1"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.4"/>
+  <dataFlows from="//@tasks.4" to="//@tasks.5"/>
+  <dataFlows from="//@tasks.10" to="//@tasks.3"/>
+  <schema id="OrdersSchema">
+    <attributes name="TotalCost" type="Float"/>
+    <attributes name="UserID"/>
+    <idColumn name="OrderId"/>
+  </schema>
+  <schema id="UserSchema">
+    <attributes name="Name"/>
+    <attributes name="Gender"/>
+    <attributes name="DressSize"/>
+    <idColumn name="UserID"/>
+  </schema>
+  <schema id="UserOrdersJoinSchema">
+    <idColumn name="JoinedID"/>
+  </schema>
+  <schema id="NextYearIncomeSchema">
+    <idColumn name="NextYearIncomeID"/>
+  </schema>
+  <schema id="UserClassesSchema">
+    <idColumn name="UserClassID"/>
+  </schema>
+  <schema id="IntegratedUserClassesAndUserOrdersJoinSchema">
+    <idColumn name="JoinSVMandOrdersID"/>
+  </schema>
+  <schema id="LabeledScatterPlotSchema">
+    <idColumn name="ScatterPlotID"/>
+  </schema>
+  <outputFile storagePath="C:/Statistics" name="UserOrdersClassification" export="//@tasks.6"/>
+  <outputFile export="//@tasks.5"/>
+</pm:Pipeline>

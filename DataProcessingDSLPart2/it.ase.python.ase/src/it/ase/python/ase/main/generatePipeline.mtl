@@ -1,0 +1,20 @@
+[comment encoding = UTF-8 /]
+[module generatePipeline('http://www.ase.it/pm/python')]
+[import it::ase::python::ase::main::task/]
+
+
+[template public generatePipeline(pip : Pipeline)]
+[comment @main/]
+[file (pip.pipelineName.concat('.py'), false, 'UTF-8')]
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import time
+import requests
+import sklearn as sk
+import urllib
+
+[for(task:Task|pip.tasks->sortedBy(runtimeInfo.executionId)) separator('\n')]
+[printTask(task)/][/for]
+[/file]
+[/template]

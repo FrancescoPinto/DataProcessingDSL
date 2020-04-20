@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="" modelDirectory="/ASEProject-Metamodel/src" modelPluginID="ASEProject-Metamodel"
+    modelName="Pipelineproject" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>default.emf</foreignModel>
+  <genPackages prefix="Pipelineproject" disposableProviderFactory="true" ecorePackage="default.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="default.ecore#//Format">
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/json"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/csv"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/xml"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/xlsx"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/pdf"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/png"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/jpg"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Format/html"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="default.ecore#//Type">
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Type/String"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Type/Boolean"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Type/Int"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Type/Float"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//Type/Bitmap"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="default.ecore#//NulValuesPolicy">
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//NulValuesPolicy/regressionImputation"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//NulValuesPolicy/dropRecord"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//NulValuesPolicy/meanImputation"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//NulValuesPolicy/medianImputation"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="default.ecore#//KernelFunction">
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//KernelFunction/Gaussian"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//KernelFunction/Polynomial"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//KernelFunction/Tanh"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="default.ecore#//InterClusterSimilarity">
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//InterClusterSimilarity/SL"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//InterClusterSimilarity/CL"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//InterClusterSimilarity/GA"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="default.ecore#//SourceType">
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//SourceType/IoT"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//SourceType/SocialMedia"/>
+      <genEnumLiterals ecoreEnumLiteral="default.ecore#//SourceType/Web"/>
+    </genEnums>
+    <genClasses ecoreClass="default.ecore#//Pipeline">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Pipeline/tasks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Pipeline/dataFlows"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Pipeline/schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Pipeline/outputFile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Pipeline/pipelineName"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="default.ecore#//Task">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//Task/input"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//Task/output"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Task/runtimeInfo"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//Task/inputSchema"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//Task/outputSchema"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Task/id"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//DataFlow">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//DataFlow/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//DataFlow/to"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//DataFlow/typeOfData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//DataFlow/format"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//DataFlow/id"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//DataCollection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//DataCollection/sourceDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//DataIntegration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//DataIntegration/joinAttributesList"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="default.ecore#//DataAnalysis"/>
+    <genClasses image="false" ecoreClass="default.ecore#//DataCleaning"/>
+    <genClasses image="false" ecoreClass="default.ecore#//DataVisualization"/>
+    <genClasses ecoreClass="default.ecore#//Export">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//Export/writes"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//InputSourceDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//InputSourceDeclaration/sourceURI"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//InputSourceDeclaration/queryEndpoint"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//InputSourceDeclaration/exchangeFormat"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//InputSourceDeclaration/sourceSchema"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//InputSourceDeclaration/sourceType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//InputSourceDeclaration/queryConditions"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//OutputFile">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//OutputFile/fileFormat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//OutputFile/storagePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//OutputFile/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//OutputFile/export"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="default.ecore#//Classification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Classification/classLabels"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="default.ecore#//Prediction"/>
+    <genClasses image="false" ecoreClass="default.ecore#//Clustering"/>
+    <genClasses image="false" ecoreClass="default.ecore#//Description"/>
+    <genClasses image="false" ecoreClass="default.ecore#//Column">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Column/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Column/type"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//NullValuesRemoval">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//NullValuesRemoval/policy"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//CustomCleaning">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//CustomCleaning/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//CustomCleaning/customParams"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Schema">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Schema/id"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Schema/attributes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//Schema/idColumn"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//JoinAttributesList">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//JoinAttributesList/joinAttributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//JoinAttributesList/id"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//RuntimeInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//RuntimeInfo/startTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//RuntimeInfo/endTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//RuntimeInfo/executionId"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//ChangeDataFormat">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//ChangeDataFormat/inputFormat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//ChangeDataFormat/outputFormat"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//KNN">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//KNN/K"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//SVM">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//SVM/kernelFunction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//SVM/estimatedCoefficients"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//KMeans">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//KMeans/K"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="default.ecore#//Hierarchical"/>
+    <genClasses ecoreClass="default.ecore#//Agglomerative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Agglomerative/interClusterSimilarity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Agglomerative/CutHeight"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//DBSCAN">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//DBSCAN/radius"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//DBSCAN/threshold"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//JarvisPatrick">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//JarvisPatrick/K"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//JarvisPatrick/threshold"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//LinearRegression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//LinearRegression/estimatedCoefficients"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Ridge">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Ridge/penaltyFactor"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Lasso">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//Lasso/penaltyFactor"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Mean"/>
+    <genClasses ecoreClass="default.ecore#//Median"/>
+    <genClasses ecoreClass="default.ecore#//Variance"/>
+    <genClasses image="false" ecoreClass="default.ecore#//LogicProposition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//LogicProposition/id"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//NotClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//NotClause/subClause"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="default.ecore#//MultiOperandClause">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//MultiOperandClause/operands"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//AndClause"/>
+    <genClasses ecoreClass="default.ecore#//OrClause"/>
+    <genClasses image="false" ecoreClass="default.ecore#//ValueClause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//ValueClause/comparisonValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference default.ecore#//ValueClause/conditionField"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//ValueClause/type"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//LtClause"/>
+    <genClasses ecoreClass="default.ecore#//GtClause"/>
+    <genClasses ecoreClass="default.ecore#//EqClause"/>
+    <genClasses ecoreClass="default.ecore#//LeClause"/>
+    <genClasses ecoreClass="default.ecore#//GeClause"/>
+    <genClasses ecoreClass="default.ecore#//ContainsClause"/>
+    <genClasses ecoreClass="default.ecore#//QueryParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//QueryParam/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//QueryParam/type"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//CustomParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//CustomParam/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//CustomParam/type"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//PrimaryKey">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//PrimaryKey/copies"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Attribute"/>
+    <genClasses ecoreClass="default.ecore#//LogisticRegression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute default.ecore#//LogisticRegression/estimatedCoefficients"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Skewness"/>
+    <genClasses ecoreClass="default.ecore#//ScatterPlot">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//ScatterPlot/independentVariables"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//ScatterPlot/responseVariables"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//LabeledScatterPlot">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//LabeledScatterPlot/labelAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="default.ecore#//Histogram"/>
+    <genClasses ecoreClass="default.ecore#//PiePlot"/>
+    <genClasses ecoreClass="default.ecore#//ProjectOnAttributes">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference default.ecore#//ProjectOnAttributes/projectionAttributes"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

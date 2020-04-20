@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gmfgraph:Canvas xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="pipelineproject">
+  <figures name="Default">
+    <figures xsi:type="gmfgraph:PolygonDecoration" name="FilledClosedArrow">
+      <template/>
+      <template x="-2" y="2"/>
+      <template x="-2" y="-2"/>
+      <template/>
+    </figures>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="PrimaryKeyCopiesFigureTargetDecoration"/>
+    <descriptors name="DataCollectionFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="DataCollectionFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="DataCollectionLabelFigure" text="DataCollection">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="DataCollectionRuntimeInfoCompartmentFigure" outline="false"/>
+        <children xsi:type="gmfgraph:Rectangle" name="DataCollectionSourceDeclarationCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureDataCollectionLabelFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+      <accessors accessor="getDataCollectionRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
+      <accessors accessor="getDataCollectionSourceDeclarationCompartmentFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
+    </descriptors>
+    <descriptors name="DataIntegrationFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="DataIntegrationFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="DataIntegrationLabelFigure" text="DataIntegration">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="DataIntegrationRuntimeInfoCompartmentFigure" outline="false"/>
+        <children xsi:type="gmfgraph:Rectangle" name="DataIntegrationJoinAttributesListCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureDataIntegrationLabelFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+      <accessors accessor="getDataIntegrationRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
+      <accessors accessor="getDataIntegrationJoinAttributesListCompartmentFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
+    </descriptors>
+    <descriptors name="ExportFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ExportFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ExportLabelFigure" text="Export">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ExportRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureExportLabelFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+      <accessors accessor="getExportRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="InputSourceDeclarationFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="InputSourceDeclarationFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="InputSourceDeclarationLabelFigure" text="InputSourceDeclaration">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="InputSourceDeclarationQueryConditionsCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureInputSourceDeclarationLabelFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+      <accessors accessor="getInputSourceDeclarationQueryConditionsCompartmentFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="OutputFileFigure">
+      <actualFigure xsi:type="gmfgraph:Rectangle" name="OutputFileFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="OutputFileLabelFigure" text="OutputFile"/>
+      </actualFigure>
+      <accessors accessor="getFigureOutputFileLabelFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="NullValuesRemovalFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="NullValuesRemovalFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="NullValuesRemovalLabelFigure" text="NullValuesRemoval">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="NullValuesRemovalRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureNullValuesRemovalLabelFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+      <accessors accessor="getNullValuesRemovalRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="CustomCleaningFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="CustomCleaningFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="CustomCleaningLabelFigure" text="CustomCleaning">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="CustomCleaningRuntimeInfoCompartmentFigure" outline="false"/>
+        <children xsi:type="gmfgraph:Rectangle" name="CustomCleaningCustomParamsCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureCustomCleaningLabelFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+      <accessors accessor="getCustomCleaningRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
+      <accessors accessor="getCustomCleaningCustomParamsCompartmentFigure" figure="//@figures.0/@descriptors.6/@actualFigure/@children.2"/>
+    </descriptors>
+    <descriptors name="SchemaFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="SchemaFigure" lineKind="LINE_DASH">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="150" green="150" blue="255"/>
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="SchemaLabelFigure" text="Schema">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="SchemaAttributesCompartmentFigure" outline="false"/>
+        <children xsi:type="gmfgraph:Rectangle" name="SchemaIdColumnCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureSchemaLabelFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+      <accessors accessor="getSchemaAttributesCompartmentFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
+      <accessors accessor="getSchemaIdColumnCompartmentFigure" figure="//@figures.0/@descriptors.7/@actualFigure/@children.2"/>
+    </descriptors>
+    <descriptors name="JoinAttributesListFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="JoinAttributesListFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="JoinAttributesListLabelFigure" text="JoinAttributesList"/>
+      </actualFigure>
+      <accessors accessor="getFigureJoinAttributesListLabelFigure" figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="RuntimeInfoFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="RuntimeInfoFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="RuntimeInfoLabelFigure" text="RuntimeInfo"/>
+      </actualFigure>
+      <accessors accessor="getFigureRuntimeInfoLabelFigure" figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ChangeDataFormatFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ChangeDataFormatFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ChangeDataFormatLabelFigure" text="ChangeDataFormat">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ChangeDataFormatRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureChangeDataFormatLabelFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
+      <accessors accessor="getChangeDataFormatRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="KNNFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="KNNFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="KNNLabelFigure" text="KNN">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="KNNRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureKNNLabelFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+      <accessors accessor="getKNNRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.11/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="SVMFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="SVMFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="SVMLabelFigure" text="SVM">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="SVMRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureSVMLabelFigure" figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
+      <accessors accessor="getSVMRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.12/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="KMeansFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="KMeansFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="KMeansLabelFigure" text="KMeans">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="KMeansRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureKMeansLabelFigure" figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
+      <accessors accessor="getKMeansRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="AgglomerativeFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="AgglomerativeFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="AgglomerativeLabelFigure" text="Agglomerative">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="AgglomerativeRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureAgglomerativeLabelFigure" figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+      <accessors accessor="getAgglomerativeRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="DBSCANFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="DBSCANFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="DBSCANLabelFigure" text="DBSCAN">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="DBSCANRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureDBSCANLabelFigure" figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
+      <accessors accessor="getDBSCANRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="JarvisPatrickFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="JarvisPatrickFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="JarvisPatrickLabelFigure" text="JarvisPatrick">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="JarvisPatrickRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureJarvisPatrickLabelFigure" figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
+      <accessors accessor="getJarvisPatrickRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="LinearRegressionFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LinearRegressionFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LinearRegressionLabelFigure" text="LinearRegression">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="LinearRegressionRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureLinearRegressionLabelFigure" figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
+      <accessors accessor="getLinearRegressionRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.17/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="RidgeFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="RidgeFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="RidgeLabelFigure" text="Ridge">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="RidgeRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureRidgeLabelFigure" figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+      <accessors accessor="getRidgeRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.18/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="LassoFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LassoFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LassoLabelFigure" text="Lasso">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="LassoRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureLassoLabelFigure" figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+      <accessors accessor="getLassoRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="MeanFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="MeanFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="MeanLabelFigure" text="Mean">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="MeanRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureMeanLabelFigure" figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
+      <accessors accessor="getMeanRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.20/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="MedianFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="MedianFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="MedianLabelFigure" text="Median">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="MedianRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureMedianLabelFigure" figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
+      <accessors accessor="getMedianRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="VarianceFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="VarianceFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="VarianceLabelFigure" text="Variance">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="VarianceRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureVarianceLabelFigure" figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
+      <accessors accessor="getVarianceRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.22/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="NotClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="NotClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="NotClauseLabelFigure" text="NotClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="NotClauseSubClauseCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureNotClauseLabelFigure" figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
+      <accessors accessor="getNotClauseSubClauseCompartmentFigure" figure="//@figures.0/@descriptors.23/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="AndClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="AndClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="AndClauseLabelFigure" text="AndClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="AndClauseOperandsCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureAndClauseLabelFigure" figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
+      <accessors accessor="getAndClauseOperandsCompartmentFigure" figure="//@figures.0/@descriptors.24/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="OrClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="OrClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="OrClauseLabelFigure" text="OrClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="OrClauseOperandsCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureOrClauseLabelFigure" figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
+      <accessors accessor="getOrClauseOperandsCompartmentFigure" figure="//@figures.0/@descriptors.25/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="LtClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LtClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LtClauseLabelFigure" text="LtClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="LtClauseConditionFieldCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureLtClauseLabelFigure" figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+      <accessors accessor="getLtClauseConditionFieldCompartmentFigure" figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="GtClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="GtClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="GtClauseLabelFigure" text="GtClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="GtClauseConditionFieldCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureGtClauseLabelFigure" figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
+      <accessors accessor="getGtClauseConditionFieldCompartmentFigure" figure="//@figures.0/@descriptors.27/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="EqClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="EqClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="EqClauseLabelFigure" text="EqClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="EqClauseConditionFieldCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureEqClauseLabelFigure" figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
+      <accessors accessor="getEqClauseConditionFieldCompartmentFigure" figure="//@figures.0/@descriptors.28/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="LeClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LeClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LeClauseLabelFigure" text="LeClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="LeClauseConditionFieldCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureLeClauseLabelFigure" figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+      <accessors accessor="getLeClauseConditionFieldCompartmentFigure" figure="//@figures.0/@descriptors.29/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="GeClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="GeClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="GeClauseLabelFigure" text="GeClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="GeClauseConditionFieldCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureGeClauseLabelFigure" figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
+      <accessors accessor="getGeClauseConditionFieldCompartmentFigure" figure="//@figures.0/@descriptors.30/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="ContainsClauseFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ContainsClauseFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ContainsClauseLabelFigure" text="ContainsClause">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ContainsClauseConditionFieldCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureContainsClauseLabelFigure" figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
+      <accessors accessor="getContainsClauseConditionFieldCompartmentFigure" figure="//@figures.0/@descriptors.31/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="QueryParamFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="QueryParamFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="QueryParamLabelFigure" text="QueryParam"/>
+      </actualFigure>
+      <accessors accessor="getFigureQueryParamLabelFigure" figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="CustomParamFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="CustomParamFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="CustomParamLabelFigure" text="CustomParam"/>
+      </actualFigure>
+      <accessors accessor="getFigureCustomParamLabelFigure" figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="PrimaryKeyFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="PrimaryKeyFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="PrimaryKeyLabelFigure" text="PrimaryKey"/>
+      </actualFigure>
+      <accessors accessor="getFigurePrimaryKeyLabelFigure" figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="AttributeFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="AttributeFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="AttributeLabelFigure" text="Attribute"/>
+      </actualFigure>
+      <accessors accessor="getFigureAttributeLabelFigure" figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="LogisticRegressionFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LogisticRegressionFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LogisticRegressionLabelFigure" text="LogisticRegression">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="LogisticRegressionRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureLogisticRegressionLabelFigure" figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
+      <accessors accessor="getLogisticRegressionRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.36/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="SkewnessFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="SkewnessFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="SkewnessLabelFigure" text="Skewness">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="SkewnessRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureSkewnessLabelFigure" figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
+      <accessors accessor="getSkewnessRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.37/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="ScatterPlotFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ScatterPlotFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ScatterPlotLabelFigure" text="ScatterPlot">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ScatterPlotRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureScatterPlotLabelFigure" figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
+      <accessors accessor="getScatterPlotRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="LabeledScatterPlotFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="LabeledScatterPlotFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="LabeledScatterPlotLabelFigure" text="LabeledScatterPlot">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="LabeledScatterPlotRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureLabeledScatterPlotLabelFigure" figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
+      <accessors accessor="getLabeledScatterPlotRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="HistogramFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="HistogramFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="HistogramLabelFigure" text="Histogram">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="HistogramRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureHistogramLabelFigure" figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
+      <accessors accessor="getHistogramRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.40/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="PiePlotFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="PiePlotFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="PiePlotLabelFigure" text="PiePlot">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="PiePlotRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigurePiePlotLabelFigure" figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
+      <accessors accessor="getPiePlotRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="ProjectOnAttributesFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ProjectOnAttributesFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ProjectOnAttributesLabelFigure" text="ProjectOnAttributes">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ProjectOnAttributesRuntimeInfoCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureProjectOnAttributesLabelFigure" figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
+      <accessors accessor="getProjectOnAttributesRuntimeInfoCompartmentFigure" figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="DataFlowFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="DataFlowFigure" lineWidth="4" targetDecoration="//@figures.0/@figures.0"/>
+    </descriptors>
+    <descriptors name="DataFlowLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="DataFlowLabelLabel" text="DataFlow"/>
+    </descriptors>
+    <descriptors name="TaskInputSchemaFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TaskInputSchemaFigure" lineKind="LINE_DASH">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" green="255"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="TaskInputSchemaExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TaskInputSchemaExternalLabel"/>
+    </descriptors>
+    <descriptors name="TaskOutputSchemaFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TaskOutputSchemaFigure" lineKind="LINE_DASH">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="255"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="TaskOutputSchemaExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TaskOutputSchemaExternalLabel"/>
+    </descriptors>
+    <descriptors name="ExportWritesFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="ExportWritesFigure" lineKind="LINE_DOT"/>
+    </descriptors>
+    <descriptors name="ExportWritesExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="ExportWritesExternalLabel" text="writes"/>
+    </descriptors>
+    <descriptors name="InputSourceDeclarationSourceSchemaFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="InputSourceDeclarationSourceSchemaFigure" lineKind="LINE_DOT"/>
+    </descriptors>
+    <descriptors name="InputSourceDeclarationSourceSchemaExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="InputSourceDeclarationSourceSchemaExternalLabel"/>
+    </descriptors>
+    <descriptors name="PrimaryKeyCopiesFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="PrimaryKeyCopiesFigure" lineKind="LINE_DOT" targetDecoration="//@figures.0/@figures.1">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" blue="255"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="PrimaryKeyCopiesExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="PrimaryKeyCopiesExternalLabel"/>
+    </descriptors>
+  </figures>
+  <nodes name="DataCollection" figure="DataCollectionFigure"/>
+  <nodes name="DataIntegration" figure="DataIntegrationFigure"/>
+  <nodes name="Export" figure="ExportFigure"/>
+  <nodes name="InputSourceDeclaration" figure="InputSourceDeclarationFigure"/>
+  <nodes name="OutputFile" figure="OutputFileFigure"/>
+  <nodes name="NullValuesRemoval" figure="NullValuesRemovalFigure"/>
+  <nodes name="CustomCleaning" figure="CustomCleaningFigure"/>
+  <nodes name="Schema" figure="SchemaFigure"/>
+  <nodes name="JoinAttributesList" figure="JoinAttributesListFigure"/>
+  <nodes name="RuntimeInfo" figure="RuntimeInfoFigure"/>
+  <nodes name="ChangeDataFormat" figure="ChangeDataFormatFigure"/>
+  <nodes name="KNN" figure="KNNFigure"/>
+  <nodes name="SVM" figure="SVMFigure"/>
+  <nodes name="KMeans" figure="KMeansFigure"/>
+  <nodes name="Agglomerative" figure="AgglomerativeFigure"/>
+  <nodes name="DBSCAN" figure="DBSCANFigure"/>
+  <nodes name="JarvisPatrick" figure="JarvisPatrickFigure"/>
+  <nodes name="LinearRegression" figure="LinearRegressionFigure"/>
+  <nodes name="Ridge" figure="RidgeFigure"/>
+  <nodes name="Lasso" figure="LassoFigure"/>
+  <nodes name="Mean" figure="MeanFigure"/>
+  <nodes name="Median" figure="MedianFigure"/>
+  <nodes name="Variance" figure="VarianceFigure"/>
+  <nodes name="NotClause" figure="NotClauseFigure"/>
+  <nodes name="AndClause" figure="AndClauseFigure"/>
+  <nodes name="OrClause" figure="OrClauseFigure"/>
+  <nodes name="LtClause" figure="LtClauseFigure"/>
+  <nodes name="GtClause" figure="GtClauseFigure"/>
+  <nodes name="EqClause" figure="EqClauseFigure"/>
+  <nodes name="LeClause" figure="LeClauseFigure"/>
+  <nodes name="GeClause" figure="GeClauseFigure"/>
+  <nodes name="ContainsClause" figure="ContainsClauseFigure"/>
+  <nodes name="QueryParam" figure="QueryParamFigure"/>
+  <nodes name="CustomParam" figure="CustomParamFigure"/>
+  <nodes name="PrimaryKey" figure="PrimaryKeyFigure"/>
+  <nodes name="Attribute" figure="AttributeFigure"/>
+  <nodes name="LogisticRegression" figure="LogisticRegressionFigure"/>
+  <nodes name="Skewness" figure="SkewnessFigure"/>
+  <nodes name="ScatterPlot" figure="ScatterPlotFigure"/>
+  <nodes name="LabeledScatterPlot" figure="LabeledScatterPlotFigure"/>
+  <nodes name="Histogram" figure="HistogramFigure"/>
+  <nodes name="PiePlot" figure="PiePlotFigure"/>
+  <nodes name="ProjectOnAttributes" figure="ProjectOnAttributesFigure"/>
+  <connections name="DataFlow" figure="DataFlowFigure"/>
+  <connections name="TaskInputSchema" figure="TaskInputSchemaFigure"/>
+  <connections name="TaskOutputSchema" figure="TaskOutputSchemaFigure"/>
+  <connections name="ExportWrites" figure="ExportWritesFigure"/>
+  <connections name="InputSourceDeclarationSourceSchema" figure="InputSourceDeclarationSourceSchemaFigure"/>
+  <connections name="PrimaryKeyCopies" figure="PrimaryKeyCopiesFigure"/>
+  <compartments name="DataCollectionRuntimeInfoCompartment" figure="DataCollectionFigure" collapsible="true" accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+  <compartments name="DataCollectionSourceDeclarationCompartment" figure="DataCollectionFigure" collapsible="true" accessor="//@figures.0/@descriptors.0/@accessors.2"/>
+  <compartments name="DataIntegrationRuntimeInfoCompartment" figure="DataIntegrationFigure" collapsible="true" accessor="//@figures.0/@descriptors.1/@accessors.1"/>
+  <compartments name="DataIntegrationJoinAttributesListCompartment" figure="DataIntegrationFigure" collapsible="true" accessor="//@figures.0/@descriptors.1/@accessors.2"/>
+  <compartments name="ExportRuntimeInfoCompartment" figure="ExportFigure" collapsible="true" accessor="//@figures.0/@descriptors.2/@accessors.1"/>
+  <compartments name="InputSourceDeclarationQueryConditionsCompartment" figure="InputSourceDeclarationFigure" collapsible="true" accessor="//@figures.0/@descriptors.3/@accessors.1"/>
+  <compartments name="NullValuesRemovalRuntimeInfoCompartment" figure="NullValuesRemovalFigure" collapsible="true" accessor="//@figures.0/@descriptors.5/@accessors.1"/>
+  <compartments name="CustomCleaningRuntimeInfoCompartment" figure="CustomCleaningFigure" collapsible="true" accessor="//@figures.0/@descriptors.6/@accessors.1"/>
+  <compartments name="CustomCleaningCustomParamsCompartment" figure="CustomCleaningFigure" collapsible="true" accessor="//@figures.0/@descriptors.6/@accessors.2"/>
+  <compartments name="SchemaAttributesCompartment" figure="SchemaFigure" collapsible="true" accessor="//@figures.0/@descriptors.7/@accessors.1"/>
+  <compartments name="SchemaIdColumnCompartment" figure="SchemaFigure" collapsible="true" accessor="//@figures.0/@descriptors.7/@accessors.2"/>
+  <compartments name="ChangeDataFormatRuntimeInfoCompartment" figure="ChangeDataFormatFigure" collapsible="true" accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+  <compartments name="KNNRuntimeInfoCompartment" figure="KNNFigure" collapsible="true" accessor="//@figures.0/@descriptors.11/@accessors.1"/>
+  <compartments name="SVMRuntimeInfoCompartment" figure="SVMFigure" collapsible="true" accessor="//@figures.0/@descriptors.12/@accessors.1"/>
+  <compartments name="KMeansRuntimeInfoCompartment" figure="KMeansFigure" collapsible="true" accessor="//@figures.0/@descriptors.13/@accessors.1"/>
+  <compartments name="AgglomerativeRuntimeInfoCompartment" figure="AgglomerativeFigure" collapsible="true" accessor="//@figures.0/@descriptors.14/@accessors.1"/>
+  <compartments name="DBSCANRuntimeInfoCompartment" figure="DBSCANFigure" collapsible="true" accessor="//@figures.0/@descriptors.15/@accessors.1"/>
+  <compartments name="JarvisPatrickRuntimeInfoCompartment" figure="JarvisPatrickFigure" collapsible="true" accessor="//@figures.0/@descriptors.16/@accessors.1"/>
+  <compartments name="LinearRegressionRuntimeInfoCompartment" figure="LinearRegressionFigure" collapsible="true" accessor="//@figures.0/@descriptors.17/@accessors.1"/>
+  <compartments name="RidgeRuntimeInfoCompartment" figure="RidgeFigure" collapsible="true" accessor="//@figures.0/@descriptors.18/@accessors.1"/>
+  <compartments name="LassoRuntimeInfoCompartment" figure="LassoFigure" collapsible="true" accessor="//@figures.0/@descriptors.19/@accessors.1"/>
+  <compartments name="MeanRuntimeInfoCompartment" figure="MeanFigure" collapsible="true" accessor="//@figures.0/@descriptors.20/@accessors.1"/>
+  <compartments name="MedianRuntimeInfoCompartment" figure="MedianFigure" collapsible="true" accessor="//@figures.0/@descriptors.21/@accessors.1"/>
+  <compartments name="VarianceRuntimeInfoCompartment" figure="VarianceFigure" collapsible="true" accessor="//@figures.0/@descriptors.22/@accessors.1"/>
+  <compartments name="NotClauseSubClauseCompartment" figure="NotClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.23/@accessors.1"/>
+  <compartments name="AndClauseOperandsCompartment" figure="AndClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.24/@accessors.1"/>
+  <compartments name="OrClauseOperandsCompartment" figure="OrClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.25/@accessors.1"/>
+  <compartments name="LtClauseConditionFieldCompartment" figure="LtClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+  <compartments name="GtClauseConditionFieldCompartment" figure="GtClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.27/@accessors.1"/>
+  <compartments name="EqClauseConditionFieldCompartment" figure="EqClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.28/@accessors.1"/>
+  <compartments name="LeClauseConditionFieldCompartment" figure="LeClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.29/@accessors.1"/>
+  <compartments name="GeClauseConditionFieldCompartment" figure="GeClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.30/@accessors.1"/>
+  <compartments name="ContainsClauseConditionFieldCompartment" figure="ContainsClauseFigure" collapsible="true" accessor="//@figures.0/@descriptors.31/@accessors.1"/>
+  <compartments name="LogisticRegressionRuntimeInfoCompartment" figure="LogisticRegressionFigure" collapsible="true" accessor="//@figures.0/@descriptors.36/@accessors.1"/>
+  <compartments name="SkewnessRuntimeInfoCompartment" figure="SkewnessFigure" collapsible="true" accessor="//@figures.0/@descriptors.37/@accessors.1"/>
+  <compartments name="ScatterPlotRuntimeInfoCompartment" figure="ScatterPlotFigure" collapsible="true" accessor="//@figures.0/@descriptors.38/@accessors.1"/>
+  <compartments name="LabeledScatterPlotRuntimeInfoCompartment" figure="LabeledScatterPlotFigure" collapsible="true" accessor="//@figures.0/@descriptors.39/@accessors.1"/>
+  <compartments name="HistogramRuntimeInfoCompartment" figure="HistogramFigure" collapsible="true" accessor="//@figures.0/@descriptors.40/@accessors.1"/>
+  <compartments name="PiePlotRuntimeInfoCompartment" figure="PiePlotFigure" collapsible="true" accessor="//@figures.0/@descriptors.41/@accessors.1"/>
+  <compartments name="ProjectOnAttributesRuntimeInfoCompartment" figure="ProjectOnAttributesFigure" collapsible="true" accessor="//@figures.0/@descriptors.42/@accessors.1"/>
+  <labels name="DataCollectionLabel" figure="DataCollectionFigure" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels name="DataIntegrationLabel" figure="DataIntegrationFigure" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+  <labels name="ExportLabel" figure="ExportFigure" accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels name="InputSourceDeclarationLabel" figure="InputSourceDeclarationFigure" accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels name="OutputFileLabel" figure="OutputFileFigure" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels name="NullValuesRemovalLabel" figure="NullValuesRemovalFigure" accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+  <labels name="CustomCleaningLabel" figure="CustomCleaningFigure" accessor="//@figures.0/@descriptors.6/@accessors.0"/>
+  <labels name="SchemaLabel" figure="SchemaFigure" accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+  <labels name="JoinAttributesListLabel" figure="JoinAttributesListFigure" accessor="//@figures.0/@descriptors.8/@accessors.0"/>
+  <labels name="RuntimeInfoLabel" figure="RuntimeInfoFigure" accessor="//@figures.0/@descriptors.9/@accessors.0"/>
+  <labels name="ChangeDataFormatLabel" figure="ChangeDataFormatFigure" accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+  <labels name="KNNLabel" figure="KNNFigure" accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+  <labels name="SVMLabel" figure="SVMFigure" accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+  <labels name="KMeansLabel" figure="KMeansFigure" accessor="//@figures.0/@descriptors.13/@accessors.0"/>
+  <labels name="AgglomerativeLabel" figure="AgglomerativeFigure" accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+  <labels name="DBSCANLabel" figure="DBSCANFigure" accessor="//@figures.0/@descriptors.15/@accessors.0"/>
+  <labels name="JarvisPatrickLabel" figure="JarvisPatrickFigure" accessor="//@figures.0/@descriptors.16/@accessors.0"/>
+  <labels name="LinearRegressionLabel" figure="LinearRegressionFigure" accessor="//@figures.0/@descriptors.17/@accessors.0"/>
+  <labels name="RidgeLabel" figure="RidgeFigure" accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+  <labels name="LassoLabel" figure="LassoFigure" accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+  <labels name="MeanLabel" figure="MeanFigure" accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+  <labels name="MedianLabel" figure="MedianFigure" accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+  <labels name="VarianceLabel" figure="VarianceFigure" accessor="//@figures.0/@descriptors.22/@accessors.0"/>
+  <labels name="NotClauseLabel" figure="NotClauseFigure" accessor="//@figures.0/@descriptors.23/@accessors.0"/>
+  <labels name="AndClauseLabel" figure="AndClauseFigure" accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+  <labels name="OrClauseLabel" figure="OrClauseFigure" accessor="//@figures.0/@descriptors.25/@accessors.0"/>
+  <labels name="LtClauseLabel" figure="LtClauseFigure" accessor="//@figures.0/@descriptors.26/@accessors.0"/>
+  <labels name="GtClauseLabel" figure="GtClauseFigure" accessor="//@figures.0/@descriptors.27/@accessors.0"/>
+  <labels name="EqClauseLabel" figure="EqClauseFigure" accessor="//@figures.0/@descriptors.28/@accessors.0"/>
+  <labels name="LeClauseLabel" figure="LeClauseFigure" accessor="//@figures.0/@descriptors.29/@accessors.0"/>
+  <labels name="GeClauseLabel" figure="GeClauseFigure" accessor="//@figures.0/@descriptors.30/@accessors.0"/>
+  <labels name="ContainsClauseLabel" figure="ContainsClauseFigure" accessor="//@figures.0/@descriptors.31/@accessors.0"/>
+  <labels name="QueryParamLabel" figure="QueryParamFigure" accessor="//@figures.0/@descriptors.32/@accessors.0"/>
+  <labels name="CustomParamLabel" figure="CustomParamFigure" accessor="//@figures.0/@descriptors.33/@accessors.0"/>
+  <labels name="PrimaryKeyLabel" figure="PrimaryKeyFigure" accessor="//@figures.0/@descriptors.34/@accessors.0"/>
+  <labels name="AttributeLabel" figure="AttributeFigure" accessor="//@figures.0/@descriptors.35/@accessors.0"/>
+  <labels name="LogisticRegressionLabel" figure="LogisticRegressionFigure" accessor="//@figures.0/@descriptors.36/@accessors.0"/>
+  <labels name="SkewnessLabel" figure="SkewnessFigure" accessor="//@figures.0/@descriptors.37/@accessors.0"/>
+  <labels name="ScatterPlotLabel" figure="ScatterPlotFigure" accessor="//@figures.0/@descriptors.38/@accessors.0"/>
+  <labels name="LabeledScatterPlotLabel" figure="LabeledScatterPlotFigure" accessor="//@figures.0/@descriptors.39/@accessors.0"/>
+  <labels name="HistogramLabel" figure="HistogramFigure" accessor="//@figures.0/@descriptors.40/@accessors.0"/>
+  <labels name="PiePlotLabel" figure="PiePlotFigure" accessor="//@figures.0/@descriptors.41/@accessors.0"/>
+  <labels name="ProjectOnAttributesLabel" figure="ProjectOnAttributesFigure" accessor="//@figures.0/@descriptors.42/@accessors.0"/>
+  <labels name="DataFlowLabel" figure="DataFlowLabelFigure" elementIcon="false"/>
+  <labels name="TaskInputSchemaExternalLabel" figure="TaskInputSchemaExternalLabelFigure" elementIcon="false"/>
+  <labels name="TaskOutputSchemaExternalLabel" figure="TaskOutputSchemaExternalLabelFigure" elementIcon="false"/>
+  <labels name="ExportWritesExternalLabel" figure="ExportWritesExternalLabelFigure" elementIcon="false"/>
+  <labels name="InputSourceDeclarationSourceSchemaExternalLabel" figure="InputSourceDeclarationSourceSchemaExternalLabelFigure" elementIcon="false"/>
+  <labels name="PrimaryKeyCopiesExternalLabel" figure="PrimaryKeyCopiesExternalLabelFigure" elementIcon="false"/>
+</gmfgraph:Canvas>

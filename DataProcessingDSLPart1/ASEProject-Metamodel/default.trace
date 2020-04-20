@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace:TraceModel
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:trace="http://www.eclipse.org/gmf/2006/Trace">
+  <nodeTraces
+      visualID="2035"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Agglomerative') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5125"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7077"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2036"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Ridge') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5126"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7078"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2037"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Lasso') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5127"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7079"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2038"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'KNN') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5128"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7080"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2039"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'SVM') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5129"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7081"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2041"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'KMeans') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5131"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7083"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2042"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'DBSCAN') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5132"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7084"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2043"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'JarvisPatrick') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5133"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7085"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2044"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LinearRegression') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5134"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7086"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2045"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Mean') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5135"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7087"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2046"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Median') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5136"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7088"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2047"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Variance') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5137"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7089"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2050"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NullValuesRemoval') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5140"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7092"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2051"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'CustomCleaning') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5142"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7093"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7094"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2052"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ChangeDataFormat') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5143"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7095"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2053"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'DataCollection') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5173"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7096"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7097"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2054"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'DataIntegration') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5175"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7126"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7127"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2056"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Export') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5177"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7129"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2057"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Schema') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'schema')">
+    <nodeLabelTraces
+        visualID="5180"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7130"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7133"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2058"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'OutputFile') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'outputFile')">
+    <nodeLabelTraces
+        visualID="5181"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2059"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LogisticRegression') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5182"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7132"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2060"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Skewness') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5184"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7134"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2062"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LabeledScatterPlot') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5186"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7136"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2063"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ScatterPlot') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5187"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7137"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2064"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Histogram') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5188"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7138"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2065"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'PiePlot') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5189"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7139"
+        queryText="true"/>
+  </nodeTraces>
+  <nodeTraces
+      visualID="2066"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ProjectOnAttributes') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Pipeline') and _containmentMF_.name = 'tasks')">
+    <nodeLabelTraces
+        visualID="5190"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7140"
+        queryText="true"/>
+  </nodeTraces>
+  <childNodeTraces
+      visualID="3036"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'RuntimeInfo') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Task') and _containmentMF_.name = 'runtimeInfo')">
+    <nodeLabelTraces
+        visualID="5124"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3037"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'CustomParam') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'CustomCleaning') and _containmentMF_.name = 'customParams')">
+    <nodeLabelTraces
+        visualID="5141"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3038"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'DataCollection') and _containmentMF_.name = 'sourceDeclaration')">
+    <nodeLabelTraces
+        visualID="5172"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7098"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3039"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'AndClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5163"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7099"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3040"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'AndClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5162"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7100"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3041"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'OrClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5161"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7101"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3042"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LtClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5145"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7102"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3044"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'GtClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5146"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7103"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3045"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'EqClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5147"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7104"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3046"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LeClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5148"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7105"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3047"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'GeClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5149"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7106"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3048"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ContainsClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5150"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7107"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3049"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'MultiOperandClause') and _containmentMF_.name = 'operands')">
+    <nodeLabelTraces
+        visualID="5160"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7108"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3050"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'AndClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5151"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7109"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3051"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'OrClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5152"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7110"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3052"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LtClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5153"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7111"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3053"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'GtClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5154"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7112"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3054"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'EqClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5155"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7113"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3055"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LeClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5156"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7114"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3056"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'GeClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5157"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7115"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3057"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ContainsClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5158"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7116"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3058"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and _containmentMF_.name = 'subClause')">
+    <nodeLabelTraces
+        visualID="5159"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7117"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3059"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'OrClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5164"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7118"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3060"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LtClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5165"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7119"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3061"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'GtClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5166"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7120"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3062"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'EqClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5167"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7121"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3063"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'LeClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5168"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7122"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3064"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'GeClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5169"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7123"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3065"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ContainsClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5170"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7124"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3066"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'NotClause') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _containmentMF_.name = 'queryConditions')">
+    <nodeLabelTraces
+        visualID="5171"
+        queryText="true"/>
+    <compartmentTraces
+        visualID="7125"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3067"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'JoinAttributesList') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'DataIntegration') and _containmentMF_.name = 'joinAttributesList')">
+    <nodeLabelTraces
+        visualID="5174"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3068"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Attribute') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Schema') and _containmentMF_.name = 'attributes')">
+    <nodeLabelTraces
+        visualID="5178"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3069"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'PrimaryKey') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Schema') and _containmentMF_.name = 'idColumn')">
+    <nodeLabelTraces
+        visualID="5183"
+        queryText="true"/>
+  </childNodeTraces>
+  <childNodeTraces
+      visualID="3070"
+      queryText="(let _eClass_:ecore::EClass = modelFacet.metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'QueryParam') and (let _containmentMF_:ecore::EStructuralFeature = modelFacet.containmentMetaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _containmentMF_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'ValueClause') and _containmentMF_.name = 'conditionField')">
+    <nodeLabelTraces
+        visualID="5191"
+        queryText="true"/>
+  </childNodeTraces>
+  <linkTraces
+      visualID="4007"
+      queryText="modelFacet.oclIsKindOf(gmfgen::TypeLinkModelFacet) and (let _eClass_:ecore::EClass = modelFacet.oclAsType(gmfgen::TypeLinkModelFacet).metaClass.ecoreClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'DataFlow')">
+    <linkLabelTraces
+        visualID="6007"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="4010"
+      queryText="modelFacet.oclIsKindOf(gmfgen::FeatureLinkModelFacet) and (let _feature_:ecore::EStructuralFeature = modelFacet.oclAsType(gmfgen::FeatureLinkModelFacet).metaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _feature_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Export') and _feature_.name = 'writes')">
+    <linkLabelTraces
+        visualID="6010"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="4011"
+      queryText="modelFacet.oclIsKindOf(gmfgen::FeatureLinkModelFacet) and (let _feature_:ecore::EStructuralFeature = modelFacet.oclAsType(gmfgen::FeatureLinkModelFacet).metaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _feature_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'InputSourceDeclaration') and _feature_.name = 'sourceSchema')">
+    <linkLabelTraces
+        visualID="6011"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="4015"
+      queryText="modelFacet.oclIsKindOf(gmfgen::FeatureLinkModelFacet) and (let _feature_:ecore::EStructuralFeature = modelFacet.oclAsType(gmfgen::FeatureLinkModelFacet).metaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _feature_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Task') and _feature_.name = 'inputSchema')">
+    <linkLabelTraces
+        visualID="6015"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="4016"
+      queryText="modelFacet.oclIsKindOf(gmfgen::FeatureLinkModelFacet) and (let _feature_:ecore::EStructuralFeature = modelFacet.oclAsType(gmfgen::FeatureLinkModelFacet).metaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _feature_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'Task') and _feature_.name = 'outputSchema')">
+    <linkLabelTraces
+        visualID="6016"
+        queryText="true"/>
+  </linkTraces>
+  <linkTraces
+      visualID="4017"
+      queryText="modelFacet.oclIsKindOf(gmfgen::FeatureLinkModelFacet) and (let _feature_:ecore::EStructuralFeature = modelFacet.oclAsType(gmfgen::FeatureLinkModelFacet).metaFeature.ecoreFeature in (let _eClass_:ecore::EClass = _feature_.eContainingClass in _eClass_.ePackage.nsURI = 'http://www.ase.it/pm' and _eClass_.name = 'PrimaryKey') and _feature_.name = 'copies')">
+    <linkLabelTraces
+        visualID="6017"
+        queryText="true"/>
+  </linkTraces>
+</trace:TraceModel>

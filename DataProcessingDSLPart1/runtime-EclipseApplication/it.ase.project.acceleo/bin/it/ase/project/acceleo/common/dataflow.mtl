@@ -1,0 +1,14 @@
+[comment encoding = UTF-8 /]
+[module dataflow('http://www.ase.it/pm')]
+
+
+
+[template public printDataFlow(dataFlow:DataFlow)]
+<b>DataFlow</b>, id: <u> [dataFlow.id/]</u>
+<ul>
+	<li>Format: [dataFlow.format/]</li>
+	<li>From Task: <u>[dataFlow.from.id/]</u></li>
+	<li>To Task: <u>[dataFlow.to.id/]</u></li>
+	<li>Type of Data: <u>[dataFlow.typeOfData.id/]</u></li>
+</ul>
+[/template]

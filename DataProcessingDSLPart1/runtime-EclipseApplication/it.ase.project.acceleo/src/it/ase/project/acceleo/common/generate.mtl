@@ -1,0 +1,48 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.ase.it/pm')]
+[import it::ase::project::acceleo::common::dataflow/]
+[import it::ase::project::acceleo::common::task/]
+[import it::ase::project::acceleo::common::schema/]
+[import it::ase::project::acceleo::common::outputFile/]
+
+
+[template public printReport(pipeline : Pipeline)]
+[comment @main/]
+[file(pipeline.pipelineName.concat('.html'),false,'UTF-8')]
+<h1>Pipeline: [pipeline.pipelineName/]</h1>
+<h3>Tasks</h3>
+	<ul>
+	[for(task:Task|pipeline.tasks)]
+		<li>[printTask(task)/]</li>
+	[/for]
+	</ul>
+<h3>Dataflows</h3>
+	<ul>
+	[for(df:DataFlow|pipeline.dataFlows)]
+		<li>[printDataFlow(df)/]</li>
+	[/for]
+	</ul>
+<h3>Schemas</h3>
+	<ul>
+	[for(schema:Schema|pipeline.schema)]
+		<li>[printSchema(schema)/]</li>
+	[/for]
+	</ul> 
+<h3>Output Files </h3>
+	<ul>
+	[for(fileVar:OutputFile|pipeline.outputFile)]
+		<li>[printOutputFile(fileVar, false)/]</li>
+	[/for]
+	</ul>
+[/file]
+[/template]
+
+
+
+
+
+
+
+
+
+

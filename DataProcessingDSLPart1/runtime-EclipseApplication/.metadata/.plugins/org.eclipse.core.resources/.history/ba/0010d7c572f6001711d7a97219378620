@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:pm="http://www.ase.it/pm" xmi:id="_gdvsIPZbEeeFFPyvnLYZIg" type="Pipelineproject" name="recoveredExample2.pipelineproject_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_izT1UPZbEeeFFPyvnLYZIg" type="2053" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izUcYPZbEeeFFPyvnLYZIg" type="5173"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izUcYfZbEeeFFPyvnLYZIg" type="7096"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izUcYvZbEeeFFPyvnLYZIg" type="7097">
+      <children xmi:type="notation:Shape" xmi:id="_izjF4PZbEeeFFPyvnLYZIg" type="3038" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_izjF4_ZbEeeFFPyvnLYZIg" type="5172"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_izjF5PZbEeeFFPyvnLYZIg" type="7098">
+          <children xmi:type="notation:Shape" xmi:id="_izk7EPZbEeeFFPyvnLYZIg" type="3039" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_izk7E_ZbEeeFFPyvnLYZIg" type="5163"/>
+            <children xmi:type="notation:BasicCompartment" xmi:id="_izk7FPZbEeeFFPyvnLYZIg" type="7099">
+              <children xmi:type="notation:Shape" xmi:id="_izmwQPZbEeeFFPyvnLYZIg" type="3041" fontName="Segoe UI">
+                <children xmi:type="notation:DecorationNode" xmi:id="_izmwQ_ZbEeeFFPyvnLYZIg" type="5161"/>
+                <children xmi:type="notation:BasicCompartment" xmi:id="_izmwRPZbEeeFFPyvnLYZIg" type="7101"/>
+                <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izmwQfZbEeeFFPyvnLYZIg"/>
+                <element xmi:type="pm:OrClause" href="recoveredExample2.pipelineproject#//@tasks.0/@sourceDeclaration/@queryConditions/@operands.0"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izmwQvZbEeeFFPyvnLYZIg" y="-1"/>
+              </children>
+              <children xmi:type="notation:Shape" xmi:id="_izmwRfZbEeeFFPyvnLYZIg" type="3047" fontName="Segoe UI">
+                <children xmi:type="notation:DecorationNode" xmi:id="_iznXUPZbEeeFFPyvnLYZIg" type="5149"/>
+                <children xmi:type="notation:BasicCompartment" xmi:id="_iznXUfZbEeeFFPyvnLYZIg" type="7106"/>
+                <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izmwRvZbEeeFFPyvnLYZIg"/>
+                <element xmi:type="pm:GeClause" href="recoveredExample2.pipelineproject#//@tasks.0/@sourceDeclaration/@queryConditions/@operands.1"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izmwR_ZbEeeFFPyvnLYZIg" x="210" y="32"/>
+              </children>
+              <children xmi:type="notation:Shape" xmi:id="_iznXUvZbEeeFFPyvnLYZIg" type="3045" fontName="Segoe UI">
+                <children xmi:type="notation:DecorationNode" xmi:id="_iznXVfZbEeeFFPyvnLYZIg" type="5147"/>
+                <children xmi:type="notation:BasicCompartment" xmi:id="_iznXVvZbEeeFFPyvnLYZIg" type="7104"/>
+                <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_iznXU_ZbEeeFFPyvnLYZIg"/>
+                <element xmi:type="pm:EqClause" href="recoveredExample2.pipelineproject#//@tasks.0/@sourceDeclaration/@queryConditions/@operands.2"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iznXVPZbEeeFFPyvnLYZIg" x="360" y="-1"/>
+              </children>
+            </children>
+            <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izk7EfZbEeeFFPyvnLYZIg"/>
+            <element xmi:type="pm:AndClause" href="recoveredExample2.pipelineproject#//@tasks.0/@sourceDeclaration/@queryConditions"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izk7EvZbEeeFFPyvnLYZIg"/>
+          </children>
+        </children>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izjF4fZbEeeFFPyvnLYZIg"/>
+        <element xmi:type="pm:InputSourceDeclaration" href="recoveredExample2.pipelineproject#//@tasks.0/@sourceDeclaration"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izjF4vZbEeeFFPyvnLYZIg"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izT1UfZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:DataCollection" href="recoveredExample2.pipelineproject#//@tasks.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izT1UvZbEeeFFPyvnLYZIg" x="495" y="160"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izUcY_ZbEeeFFPyvnLYZIg" type="2039" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izUcZvZbEeeFFPyvnLYZIg" type="5129"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izUcZ_ZbEeeFFPyvnLYZIg" type="7081"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izUcZPZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:SVM" href="recoveredExample2.pipelineproject#//@tasks.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izUcZfZbEeeFFPyvnLYZIg" x="375" y="835"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izVDcPZbEeeFFPyvnLYZIg" type="2062" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izVDc_ZbEeeFFPyvnLYZIg" type="5186"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izVDdPZbEeeFFPyvnLYZIg" type="7136"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izVDcfZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:LabeledScatterPlot" href="recoveredExample2.pipelineproject#//@tasks.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izVDcvZbEeeFFPyvnLYZIg" x="450" y="1140"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izVDdfZbEeeFFPyvnLYZIg" type="2054" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izVDePZbEeeFFPyvnLYZIg" type="5175"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izVDefZbEeeFFPyvnLYZIg" type="7126"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izVDevZbEeeFFPyvnLYZIg" type="7127"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izVDdvZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:DataIntegration" href="recoveredExample2.pipelineproject#//@tasks.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izVDd_ZbEeeFFPyvnLYZIg" x="470" y="980"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izVqgPZbEeeFFPyvnLYZIg" type="2036" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izVqg_ZbEeeFFPyvnLYZIg" type="5126"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izVqhPZbEeeFFPyvnLYZIg" type="7078"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izVqgfZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Ridge" href="recoveredExample2.pipelineproject#//@tasks.4"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izVqgvZbEeeFFPyvnLYZIg" x="620" y="835"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izVqhfZbEeeFFPyvnLYZIg" type="2056" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izVqiPZbEeeFFPyvnLYZIg" type="5177"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izVqifZbEeeFFPyvnLYZIg" type="7129"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izVqhvZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Export" href="recoveredExample2.pipelineproject#//@tasks.5"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izVqh_ZbEeeFFPyvnLYZIg" x="645" y="980"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izVqivZbEeeFFPyvnLYZIg" type="2056" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izVqjfZbEeeFFPyvnLYZIg" type="5177"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izWRkPZbEeeFFPyvnLYZIg" type="7129"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izVqi_ZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Export" href="recoveredExample2.pipelineproject#//@tasks.6"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izVqjPZbEeeFFPyvnLYZIg" x="445" y="1280"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izWRkfZbEeeFFPyvnLYZIg" type="2053" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izWRlPZbEeeFFPyvnLYZIg" type="5173"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izWRlfZbEeeFFPyvnLYZIg" type="7096"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izWRlvZbEeeFFPyvnLYZIg" type="7097"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izWRkvZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:DataCollection" href="recoveredExample2.pipelineproject#//@tasks.7"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izWRk_ZbEeeFFPyvnLYZIg" x="340"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izWRl_ZbEeeFFPyvnLYZIg" type="2054" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izWRmvZbEeeFFPyvnLYZIg" type="5175"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izWRm_ZbEeeFFPyvnLYZIg" type="7126"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izWRnPZbEeeFFPyvnLYZIg" type="7127"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izWRmPZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:DataIntegration" href="recoveredExample2.pipelineproject#//@tasks.8"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izWRmfZbEeeFFPyvnLYZIg" x="500" y="530"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izW4oPZbEeeFFPyvnLYZIg" type="2052" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izW4o_ZbEeeFFPyvnLYZIg" type="5143"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izW4pPZbEeeFFPyvnLYZIg" type="7095"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izW4ofZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:ChangeDataFormat" href="recoveredExample2.pipelineproject#//@tasks.9"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izW4ovZbEeeFFPyvnLYZIg" x="360" y="160"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izW4pfZbEeeFFPyvnLYZIg" type="2050" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izW4qPZbEeeFFPyvnLYZIg" type="5140"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izW4qfZbEeeFFPyvnLYZIg" type="7092"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izW4pvZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:NullValuesRemoval" href="recoveredExample2.pipelineproject#//@tasks.10"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izW4p_ZbEeeFFPyvnLYZIg" x="510" y="690"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izZ78vZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izZ7-PZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izZ7-fZbEeeFFPyvnLYZIg" type="7130">
+      <children xmi:type="notation:Shape" xmi:id="_ArqkIPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_ArqkIvZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.0/@attributes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ArqkIfZnEeeFFPyvnLYZIg" x="20" y="23"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_MZWTQPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_MZW6UPZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.0/@attributes.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MZWTQfZnEeeFFPyvnLYZIg" x="145" y="23"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izZ7-vZbEeeFFPyvnLYZIg" type="7133">
+      <children xmi:type="notation:Shape" xmi:id="_i0v_wPZbEeeFFPyvnLYZIg" type="3069" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_i0v_wvZbEeeFFPyvnLYZIg" type="5183"/>
+        <element xmi:type="pm:PrimaryKey" href="recoveredExample2.pipelineproject#//@schema.0/@idColumn"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i0v_wfZbEeeFFPyvnLYZIg" x="20" y="14"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izZ78_ZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izZ79PZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izZ79fZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izZ79vZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izZ79_ZbEeeFFPyvnLYZIg" x="35" width="242" height="221"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izajAPZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izajBvZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izajB_ZbEeeFFPyvnLYZIg" type="7130">
+      <children xmi:type="notation:Shape" xmi:id="_TUOasPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TUPBwPZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.1/@attributes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TUOasfZnEeeFFPyvnLYZIg" x="24" y="5"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_WU-O4PZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_WU-18PZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.1/@attributes.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WU-O4fZnEeeFFPyvnLYZIg" x="100" y="7"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_YDDhUPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_YDDhUvZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.1/@attributes.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YDDhUfZnEeeFFPyvnLYZIg" x="45" y="52"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_rY5UoPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_rY57sPZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.1/@attributes.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rY5UofZnEeeFFPyvnLYZIg" x="161" y="56"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izajCPZbEeeFFPyvnLYZIg" type="7133">
+      <children xmi:type="notation:Shape" xmi:id="_i0ycAPZbEeeFFPyvnLYZIg" type="3069" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_i0zDEPZbEeeFFPyvnLYZIg" type="5183"/>
+        <element xmi:type="pm:PrimaryKey" href="recoveredExample2.pipelineproject#//@schema.1/@idColumn"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_i0ycAfZbEeeFFPyvnLYZIg" x="80" y="-7"/>
+      </children>
+    </children>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izajAfZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izajAvZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izajA_ZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izajBPZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izajBfZbEeeFFPyvnLYZIg" x="35" y="275" width="271" height="221"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izajCfZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izajD_ZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izajEPZbEeeFFPyvnLYZIg" type="7130">
+      <children xmi:type="notation:Shape" xmi:id="_x_HasPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_x_HasvZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.2/@attributes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_x_HasfZnEeeFFPyvnLYZIg" x="10" y="1"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_yt82oPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_yt82ovZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.2/@attributes.1"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yt82ofZnEeeFFPyvnLYZIg" x="100" y="1"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_zfPJoPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zfPJovZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.2/@attributes.2"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zfPJofZnEeeFFPyvnLYZIg" x="5" y="45"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_0w8pIPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_0w9QMPZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.2/@attributes.3"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0w8pIfZnEeeFFPyvnLYZIg" x="95" y="45"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izajEfZbEeeFFPyvnLYZIg" type="7133"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izajCvZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izajC_ZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izajDPZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izajDfZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.2"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izajDvZbEeeFFPyvnLYZIg" x="585" y="-55" width="226" height="186"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izajEvZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izbKEPZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbKEfZbEeeFFPyvnLYZIg" type="7130">
+      <children xmi:type="notation:Shape" xmi:id="_9ShBkPZnEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_9ShooPZnEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.3/@attributes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9ShBkfZnEeeFFPyvnLYZIg" x="18" y="3"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbKEvZbEeeFFPyvnLYZIg" type="7133"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izajE_ZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izajFPZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izajFfZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izajFvZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.3"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izajF_ZbEeeFFPyvnLYZIg" x="915"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izbKE_ZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izbKGfZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbKGvZbEeeFFPyvnLYZIg" type="7130">
+      <children xmi:type="notation:Shape" xmi:id="_CEBBsPZoEeeFFPyvnLYZIg" type="3068" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_CEBowPZoEeeFFPyvnLYZIg" type="5178"/>
+        <element xmi:type="pm:Attribute" href="recoveredExample2.pipelineproject#//@schema.4/@attributes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CEBBsfZoEeeFFPyvnLYZIg" x="17" y="1"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbKG_ZbEeeFFPyvnLYZIg" type="7133"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izbKFPZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izbKFfZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izbKFvZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izbKF_ZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.4"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izbKGPZbEeeFFPyvnLYZIg" x="1135"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izbKHPZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izbKIvZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbKI_ZbEeeFFPyvnLYZIg" type="7130"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbKJPZbEeeFFPyvnLYZIg" type="7133"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izbKHfZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izbKHvZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izbKH_ZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izbKIPZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.5"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izbKIfZbEeeFFPyvnLYZIg" x="1330"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_izbxIPZbEeeFFPyvnLYZIg" type="2057">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izbxJvZbEeeFFPyvnLYZIg" type="5180"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbxJ_ZbEeeFFPyvnLYZIg" type="7130"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_izbxKPZbEeeFFPyvnLYZIg" type="7133"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_izbxIfZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_izbxIvZbEeeFFPyvnLYZIg" fontName="Segoe UI"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="_izbxI_ZbEeeFFPyvnLYZIg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_izbxJPZbEeeFFPyvnLYZIg"/>
+    <element xmi:type="pm:Schema" href="recoveredExample2.pipelineproject#//@schema.6"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izbxJfZbEeeFFPyvnLYZIg" x="1680"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izbxKfZbEeeFFPyvnLYZIg" type="2058" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izbxK_ZbEeeFFPyvnLYZIg" type="5181"/>
+    <element xmi:type="pm:OutputFile" href="recoveredExample2.pipelineproject#//@outputFile.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izbxKvZbEeeFFPyvnLYZIg" x="450" y="1425"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_izbxLPZbEeeFFPyvnLYZIg" type="2058" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_izcYMPZbEeeFFPyvnLYZIg" type="5181"/>
+    <element xmi:type="pm:OutputFile" href="recoveredExample2.pipelineproject#//@outputFile.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_izbxLfZbEeeFFPyvnLYZIg" x="675" y="1140"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_gdvsIfZbEeeFFPyvnLYZIg"/>
+  <element xmi:type="pm:Pipeline" href="recoveredExample2.pipelineproject#/"/>
+</notation:Diagram>

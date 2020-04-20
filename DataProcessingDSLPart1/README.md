@@ -1,4 +1,4 @@
-#Part 1
+# Part 1
 This part of the project contains a `default.ecore` file containing the metamodel, the `default.ecore_diagram` containing the relative diagram, the `default.emf` file that contains the Concrete Graphical Syntax defined using Eugenia annotations. OCLInEcore constraints are contained in the `.ecore` file.
 
 To execute the generated editors, right click on `ASEProject-Metamodel.editor` and `Run As Eclipse Application`. The `ASEProject-Metamodel.validation` contains the `constraints.evl` file under the constraints folder.
